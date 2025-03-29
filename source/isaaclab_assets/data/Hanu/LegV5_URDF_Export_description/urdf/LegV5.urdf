@@ -180,14 +180,14 @@
     <visual>
       <origin rpy="0 0 0" xyz="0 0 0"/>
       <geometry>
-        <mesh filename="file:///home/whaly/Desktop/issac_ws/install/LegV5_description/share/LegV5_description/meshes/base_link.stl" scale="0.001 0.001 0.001"/>
+        <mesh filename="file:///home/RAI_65011278/IsaacLab/source/isaaclab_assets/data/Hanu/LegV5_URDF_Export_description/meshes/base_link.stl" scale="0.001 0.001 0.001"/>
       </geometry>
       <material name="silver"/>
     </visual>
     <collision>
       <origin rpy="0 0 0" xyz="0 0 0"/>
       <geometry>
-        <mesh filename="file:///home/whaly/Desktop/issac_ws/install/LegV5_description/share/LegV5_description/meshes/base_link.stl" scale="0.001 0.001 0.001"/>
+        <mesh filename="file:///home/RAI_65011278/IsaacLab/source/isaaclab_assets/data/Hanu/LegV5_URDF_Export_description/meshes/base_link.stl" scale="0.001 0.001 0.001"/>
       </geometry>
     </collision>
   </link>
@@ -200,14 +200,14 @@
     <visual>
       <origin rpy="0 0 0" xyz="0.02499 -0.246154 -0.008627"/>
       <geometry>
-        <mesh filename="file:///home/whaly/Desktop/issac_ws/install/LegV5_description/share/LegV5_description/meshes/R1_Hip_1_1.stl" scale="0.001 0.001 0.001"/>
+        <mesh filename="file:///home/RAI_65011278/IsaacLab/source/isaaclab_assets/data/Hanu/LegV5_URDF_Export_description/meshes/R1_Hip_1_1.stl" scale="0.001 0.001 0.001"/>
       </geometry>
       <material name="silver"/>
     </visual>
     <collision>
       <origin rpy="0 0 0" xyz="0.02499 -0.246154 -0.008627"/>
       <geometry>
-        <mesh filename="file:///home/whaly/Desktop/issac_ws/install/LegV5_description/share/LegV5_description/meshes/R1_Hip_1_1.stl" scale="0.001 0.001 0.001"/>
+        <mesh filename="file:///home/RAI_65011278/IsaacLab/source/isaaclab_assets/data/Hanu/LegV5_URDF_Export_description/meshes/R1_Hip_1_1.stl" scale="0.001 0.001 0.001"/>
       </geometry>
     </collision>
   </link>
@@ -220,14 +220,14 @@
     <visual>
       <origin rpy="0 0 0" xyz="-0.17501 -0.246154 -0.008627"/>
       <geometry>
-        <mesh filename="file:///home/whaly/Desktop/issac_ws/install/LegV5_description/share/LegV5_description/meshes/L1_Hip_1_1.stl" scale="0.001 0.001 0.001"/>
+        <mesh filename="file:///home/RAI_65011278/IsaacLab/source/isaaclab_assets/data/Hanu/LegV5_URDF_Export_description/meshes/L1_Hip_1_1.stl" scale="0.001 0.001 0.001"/>
       </geometry>
       <material name="silver"/>
     </visual>
     <collision>
       <origin rpy="0 0 0" xyz="-0.17501 -0.246154 -0.008627"/>
       <geometry>
-        <mesh filename="file:///home/whaly/Desktop/issac_ws/install/LegV5_description/share/LegV5_description/meshes/L1_Hip_1_1.stl" scale="0.001 0.001 0.001"/>
+        <mesh filename="file:///home/RAI_65011278/IsaacLab/source/isaaclab_assets/data/Hanu/LegV5_URDF_Export_description/meshes/L1_Hip_1_1.stl" scale="0.001 0.001 0.001"/>
       </geometry>
     </collision>
   </link>
@@ -240,14 +240,14 @@
     <visual>
       <origin rpy="0 0 0" xyz="0.02499 -0.170254 -0.013127"/>
       <geometry>
-        <mesh filename="file:///home/whaly/Desktop/issac_ws/install/LegV5_description/share/LegV5_description/meshes/R2_Hip_1_1.stl" scale="0.001 0.001 0.001"/>
+        <mesh filename="file:///home/RAI_65011278/IsaacLab/source/isaaclab_assets/data/Hanu/LegV5_URDF_Export_description/meshes/R2_Hip_1_1.stl" scale="0.001 0.001 0.001"/>
       </geometry>
       <material name="silver"/>
     </visual>
     <collision>
       <origin rpy="0 0 0" xyz="0.02499 -0.170254 -0.013127"/>
       <geometry>
-        <mesh filename="file:///home/whaly/Desktop/issac_ws/install/LegV5_description/share/LegV5_description/meshes/R2_Hip_1_1.stl" scale="0.001 0.001 0.001"/>
+        <mesh filename="file:///home/RAI_65011278/IsaacLab/source/isaaclab_assets/data/Hanu/LegV5_URDF_Export_description/meshes/R2_Hip_1_1.stl" scale="0.001 0.001 0.001"/>
       </geometry>
     </collision>
   </link>
@@ -260,14 +260,14 @@
     <visual>
       <origin rpy="0 0 0" xyz="-0.17501 -0.170254 -0.013127"/>
       <geometry>
-        <mesh filename="file:///home/whaly/Desktop/issac_ws/install/LegV5_description/share/LegV5_description/meshes/L2_Hip_1_1.stl" scale="0.001 0.001 0.001"/>
+        <mesh filename="file:///home/RAI_65011278/IsaacLab/source/isaaclab_assets/data/Hanu/LegV5_URDF_Export_description/meshes/L2_Hip_1_1.stl" scale="0.001 0.001 0.001"/>
       </geometry>
       <material name="silver"/>
     </visual>
     <collision>
       <origin rpy="0 0 0" xyz="-0.17501 -0.170254 -0.013127"/>
       <geometry>
-        <mesh filename="file:///home/whaly/Desktop/issac_ws/install/LegV5_description/share/LegV5_description/meshes/L2_Hip_1_1.stl" scale="0.001 0.001 0.001"/>
+        <mesh filename="file:///home/RAI_65011278/IsaacLab/source/isaaclab_assets/data/Hanu/LegV5_URDF_Export_description/meshes/L2_Hip_1_1.stl" scale="0.001 0.001 0.001"/>
       </geometry>
     </collision>
   </link>
@@ -280,14 +280,14 @@
     <visual>
       <origin rpy="0 0 0" xyz="0.04714 -0.170254 -0.085427"/>
       <geometry>
-        <mesh filename="file:///home/whaly/Desktop/issac_ws/install/LegV5_description/share/LegV5_description/meshes/R3_Upper_1_1.stl" scale="0.001 0.001 0.001"/>
+        <mesh filename="file:///home/RAI_65011278/IsaacLab/source/isaaclab_assets/data/Hanu/LegV5_URDF_Export_description/meshes/R3_Upper_1_1.stl" scale="0.001 0.001 0.001"/>
       </geometry>
       <material name="silver"/>
     </visual>
     <collision>
       <origin rpy="0 0 0" xyz="0.04714 -0.170254 -0.085427"/>
       <geometry>
-        <mesh filename="file:///home/whaly/Desktop/issac_ws/install/LegV5_description/share/LegV5_description/meshes/R3_Upper_1_1.stl" scale="0.001 0.001 0.001"/>
+        <mesh filename="file:///home/RAI_65011278/IsaacLab/source/isaaclab_assets/data/Hanu/LegV5_URDF_Export_description/meshes/R3_Upper_1_1.stl" scale="0.001 0.001 0.001"/>
       </geometry>
     </collision>
   </link>
@@ -300,14 +300,14 @@
     <visual>
       <origin rpy="0 0 0" xyz="-0.19716 -0.170254 -0.085427"/>
       <geometry>
-        <mesh filename="file:///home/whaly/Desktop/issac_ws/install/LegV5_description/share/LegV5_description/meshes/L3_Upper_1_1.stl" scale="0.001 0.001 0.001"/>
+        <mesh filename="file:///home/RAI_65011278/IsaacLab/source/isaaclab_assets/data/Hanu/LegV5_URDF_Export_description/meshes/L3_Upper_1_1.stl" scale="0.001 0.001 0.001"/>
       </geometry>
       <material name="silver"/>
     </visual>
     <collision>
       <origin rpy="0 0 0" xyz="-0.19716 -0.170254 -0.085427"/>
       <geometry>
-        <mesh filename="file:///home/whaly/Desktop/issac_ws/install/LegV5_description/share/LegV5_description/meshes/L3_Upper_1_1.stl" scale="0.001 0.001 0.001"/>
+        <mesh filename="file:///home/RAI_65011278/IsaacLab/source/isaaclab_assets/data/Hanu/LegV5_URDF_Export_description/meshes/L3_Upper_1_1.stl" scale="0.001 0.001 0.001"/>
       </geometry>
     </collision>
   </link>
@@ -320,14 +320,14 @@
     <visual>
       <origin rpy="0 0 0" xyz="0.04714 0.109745 -0.085975"/>
       <geometry>
-        <mesh filename="file:///home/whaly/Desktop/issac_ws/install/LegV5_description/share/LegV5_description/meshes/R4_Lower_1_1.stl" scale="0.001 0.001 0.001"/>
+        <mesh filename="file:///home/RAI_65011278/IsaacLab/source/isaaclab_assets/data/Hanu/LegV5_URDF_Export_description/meshes/R4_Lower_1_1.stl" scale="0.001 0.001 0.001"/>
       </geometry>
       <material name="silver"/>
     </visual>
     <collision>
       <origin rpy="0 0 0" xyz="0.04714 0.109745 -0.085975"/>
       <geometry>
-        <mesh filename="file:///home/whaly/Desktop/issac_ws/install/LegV5_description/share/LegV5_description/meshes/R4_Lower_1_1.stl" scale="0.001 0.001 0.001"/>
+        <mesh filename="file:///home/RAI_65011278/IsaacLab/source/isaaclab_assets/data/Hanu/LegV5_URDF_Export_description/meshes/R4_Lower_1_1.stl" scale="0.001 0.001 0.001"/>
       </geometry>
     </collision>
   </link>
@@ -340,14 +340,14 @@
     <visual>
       <origin rpy="0 0 0" xyz="-0.19716 0.109745 -0.085975"/>
       <geometry>
-        <mesh filename="file:///home/whaly/Desktop/issac_ws/install/LegV5_description/share/LegV5_description/meshes/L4_Lower_1_1.stl" scale="0.001 0.001 0.001"/>
+        <mesh filename="file:///home/RAI_65011278/IsaacLab/source/isaaclab_assets/data/Hanu/LegV5_URDF_Export_description/meshes/L4_Lower_1_1.stl" scale="0.001 0.001 0.001"/>
       </geometry>
       <material name="silver"/>
     </visual>
     <collision>
       <origin rpy="0 0 0" xyz="-0.19716 0.109745 -0.085975"/>
       <geometry>
-        <mesh filename="file:///home/whaly/Desktop/issac_ws/install/LegV5_description/share/LegV5_description/meshes/L4_Lower_1_1.stl" scale="0.001 0.001 0.001"/>
+        <mesh filename="file:///home/RAI_65011278/IsaacLab/source/isaaclab_assets/data/Hanu/LegV5_URDF_Export_description/meshes/L4_Lower_1_1.stl" scale="0.001 0.001 0.001"/>
       </geometry>
     </collision>
   </link>
@@ -360,14 +360,14 @@
     <visual>
       <origin rpy="0 0 0" xyz="0.024914 0.227136 -0.049568"/>
       <geometry>
-        <mesh filename="file:///home/whaly/Desktop/issac_ws/install/LegV5_description/share/LegV5_description/meshes/R5_Knee_Roll_1_1.stl" scale="0.001 0.001 0.001"/>
+        <mesh filename="file:///home/RAI_65011278/IsaacLab/source/isaaclab_assets/data/Hanu/LegV5_URDF_Export_description/meshes/R5_Knee_Roll_1_1.stl" scale="0.001 0.001 0.001"/>
       </geometry>
       <material name="silver"/>
     </visual>
     <collision>
       <origin rpy="0 0 0" xyz="0.024914 0.227136 -0.049568"/>
       <geometry>
-        <mesh filename="file:///home/whaly/Desktop/issac_ws/install/LegV5_description/share/LegV5_description/meshes/R5_Knee_Roll_1_1.stl" scale="0.001 0.001 0.001"/>
+        <mesh filename="file:///home/RAI_65011278/IsaacLab/source/isaaclab_assets/data/Hanu/LegV5_URDF_Export_description/meshes/R5_Knee_Roll_1_1.stl" scale="0.001 0.001 0.001"/>
       </geometry>
     </collision>
   </link>
@@ -380,14 +380,14 @@
     <visual>
       <origin rpy="0 0 0" xyz="-0.174934 0.227136 -0.049567"/>
       <geometry>
-        <mesh filename="file:///home/whaly/Desktop/issac_ws/install/LegV5_description/share/LegV5_description/meshes/L5_Knee_Roll_1_1.stl" scale="0.001 0.001 0.001"/>
+        <mesh filename="file:///home/RAI_65011278/IsaacLab/source/isaaclab_assets/data/Hanu/LegV5_URDF_Export_description/meshes/L5_Knee_Roll_1_1.stl" scale="0.001 0.001 0.001"/>
       </geometry>
       <material name="silver"/>
     </visual>
     <collision>
       <origin rpy="0 0 0" xyz="-0.174934 0.227136 -0.049567"/>
       <geometry>
-        <mesh filename="file:///home/whaly/Desktop/issac_ws/install/LegV5_description/share/LegV5_description/meshes/L5_Knee_Roll_1_1.stl" scale="0.001 0.001 0.001"/>
+        <mesh filename="file:///home/RAI_65011278/IsaacLab/source/isaaclab_assets/data/Hanu/LegV5_URDF_Export_description/meshes/L5_Knee_Roll_1_1.stl" scale="0.001 0.001 0.001"/>
       </geometry>
     </collision>
   </link>
@@ -400,14 +400,14 @@
     <visual>
       <origin rpy="0 0 0" xyz="-0.17491 0.422829 -0.085765"/>
       <geometry>
-        <mesh filename="file:///home/whaly/Desktop/issac_ws/install/LegV5_description/share/LegV5_description/meshes/L6_U_Joint_1_1.stl" scale="0.001 0.001 0.001"/>
+        <mesh filename="file:///home/RAI_65011278/IsaacLab/source/isaaclab_assets/data/Hanu/LegV5_URDF_Export_description/meshes/L6_U_Joint_1_1.stl" scale="0.001 0.001 0.001"/>
       </geometry>
       <material name="silver"/>
     </visual>
     <collision>
       <origin rpy="0 0 0" xyz="-0.17491 0.422829 -0.085765"/>
       <geometry>
-        <mesh filename="file:///home/whaly/Desktop/issac_ws/install/LegV5_description/share/LegV5_description/meshes/L6_U_Joint_1_1.stl" scale="0.001 0.001 0.001"/>
+        <mesh filename="file:///home/RAI_65011278/IsaacLab/source/isaaclab_assets/data/Hanu/LegV5_URDF_Export_description/meshes/L6_U_Joint_1_1.stl" scale="0.001 0.001 0.001"/>
       </geometry>
     </collision>
   </link>
@@ -420,14 +420,14 @@
     <visual>
       <origin rpy="0 0 0" xyz="0.03494 0.334926 -0.086663"/>
       <geometry>
-        <mesh filename="file:///home/whaly/Desktop/issac_ws/install/LegV5_description/share/LegV5_description/meshes/R11_Knee_Pitch_1_1.stl" scale="0.001 0.001 0.001"/>
+        <mesh filename="file:///home/RAI_65011278/IsaacLab/source/isaaclab_assets/data/Hanu/LegV5_URDF_Export_description/meshes/R11_Knee_Pitch_1_1.stl" scale="0.001 0.001 0.001"/>
       </geometry>
       <material name="silver"/>
     </visual>
     <collision>
       <origin rpy="0 0 0" xyz="0.03494 0.334926 -0.086663"/>
       <geometry>
-        <mesh filename="file:///home/whaly/Desktop/issac_ws/install/LegV5_description/share/LegV5_description/meshes/R11_Knee_Pitch_1_1.stl" scale="0.001 0.001 0.001"/>
+        <mesh filename="file:///home/RAI_65011278/IsaacLab/source/isaaclab_assets/data/Hanu/LegV5_URDF_Export_description/meshes/R11_Knee_Pitch_1_1.stl" scale="0.001 0.001 0.001"/>
       </geometry>
     </collision>
   </link>
@@ -440,14 +440,14 @@
     <visual>
       <origin rpy="0 0 0" xyz="0.02489 0.422829 -0.126615"/>
       <geometry>
-        <mesh filename="file:///home/whaly/Desktop/issac_ws/install/LegV5_description/share/LegV5_description/meshes/R13_Foot_1_1.stl" scale="0.001 0.001 0.001"/>
+        <mesh filename="file:///home/RAI_65011278/IsaacLab/source/isaaclab_assets/data/Hanu/LegV5_URDF_Export_description/meshes/R13_Foot_1_1.stl" scale="0.001 0.001 0.001"/>
       </geometry>
       <material name="silver"/>
     </visual>
     <collision>
       <origin rpy="0 0 0" xyz="0.02489 0.422829 -0.126615"/>
       <geometry>
-        <mesh filename="file:///home/whaly/Desktop/issac_ws/install/LegV5_description/share/LegV5_description/meshes/R13_Foot_1_1.stl" scale="0.001 0.001 0.001"/>
+        <mesh filename="file:///home/RAI_65011278/IsaacLab/source/isaaclab_assets/data/Hanu/LegV5_URDF_Export_description/meshes/R13_Foot_1_1.stl" scale="0.001 0.001 0.001"/>
       </geometry>
     </collision>
   </link>
@@ -460,14 +460,14 @@
     <visual>
       <origin rpy="0 0 0" xyz="-0.18496 0.334926 -0.086663"/>
       <geometry>
-        <mesh filename="file:///home/whaly/Desktop/issac_ws/install/LegV5_description/share/LegV5_description/meshes/L11_Knee_Pitch_1_1.stl" scale="0.001 0.001 0.001"/>
+        <mesh filename="file:///home/RAI_65011278/IsaacLab/source/isaaclab_assets/data/Hanu/LegV5_URDF_Export_description/meshes/L11_Knee_Pitch_1_1.stl" scale="0.001 0.001 0.001"/>
       </geometry>
       <material name="silver"/>
     </visual>
     <collision>
       <origin rpy="0 0 0" xyz="-0.18496 0.334926 -0.086663"/>
       <geometry>
-        <mesh filename="file:///home/whaly/Desktop/issac_ws/install/LegV5_description/share/LegV5_description/meshes/L11_Knee_Pitch_1_1.stl" scale="0.001 0.001 0.001"/>
+        <mesh filename="file:///home/RAI_65011278/IsaacLab/source/isaaclab_assets/data/Hanu/LegV5_URDF_Export_description/meshes/L11_Knee_Pitch_1_1.stl" scale="0.001 0.001 0.001"/>
       </geometry>
     </collision>
   </link>
@@ -480,14 +480,14 @@
     <visual>
       <origin rpy="0 0 0" xyz="-0.17491 0.422829 -0.126615"/>
       <geometry>
-        <mesh filename="file:///home/whaly/Desktop/issac_ws/install/LegV5_description/share/LegV5_description/meshes/L13_Foot_1_1.stl" scale="0.001 0.001 0.001"/>
+        <mesh filename="file:///home/RAI_65011278/IsaacLab/source/isaaclab_assets/data/Hanu/LegV5_URDF_Export_description/meshes/L13_Foot_1_1.stl" scale="0.001 0.001 0.001"/>
       </geometry>
       <material name="silver"/>
     </visual>
     <collision>
       <origin rpy="0 0 0" xyz="-0.17491 0.422829 -0.126615"/>
       <geometry>
-        <mesh filename="file:///home/whaly/Desktop/issac_ws/install/LegV5_description/share/LegV5_description/meshes/L13_Foot_1_1.stl" scale="0.001 0.001 0.001"/>
+        <mesh filename="file:///home/RAI_65011278/IsaacLab/source/isaaclab_assets/data/Hanu/LegV5_URDF_Export_description/meshes/L13_Foot_1_1.stl" scale="0.001 0.001 0.001"/>
       </geometry>
     </collision>
   </link>
@@ -500,14 +500,14 @@
     <visual>
       <origin rpy="0 0 0" xyz="0.02489 0.422829 -0.085765"/>
       <geometry>
-        <mesh filename="file:///home/whaly/Desktop/issac_ws/install/LegV5_description/share/LegV5_description/meshes/R6_U_Joint_1_1.stl" scale="0.001 0.001 0.001"/>
+        <mesh filename="file:///home/RAI_65011278/IsaacLab/source/isaaclab_assets/data/Hanu/LegV5_URDF_Export_description/meshes/R6_U_Joint_1_1.stl" scale="0.001 0.001 0.001"/>
       </geometry>
       <material name="silver"/>
     </visual>
     <collision>
       <origin rpy="0 0 0" xyz="0.02489 0.422829 -0.085765"/>
       <geometry>
-        <mesh filename="file:///home/whaly/Desktop/issac_ws/install/LegV5_description/share/LegV5_description/meshes/R6_U_Joint_1_1.stl" scale="0.001 0.001 0.001"/>
+        <mesh filename="file:///home/RAI_65011278/IsaacLab/source/isaaclab_assets/data/Hanu/LegV5_URDF_Export_description/meshes/R6_U_Joint_1_1.stl" scale="0.001 0.001 0.001"/>
       </geometry>
     </collision>
   </link>
