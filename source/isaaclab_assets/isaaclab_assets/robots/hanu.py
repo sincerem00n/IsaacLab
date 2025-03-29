@@ -1,7 +1,9 @@
 # Copyright (c) 2025, RAI Hanumanoid Project Developers.
 # All right reserved.
 
-"""Configuration for the XX-DOFs Hanumanoid robot.
+# SPDX-License-Identifier: BSD-3-Clause
+
+"""Configuration for the 16-DOFs Hanumanoid robot.
 
 The following configuration are available:
 * :obj:`HANU_A0_CFG`: Hanumanoid A0 robot
@@ -55,9 +57,9 @@ HANU_A0_CFG = ArticulationCfg(
             "R4_to_R6_Rev": 0.0,
         },
         joint_vel={".*": 0.0},
-        ),
-        soft_joint_pos_limit_factor=0.9,
-        actuators={
+    ),
+    # soft_joint_pos_limit_factor=0.9,
+    actuators={
         "legs": ImplicitActuatorCfg(
             joint_names_expr=[
                 "base_to_L1",
@@ -99,25 +101,8 @@ HANU_A0_CFG = ArticulationCfg(
                 # "torso_joint": 200.0,
             },
             damping={
-                "base_to_L1": 1.0,
-                "L1_to_L2_Rev": 1.0,
-                "L4_to_L11_Rev": 1.0,
-                "L4_to_L5_Rev": 1.0,
-                "base_to_R1": 1.0,
-                "R1_to_R2_Rev": 1.0,
-                "R4_to_R11_Rev": 1.0,
-                "R4_to_R5_Rev": 1.0,
-                # ".*_hip_yaw_joint": 5.0,
-                # ".*_hip_roll_joint": 5.0,
-                # ".*_hip_pitch_joint": 5.0,
-                # ".*_knee_joint": 5.0,
-                # "torso_joint": 5.0,
+                ".*": 1.0,  # Set damping for all joints
             },
-            # armature={
-            #     ".*_hip_.*": 0.01,
-            #     ".*_knee_joint": 0.01,
-            #     "torso_joint": 0.01,
-            # },
         ),
         "feet": ImplicitActuatorCfg(
             effort_limit=20,
