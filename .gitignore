@@ -53,10 +53,10 @@ _repo
 _build
 .lastformat
 
-# # RL-Games
-# **/runs/*
-# **/logs/*
-# **/recordings/*
+# RL-Games
+**/runs/*
+**/logs/*
+**/recordings/*
 
 # Pre-Trained Checkpoints
 /.pretrained_checkpoints/
