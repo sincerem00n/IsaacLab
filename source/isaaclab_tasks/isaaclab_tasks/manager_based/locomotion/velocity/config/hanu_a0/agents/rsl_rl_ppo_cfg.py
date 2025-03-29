@@ -12,7 +12,7 @@ class HanumanoidA0RoughPPORunnerCfg(RslRlOnPolicyRunnerCfg):
     experiment_name = "hanu_a0_rough"
     empirical_normalization = False
     policy = RslRlPpoActorCriticCfg(
-        init_noise_std=1.0
+        init_noise_std=1.0,
         actor_hidden_dims=[512, 256, 128],
         critic_hidden_dims=[512, 256, 128],
         activation="elu",
