@@ -40,6 +40,7 @@ HANU_A0_CFG = ArticulationCfg(
     ),
     init_state=ArticulationCfg.InitialStateCfg(
         pos=(0.0, 0.0, 0.65), # (x, y, z)
+        rot=(1.0, 1.0, 0.0, 0.0), # (w, x, y, z)
         joint_pos={
             "base_to_L1": 0.0,
             "base_to_R1": 0.0,
@@ -58,7 +59,7 @@ HANU_A0_CFG = ArticulationCfg(
         },
         joint_vel={".*": 0.0},
     ),
-    # soft_joint_pos_limit_factor=0.9,
+    soft_joint_pos_limit_factor=0.9,
     actuators={
         "legs": ImplicitActuatorCfg(
             joint_names_expr=[
