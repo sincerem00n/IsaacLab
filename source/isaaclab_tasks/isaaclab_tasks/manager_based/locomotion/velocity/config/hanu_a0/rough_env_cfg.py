@@ -1,5 +1,5 @@
 # Copyright (c) 2025, RAI Hanumanoid Project Developers.
-# All right reserved.
+# All rights reserved.
 
 # SPDX-License-Identifier: BSD-3-Clause
 
@@ -35,19 +35,31 @@ class HanuRewardsCfg(RewardsCfg):
     )
     joint_deviation_hip = RewTerm(
         func=mdp.joint_deviation_l1,
-        weight=-0.2,
+        weight=-0.7,
         params={"asset_cfg": SceneEntityCfg("robot", joint_names=["base_to_.*"])},
     )
     joint_deviation_toes = RewTerm(
         func=mdp.joint_deviation_l1,
-        weight=0, # -0.2
+        weight=-0.1, # cassie:-0.2
         params={"asset_cfg": SceneEntityCfg("robot", joint_names=["L6_to_L13_Rev", "R6_to_R13_Rev"])},
     )
     # penalize toe joint limits
     dof_pos_limits = RewTerm(
         func=mdp.joint_pos_limits,
-        weight=0, # -1.0
+        weight=-0.2, # cassie:-1.0
         params={"asset_cfg": SceneEntityCfg("robot", joint_names=["L6_to_L13_Rev", "R6_to_R13_Rev"])},
+    )
+
+    base_height_l2 = RewTerm(
+        func=mdp.base_height_l2,
+        weight=0.9,
+        params={"asset_cfg": SceneEntityCfg("robot", body_names=["base_link"]), "target_height": 0.55}, # "target": 0.35         target not a param of base_pos_z
+    )
+
+    joint_deviation_knee = RewTerm(
+        func=mdp.joint_deviation_l1,
+        weight=-0.2,
+        params={"asset_cfg": SceneEntityCfg("robot", joint_names=["L4_to_L5_Rev", "R4_to_R5_Rev"])},
     )
 
 
@@ -95,7 +107,7 @@ class HanumanoidA0RoughEnvCfg(LocomotionVelocityRoughEnvCfg):
         self.scene.terrain.terrain_generator.sub_terrains["random_rough"].noise_step = 0.01
 
         # action scale
-        self.actions.joint_pos.scale = 0.25
+        self.actions.joint_pos.scale = 0.5
         # self.actions.joint_vel.scale = 1.0
         # self.actions.joint_torque.scale = 1.0
 
@@ -121,13 +133,30 @@ class HanumanoidA0RoughEnvCfg(LocomotionVelocityRoughEnvCfg):
         # self.rewards.feet_air_time.params["sensor_cfg"].body_names = ["L13_Foot_1_1", "R13_Foot_1_1"] # TODO: check ".*_foot" link
         # self.rewards.feet_air_time.weight = 0.3 # default: 0.125
         self.rewards.lin_vel_z_l2.weight = 0.0
-        self.rewards.undesired_contacts.params["sensor_cfg"].body_names = "base_link" # TODO: check ".*_thigh" link
+        self.rewards.undesired_contacts.params["sensor_cfg"].body_names = [
+            "base_link",
+            "L1_Hip_1_1",
+            "R1_Hip_1_1",
+            'L2_Hip_1_1',
+            'R2_Hip_1_1',
+            'L3_Upper_1_1',
+            'R3_Upper_1_1',
+            'L4_Lower_1_1',
+            'R4_Lower_1_1',
+            'L11_Knee_Pitch_1_1',
+            'L5_Knee_Roll_1_1',
+            'L6_U_Joint_1_1',
+            'R11_Knee_Pitch_1_1',
+            'R5_Knee_Roll_1_1',
+            'R6_U_Joint_1_1',
+            ]
+        # self.rewards.undesired_contacts.params["sensor_cfg"].body_names = "base_link" # TODO: check ".*_thigh" link
         self.rewards.undesired_contacts.weight = -0.1 # default: -0.1
         self.rewards.flat_orientation_l2.weight = -1.0
         self.rewards.action_rate_l2.weight = -0.005
         self.rewards.dof_acc_l2.weight = -1.25e-7
         self.rewards.dof_torques_l2.weight = -0.0002
-        self.rewards.track_lin_vel_xy_exp.weight = 1.5
+        self.rewards.track_lin_vel_xy_exp.weight = 2.0
         self.rewards.track_ang_vel_z_exp.weight = 2.0
 
         # commands
@@ -139,7 +168,23 @@ class HanumanoidA0RoughEnvCfg(LocomotionVelocityRoughEnvCfg):
         self.observations.policy.enable_corruption = False
         
         # terminations
-        self.terminations.base_contact.params["sensor_cfg"].body_names = "base_link"
+        self.terminations.base_contact.params["sensor_cfg"].body_names = [
+            "base_link",
+            "L1_Hip_1_1",
+            "R1_Hip_1_1",
+            'L2_Hip_1_1',
+            'R2_Hip_1_1',
+            'L3_Upper_1_1',
+            'R3_Upper_1_1',
+            'L4_Lower_1_1',
+            'R4_Lower_1_1',
+            'L11_Knee_Pitch_1_1',
+            'L5_Knee_Roll_1_1',
+            'L6_U_Joint_1_1',
+            'R11_Knee_Pitch_1_1',
+            'R5_Knee_Roll_1_1',
+            'R6_U_Joint_1_1',
+            ]
 
 @configclass
 class HanumanoidA0RoughEnvCfg_PLAY(HanumanoidA0RoughEnvCfg):
