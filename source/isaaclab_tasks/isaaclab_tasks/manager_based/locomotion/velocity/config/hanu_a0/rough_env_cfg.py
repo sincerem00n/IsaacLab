@@ -30,7 +30,7 @@ class HanuRewardsCfg(RewardsCfg):
         params={
             "sensor_cfg": SceneEntityCfg("contact_forces", body_names=["L13_Foot_1_1", "R13_Foot_1_1"]),
             "command_name": "base_velocity",
-            "threshold": 0.3,
+            "threshold": 0.4,
         },
     )
     joint_deviation_hip = RewTerm(
@@ -159,9 +159,12 @@ class HanumanoidA0RoughEnvCfg(LocomotionVelocityRoughEnvCfg):
         self.rewards.track_lin_vel_xy_exp.weight = 2.0
         self.rewards.track_ang_vel_z_exp.weight = 2.0
 
+        self.rewards.feet_air_time.weight = 1.0
+        self.rewards.base_height_l2.weight = 2.0
+
         # commands
-        self.commands.base_velocity.ranges.lin_vel_x = (0.0, 1.0)
-        self.commands.base_velocity.ranges.lin_vel_y = (-0.0, 0.0)
+        self.commands.base_velocity.ranges.lin_vel_x = (-0.5, 0.5)
+        self.commands.base_velocity.ranges.lin_vel_y = (-1.0, 0.0)
         self.commands.base_velocity.ranges.ang_vel_z = (-1.0, 1.0)
 
         # observations
@@ -201,8 +204,8 @@ class HanumanoidA0RoughEnvCfg_PLAY(HanumanoidA0RoughEnvCfg):
             self.scene.terrain.terrain_generator.num_cols = 5
             self.scene.terrain.terrain_generator.curriculum = False
 
-        self.commands.base_velocity.ranges.lin_vel_x = (1.0, 1.0)
-        self.commands.base_velocity.ranges.lin_vel_y = (0.0, 0.0)
+        self.commands.base_velocity.ranges.lin_vel_x = (-0.5, 0.5)
+        self.commands.base_velocity.ranges.lin_vel_y = (-1.0, 0.0)
         # self.commands.base_velocity.ranges.ang_vel_z = (-1.0, 1.0)
         self.commands.base_velocity.ranges.heading = (0.0, 0.0)
 
