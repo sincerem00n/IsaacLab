@@ -3,6 +3,8 @@
 
 # SPDX-License-Identifier: BSD-3-Clause
 
+import math
+
 from isaaclab.utils import configclass
 
 import isaaclab_tasks.manager_based.locomotion.velocity.mdp as mdp
@@ -26,7 +28,7 @@ class HanuRewardsCfg(RewardsCfg):
     termination_penalty = RewTerm(func=mdp.is_terminated, weight=-200.0)
     feet_air_time = RewTerm(
         func=mdp.feet_air_time_positive_biped,
-        weight=2.5,
+        weight=0.25,
         params={
             "sensor_cfg": SceneEntityCfg("contact_forces", body_names=["L13_Foot_1_1", "R13_Foot_1_1"]),
             "command_name": "base_velocity",
@@ -53,7 +55,7 @@ class HanuRewardsCfg(RewardsCfg):
     base_height_l2 = RewTerm(
         func=mdp.base_height_l2,
         weight=0.9,
-        params={"asset_cfg": SceneEntityCfg("robot", body_names=["base_link"]), "target_height": 0.55}, # "target": 0.35         target not a param of base_pos_z
+        params={"asset_cfg": SceneEntityCfg("robot", body_names=["base_link"]), "target_height": 0.83}, # "target": 0.35         target not a param of base_pos_z
     )
 
     joint_deviation_knee = RewTerm(
@@ -62,6 +64,24 @@ class HanuRewardsCfg(RewardsCfg):
         params={"asset_cfg": SceneEntityCfg("robot", joint_names=["L4_to_L5_Rev", "R4_to_R5_Rev"])},
     )
 
+    track_ang_vel_z_exp = RewTerm(
+        func=mdp.track_ang_vel_z_world_exp,
+        weight=1.0,
+        params={
+            "command_name": "base_velocity",
+            "std": 0.5,
+            "asset_cfg": SceneEntityCfg("robot", body_names=["base_link"]),
+        },
+    )
+    track_lin_vel_xy_exp = RewTerm(
+        func=mdp.track_lin_vel_xy_yaw_frame_exp,
+        weight=2.0,
+        params={
+            "command_name": "base_velocity",
+            "std": 0.5,
+            "asset_cfg": SceneEntityCfg("robot", body_names=["base_link"]),
+        },
+    )
 
 
 @configclass
@@ -156,10 +176,8 @@ class HanumanoidA0RoughEnvCfg(LocomotionVelocityRoughEnvCfg):
         self.rewards.action_rate_l2.weight = -0.005
         self.rewards.dof_acc_l2.weight = -1.25e-7
         self.rewards.dof_torques_l2.weight = -0.0002
-        self.rewards.track_lin_vel_xy_exp.weight = 2.0
-        self.rewards.track_ang_vel_z_exp.weight = 2.0
 
-        self.rewards.feet_air_time.weight = 1.0
+        self.rewards.feet_air_time.weight = 0.25
         self.rewards.base_height_l2.weight = 2.0
 
         # commands
