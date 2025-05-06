@@ -1,3 +1,8 @@
+# Copyright (c) 2022-2025, The Isaac Lab Project Developers.
+# All rights reserved.
+#
+# SPDX-License-Identifier: BSD-3-Clause
+
 # Copyright 2015 Open Source Robotics Foundation, Inc.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -12,12 +17,12 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-from ament_pep257.main import main
 import pytest
+from ament_pep257.main import main
 
 
 @pytest.mark.linter
 @pytest.mark.pep257
 def test_pep257():
-    rc = main(argv=['.', 'test'])
-    assert rc == 0, 'Found code style errors / warnings'
+    rc = main(argv=[".", "test"])
+    assert rc == 0, "Found code style errors / warnings"

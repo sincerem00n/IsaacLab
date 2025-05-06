@@ -1,3 +1,8 @@
+# Copyright (c) 2022-2025, The Isaac Lab Project Developers.
+# All rights reserved.
+#
+# SPDX-License-Identifier: BSD-3-Clause
+
 import argparse
 
 from isaaclab.app import AppLauncher
@@ -14,9 +19,9 @@ simulation_app = app_launcher.app
 
 # ==========================================================================================
 
-from isaaclab.sim import SimulationCfg, SimulationContext
-
 from isaaclab_assets.robots.hanu import HANU_A0_CFG
+
+from isaaclab.sim import SimulationCfg, SimulationContext
 
 # ==========================================================================================
 

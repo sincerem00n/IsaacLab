@@ -1,3 +1,8 @@
+# Copyright (c) 2022-2025, The Isaac Lab Project Developers.
+# All rights reserved.
+#
+# SPDX-License-Identifier: BSD-3-Clause
+
 # Copyright (c) 2025, RAI Hanumanoid Project Developers.
 # All rights reserved.
 
@@ -5,22 +10,22 @@
 
 import math
 
-from isaaclab.utils import configclass
-
-import isaaclab_tasks.manager_based.locomotion.velocity.mdp as mdp
-from isaaclab_tasks.manager_based.locomotion.velocity.velocity_env_cfg import LocomotionVelocityRoughEnvCfg, RewardsCfg
-from isaaclab.managers import RewardTermCfg as RewTerm
-from isaaclab.managers import SceneEntityCfg
-
-import isaacsim.asset.importer.urdf 
+import isaacsim.asset.importer.urdf
 import omni.usd
 from pxr import UsdPhysics
-from isaaclab.assets import Articulation
 
 ###########################
 # Pre-defined configs
 ###########################
 from isaaclab_assets.robots.hanu import HANU_A0_CFG
+
+from isaaclab.assets import Articulation
+from isaaclab.managers import RewardTermCfg as RewTerm
+from isaaclab.managers import SceneEntityCfg
+from isaaclab.utils import configclass
+
+import isaaclab_tasks.manager_based.locomotion.velocity.mdp as mdp
+from isaaclab_tasks.manager_based.locomotion.velocity.velocity_env_cfg import LocomotionVelocityRoughEnvCfg, RewardsCfg
 
 
 @configclass
@@ -42,20 +47,23 @@ class HanuRewardsCfg(RewardsCfg):
     )
     joint_deviation_toes = RewTerm(
         func=mdp.joint_deviation_l1,
-        weight=-0.1, # cassie:-0.2
+        weight=-0.1,  # cassie:-0.2
         params={"asset_cfg": SceneEntityCfg("robot", joint_names=["L6_to_L13_Rev", "R6_to_R13_Rev"])},
     )
     # penalize toe joint limits
     dof_pos_limits = RewTerm(
         func=mdp.joint_pos_limits,
-        weight=-0.2, # cassie:-1.0
+        weight=-0.2,  # cassie:-1.0
         params={"asset_cfg": SceneEntityCfg("robot", joint_names=["L6_to_L13_Rev", "R6_to_R13_Rev"])},
     )
 
     base_height_l2 = RewTerm(
         func=mdp.base_height_l2,
         weight=0.9,
-        params={"asset_cfg": SceneEntityCfg("robot", body_names=["base_link"]), "target_height": 0.83}, # "target": 0.35         target not a param of base_pos_z
+        params={
+            "asset_cfg": SceneEntityCfg("robot", body_names=["base_link"]),
+            "target_height": 0.83,
+        },  # "target": 0.35         target not a param of base_pos_z
     )
 
     joint_deviation_knee = RewTerm(
@@ -66,7 +74,7 @@ class HanuRewardsCfg(RewardsCfg):
 
     track_ang_vel_z_exp = RewTerm(
         func=mdp.track_ang_vel_z_world_exp,
-        weight=1.0,
+        weight=0.5,
         params={
             "command_name": "base_velocity",
             "std": 0.5,
@@ -86,7 +94,7 @@ class HanuRewardsCfg(RewardsCfg):
 
 @configclass
 class HanumanoidA0RoughEnvCfg(LocomotionVelocityRoughEnvCfg):
-    
+
     rewards: HanuRewardsCfg = HanuRewardsCfg()
 
     def __post_init__(self):
@@ -94,12 +102,14 @@ class HanumanoidA0RoughEnvCfg(LocomotionVelocityRoughEnvCfg):
 
         # scene
         # self.scene.robot.prim_path = "{ENV_REGEX_NS}/LegV5_URDF_Export"
-        self.scene.robot = HANU_A0_CFG.replace(prim_path="{ENV_REGEX_NS}/LegV5_URDF_Export") #! TODO: check dir
+        self.scene.robot = HANU_A0_CFG.replace(prim_path="{ENV_REGEX_NS}/LegV5_URDF_Export")  #! TODO: check dir
         # self.scene.robot = HANU_A0_CFG
-    
-        self.scene.height_scanner.prim_path = "{ENV_REGEX_NS}/LegV5_URDF_Export/LegV5_URDF_Export/base_link" # TODO: change Robot name
+
+        self.scene.height_scanner.prim_path = (  # TODO: change Robot name
+            "{ENV_REGEX_NS}/LegV5_URDF_Export/LegV5_URDF_Export/base_link"
+        )
         # /World/LegV5_URDF_Export/base_link
-        
+
         self.scene.contact_forces.prim_path = "{ENV_REGEX_NS}/LegV5_URDF_Export/LegV5_URDF_Export/.*"
 
         # check if the rigid bodies are loaded correctly
@@ -134,7 +144,7 @@ class HanumanoidA0RoughEnvCfg(LocomotionVelocityRoughEnvCfg):
         # events
         self.events.push_robot = None
         self.events.add_base_mass.params["mass_distribution_params"] = (-1.0, 3.0)
-        self.events.add_base_mass.params["asset_cfg"].body_names = "base_link" # TODO: check "base" link
+        self.events.add_base_mass.params["asset_cfg"].body_names = "base_link"  # TODO: check "base" link
         self.events.base_external_force_torque.params["asset_cfg"].body_names = "base_link"
         self.events.reset_robot_joints.params["position_range"] = (1.0, 1.0)
         self.events.reset_base.params = {
@@ -157,21 +167,21 @@ class HanumanoidA0RoughEnvCfg(LocomotionVelocityRoughEnvCfg):
             "base_link",
             "L1_Hip_1_1",
             "R1_Hip_1_1",
-            'L2_Hip_1_1',
-            'R2_Hip_1_1',
-            'L3_Upper_1_1',
-            'R3_Upper_1_1',
-            'L4_Lower_1_1',
-            'R4_Lower_1_1',
-            'L11_Knee_Pitch_1_1',
-            'L5_Knee_Roll_1_1',
-            'L6_U_Joint_1_1',
-            'R11_Knee_Pitch_1_1',
-            'R5_Knee_Roll_1_1',
-            'R6_U_Joint_1_1',
-            ]
+            "L2_Hip_1_1",
+            "R2_Hip_1_1",
+            "L3_Upper_1_1",
+            "R3_Upper_1_1",
+            "L4_Lower_1_1",
+            "R4_Lower_1_1",
+            "L11_Knee_Pitch_1_1",
+            "L5_Knee_Roll_1_1",
+            "L6_U_Joint_1_1",
+            "R11_Knee_Pitch_1_1",
+            "R5_Knee_Roll_1_1",
+            "R6_U_Joint_1_1",
+        ]
         # self.rewards.undesired_contacts.params["sensor_cfg"].body_names = "base_link" # TODO: check ".*_thigh" link
-        self.rewards.undesired_contacts.weight = -0.1 # default: -0.1
+        self.rewards.undesired_contacts.weight = -0.1  # default: -0.1
         self.rewards.flat_orientation_l2.weight = -1.0
         self.rewards.action_rate_l2.weight = -0.005
         self.rewards.dof_acc_l2.weight = -1.25e-7
@@ -187,25 +197,26 @@ class HanumanoidA0RoughEnvCfg(LocomotionVelocityRoughEnvCfg):
 
         # observations
         self.observations.policy.enable_corruption = False
-        
+
         # terminations
         self.terminations.base_contact.params["sensor_cfg"].body_names = [
             "base_link",
             "L1_Hip_1_1",
             "R1_Hip_1_1",
-            'L2_Hip_1_1',
-            'R2_Hip_1_1',
-            'L3_Upper_1_1',
-            'R3_Upper_1_1',
-            'L4_Lower_1_1',
-            'R4_Lower_1_1',
-            'L11_Knee_Pitch_1_1',
-            'L5_Knee_Roll_1_1',
-            'L6_U_Joint_1_1',
-            'R11_Knee_Pitch_1_1',
-            'R5_Knee_Roll_1_1',
-            'R6_U_Joint_1_1',
-            ]
+            "L2_Hip_1_1",
+            "R2_Hip_1_1",
+            "L3_Upper_1_1",
+            "R3_Upper_1_1",
+            "L4_Lower_1_1",
+            "R4_Lower_1_1",
+            "L11_Knee_Pitch_1_1",
+            "L5_Knee_Roll_1_1",
+            "L6_U_Joint_1_1",
+            "R11_Knee_Pitch_1_1",
+            "R5_Knee_Roll_1_1",
+            "R6_U_Joint_1_1",
+        ]
+
 
 @configclass
 class HanumanoidA0RoughEnvCfg_PLAY(HanumanoidA0RoughEnvCfg):
@@ -214,7 +225,7 @@ class HanumanoidA0RoughEnvCfg_PLAY(HanumanoidA0RoughEnvCfg):
 
         self.scene.num_envs = 32
         self.scene.env_spacing = 2.5
-        
+
         self.scene.terrain.max_init_terrain_level = None
 
         if self.scene.terrain.terrain_generator is not None:

@@ -1,3 +1,8 @@
+# Copyright (c) 2022-2025, The Isaac Lab Project Developers.
+# All rights reserved.
+#
+# SPDX-License-Identifier: BSD-3-Clause
+
 # Copyright (c) 2025, RAI Hanumanoid Project Developers.
 # All right reserved.
 
@@ -21,7 +26,7 @@ HANU_A0_CFG = ArticulationCfg(
     # prim_path="/LegV5_URDF_Export",
     # prim_path=f"/home/RAI_65011278/IsaacLab/source/isaaclab_assets/data/Hanu/LegV5_URDF_Export_description/",
     spawn=sim_util.UsdFileCfg(
-        usd_path=f"/home/RAI_65011278/IsaacLab/source/isaaclab_assets/data/Hanu/LegV5_URDF_Export_description/urdf/LegV5/LegV5_v1.usd", # TODO: set path for usd
+        usd_path=f"/home/RAI_65011278/IsaacLab/source/isaaclab_assets/data/Hanu/LegV5_URDF_Export_description/urdf/LegV5/LegV5_v1.usd",  # TODO: set path for usd
         activate_contact_sensors=True,
         rigid_props=sim_util.RigidBodyPropertiesCfg(
             disable_gravity=False,
@@ -30,7 +35,7 @@ HANU_A0_CFG = ArticulationCfg(
             angular_damping=0.0,
             max_linear_velocity=1000.0,
             max_angular_velocity=1000.0,
-            max_depenetration_velocity=1.0
+            max_depenetration_velocity=1.0,
         ),
         articulation_props=sim_util.ArticulationRootPropertiesCfg(
             enabled_self_collisions=False,
@@ -39,8 +44,8 @@ HANU_A0_CFG = ArticulationCfg(
         ),
     ),
     init_state=ArticulationCfg.InitialStateCfg(
-        pos=(0.0, 0.0, 0.65), # (x, y, z)
-        rot=(1.0, 1.0, 0.0, 0.0), # (w, x, y, z)
+        pos=(0.0, 0.0, 0.65),  # (x, y, z)
+        rot=(1.0, 1.0, 0.0, 0.0),  # (w, x, y, z)
         joint_pos={
             "base_to_L1": 0.0,
             "base_to_R1": 0.0,

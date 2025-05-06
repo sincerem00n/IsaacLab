@@ -46,6 +46,7 @@ from isaaclab.sim import SimulationContext
 from isaaclab_assets import CARTPOLE_CFG  # isort:skip
 from isaaclab_assets.robots.hanu import HANU_A0_CFG  # isort:skip
 
+
 def design_scene() -> tuple[dict, list[list[float]]]:
     """Designs the scene."""
     # Ground-plane
