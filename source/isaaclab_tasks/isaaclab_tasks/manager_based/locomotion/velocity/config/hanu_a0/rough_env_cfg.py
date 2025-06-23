@@ -96,6 +96,7 @@ class HanuRewardsCfg(RewardsCfg):
 class HanumanoidA0RoughEnvCfg(LocomotionVelocityRoughEnvCfg):
 
     rewards: HanuRewardsCfg = HanuRewardsCfg()
+    # scene: SceneCfg = MySceneCfg(num_envs=4096, env_spacing=2.5)
 
     def __post_init__(self):
         super().__post_init__()
