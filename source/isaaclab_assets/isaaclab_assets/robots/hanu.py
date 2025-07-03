@@ -8,12 +8,13 @@
 
 # SPDX-License-Identifier: BSD-3-Clause
 
-"""Configuration for the 16-DOFs Hanumanoid robot.
+"""Configuration for the Hanumanoid robot.
 
 The following configuration are available:
-* :obj:`HANU_A0_CFG`: Hanumanoid A0 robot
+* :obj:`HANU_A0_CFG`: Hanumanoid A0 robot with only legs and feet actuators.
+* :obj:`HANU_A1_CFG`: Hanumanoid A1 robot (full body) with arms, legs, and torso actuators.
 
-Reference: https://github.com/Zartern/Hanumanoid
+Reference: https://github.com/whaly-w/Hanumanoid
 """
 
 import isaaclab.sim as sim_util
@@ -151,3 +152,90 @@ HANU_A0_CFG = ArticulationCfg(
     },
 )
 """Configuration for the Hanumanoid A0 robot."""
+
+HANU_A1_CFG = ArticulationCfg(
+    prim_path="{ENV_REGEX_NS}/full_body",  # TODO: check prim_path
+    spawn=sim_util.UsdFileCfg(
+        usd_path=r"C:\Users\jingj\IsaacLab\source\isaaclab_assets\data\Hanu\full_body_description\urdf\full_body\full_body_v1.usd",  # TODO: set path for usd
+        activate_contact_sensors=True,
+        rigid_props=sim_util.RigidBodyPropertiesCfg(
+            disable_gravity=False,
+            retain_accelerations=False,
+            linear_damping=0.0,
+            angular_damping=0.0,
+            max_linear_velocity=1000.0,
+            max_angular_velocity=1000.0,
+            max_depenetration_velocity=1.0,
+        ),
+        articulation_props=sim_util.ArticulationRootPropertiesCfg(
+            enabled_self_collisions=False,
+            solver_position_iteration_count=8,
+            solver_velocity_iteration_count=4,
+        ),
+    ),
+    init_state=ArticulationCfg.InitialStateCfg(
+        joint_pos={".*": 0.0},
+        joint_vel={".*": 0.0},
+    ),
+    soft_joint_pos_limit_factor=0.9,
+    actuators={
+        "arms": ImplicitActuatorCfg(
+            joint_names_expr=[
+                "LA1_Shoulder_to_LA2_Shoulder_Roll",
+                "LA2_Shoulder_to_LA3_Upper_Arm_Yaw",
+                "LA3_Upper_Arm_to_LA4_Lower_Arm_Pitch",
+                "LA4_Lower_Arm_to_LA5_Wrist_Yaw",
+                "LA5_Wrist_to_LA6_Wrist_Pitch",
+                "LA6_Wrist_to_LA7_Hand_Roll",
+                "RA1_Shoulder_to_RA2_Shoulder_Roll_",
+                "RA2_Shoulder_to_RA3_Upper_Arm_Yaw",
+                "RA3_Upper_Arm_to_RA4_Lower_Arm_Pitch_",
+                "RA4_Lower_Arm_to_RA5_Wrist_Yaw",
+                "RA5_Wrist_to_RA6_Wrist_Pitch",
+                "RA6_Wrist_to_RA7_Hand_Roll",
+            ],
+            effort_limit=100,
+            velocity_limit=50.0,
+            stiffness=30.0,
+            damping=None,
+            armature=0.01,
+        ),
+        "legs": ImplicitActuatorCfg(
+            joint_names_expr=[
+                "LL1_Groin_to_LL2_Buttock_Pitch",
+                "LL2_Buttock_to_LL3_Thigh_Roll",
+                "LL3_Thigh_to_LL4_Calf_Pitch",
+                "LL4_Calf_to_LL5_ankle_Pitch",
+                "LL5_ankle_to_LL6_Foot_Roll",
+                "RL1_Groin_to_RL2_Buttock_Pitch",
+                "RL2_Buttock_to_RL3_Thigh_Roll",
+                "RL3_Thigh_to_RL4_Calf_Pitch",
+                "RL4_Calf_to_RL5_ankle_Pitch",
+                "RL5_ankle_to_RL6_Foot_Roll",
+                "hip_to_LL1_Groin_Yaw",
+                "hip_to_RL1_Groin_Yaw",
+            ],
+            effort_limit=300,
+            velocity_limit=100.0,
+            stiffness=100.0,
+            damping=10.0,
+            armature=0.01,
+        ),
+        "torso": ImplicitActuatorCfg(
+            joint_names_expr=[
+                "abdomen_to_hip_Pitch",
+                "base_to_neck_yaw",
+                "neck_to_torso_Pitch",
+                "torso_to_LA1_Shoulder_Pitch",
+                "torso_to_RA1_Shoulder_Pitch",
+                "torso_to_abdomen_Yaw",
+            ],
+            effort_limit=100,
+            velocity_limit=50.0,
+            stiffness=50.0,
+            damping=5.0,
+            armature=0.01,
+        ),
+    },
+)
+"""Configuration for the Hanumanoid A1 robot."""
