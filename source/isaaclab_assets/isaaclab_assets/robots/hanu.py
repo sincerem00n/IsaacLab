@@ -174,6 +174,8 @@ HANU_A1_CFG = ArticulationCfg(
         ),
     ),
     init_state=ArticulationCfg.InitialStateCfg(
+        pos=(0.0, 0.0, 1.0),  # (x, y, z)
+        # rot=(1.0, 1.0, 0.0, 0.0),  # (w, x, y, z)
         joint_pos={".*": 0.0},
         joint_vel={".*": 0.0},
     ),
