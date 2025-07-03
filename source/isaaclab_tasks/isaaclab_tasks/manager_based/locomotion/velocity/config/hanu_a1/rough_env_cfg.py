@@ -78,9 +78,22 @@ class HanuA1RoughEnvCfg(LocomotionVelocityRoughEnvCfg):
         super().__post_init__()
 
         # ------ Scene configuration --------
-        self.scene.robot = HANU_A1_CFG.copy()
-        self.scene.height_scanner.prim_path = r"{ENV_REGEX_NS}/full_body/(RL6|LL6)_Foot_Roll_1"
-        self.scene.contact_forces.prim_path = r"{ENV_REGEX_NS}/full_body/(RL6|LL6)_Foot_Roll_1"
+        self.scene.robot = HANU_A1_CFG.replace(prim_path="{ENV_REGEX_NS}/robot")
+        # self.scene.robot.spawn.activate_contact_sensors = True
+        self.scene.height_scanner.prim_path = "/World/envs/env_.*/robot/full_body/Torso_1"
+        # /World/Origin1/full_body/full_body/RL6_Foot_Roll_1
+        self.scene.contact_forces.prim_path = "{ENV_REGEX_NS}/robot/full_body/.*"
+        # self.scene.contact_forces.prim_paths = [
+        #     "{ENV_REGEX_NS}/robot/full_body/LL6_Foot_Roll_1",
+        #     "{ENV_REGEX_NS}/robot/full_body/RL6_Foot_Roll_1"
+        # ]
+
+        # check if the robot is spawned correctly
+        # stage = omni.usd.get_context().get_stage()
+        # world_prim = stage.GetPrimAtPath("/World")
+        # print("All Prims in /World:")
+        # for prim in world_prim.GetChildren():
+        #     print(prim.GetPath().pathString)
 
         self.scene.terrain.terrain_generator.sub_terrains["boxes"].grid_height_range = (0.025, 0.1)
         self.scene.terrain.terrain_generator.sub_terrains["random_rough"].noise_range = (0.01, 0.06)
