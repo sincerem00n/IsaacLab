@@ -44,7 +44,7 @@ from isaaclab.sim import SimulationContext
 # Pre-defined configs
 ##
 from isaaclab_assets import CARTPOLE_CFG  # isort:skip
-from isaaclab_assets.robots.hanu import HANU_A0_CFG  # isort:skip
+from isaaclab_assets.robots.hanu import HANU_A0_CFG, HANU_A1_CFG  # isort:skip
 
 
 def design_scene() -> tuple[dict, list[list[float]]]:
@@ -65,8 +65,8 @@ def design_scene() -> tuple[dict, list[list[float]]]:
     prim_utils.create_prim("/World/Origin2", "Xform", translation=origins[1])
 
     # Articulation
-    hanu_cfg = HANU_A0_CFG.copy()
-    hanu_cfg.prim_path = "/World/Origin.*/LegV5_URDF_Export"
+    hanu_cfg = HANU_A1_CFG.copy()
+    hanu_cfg.prim_path = "/World/Origin.*/full_body"
     hanu = Articulation(cfg=hanu_cfg)
 
     # return the scene information
