@@ -1323,7 +1323,7 @@
     <parent link="Torso_1"/>
     <child link="abdomen_1"/>
     <axis xyz="0.0 0.0 -1.0"/>
-    <limit effort="32" velocity="20"/>
+    <limit effort="32" lower="-1.5708" upper="1.5708" velocity="20"/>
   </joint>
   <joint name="abdomen to hip Pitch" type="revolute">
     <origin rpy="0 0 0" xyz="0.0 0.0 -0.1095"/>
