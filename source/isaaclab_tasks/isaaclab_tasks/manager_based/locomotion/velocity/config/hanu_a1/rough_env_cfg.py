@@ -63,7 +63,7 @@ class HanuA1RewardsCfg(RewardsCfg):
         weight=0.9,
         params={
             "asset_cfg": SceneEntityCfg("robot", body_names=["base_link"]),
-            "target_height": 1.0,
+            "target_height": 2.0,
         },  # "target": 0.35         target not a param of base_pos_z
     )
 
@@ -128,15 +128,17 @@ class HanuA1RoughEnvCfg(LocomotionVelocityRoughEnvCfg):
             "RL3_Thigh_Roll_1",
             "LL4_Calf_Pitch_1",
             "RL4_Calf_Pitch_1",
+
         ]
         self.rewards.undesired_contacts.weight = -0.2
         self.rewards.feet_air_time.weight = 0.25
-        self.rewards.base_height_l2.weight = 1.0
+        self.rewards.base_height_l2.weight = 3.0
 
         # ------ Commands configuration --------
         self.commands.base_velocity.ranges.lin_vel_x = (0.0, 1.0)
         self.commands.base_velocity.ranges.lin_vel_y = (-0.0, 0.0)
         self.commands.base_velocity.ranges.ang_vel_z = (-1.0, 1.0)
+        self.commands.base_velocity.rel_standing_envs = 0.5
 
         # ------ Obsesrvations configuration --------
         self.observations.policy.enable_corruption = False
@@ -144,6 +146,9 @@ class HanuA1RoughEnvCfg(LocomotionVelocityRoughEnvCfg):
         # ------ Terminations configuration --------
         self.terminations.base_contact.params["sensor_cfg"].body_names = [
             "base_link",
+            "Torso_1",
+            "abdomen_1",
+            "Hip_1",
             "LL3_Thigh_Roll_1",
             "RL3_Thigh_Roll_1",
             "LL4_Calf_Pitch_1",
