@@ -79,7 +79,7 @@ class HanuA1TerminationsCfg(TerminationsCfg):
         func=mdp.bad_orientation,
         params={
             "asset_cfg": SceneEntityCfg("robot", body_names=["base_link"]),
-            "limit_angle": math.radians(60.0),  # 60 degrees
+            "limit_angle": math.pi/3,  # 60 degrees
         },
     )
 
