@@ -126,6 +126,7 @@ class HanuA1RoughEnvCfg(LocomotionVelocityRoughEnvCfg):
         self.events.push_robot = None
         self.events.add_base_mass = None
         # self.events.add_base_mass.params["mass_distribution_params"] = (-1.0, 3.0)
+        self.events.base_external_force_torque = None
         # self.events.base_external_force_torque.params["asset_cfg"].body_names = "Hip_1"
         # self.events.base_external_force_torque.params["force_range"] = (-1.0, 1.0)
         
@@ -156,7 +157,7 @@ class HanuA1RoughEnvCfg(LocomotionVelocityRoughEnvCfg):
         ]
         self.rewards.undesired_contacts.weight = -0.2
         self.rewards.feet_air_time.weight = 0.25
-        self.rewards.base_height_l2.weight = 3.0
+        self.rewards.base_height_l2.weight = 1.0
         self.rewards.action_rate_l2.weight = -0.005
         # self.rewards.dof_acc_l2.weight = -1.25e-7
         self.rewards.termination_penalty.weight = -2.0
