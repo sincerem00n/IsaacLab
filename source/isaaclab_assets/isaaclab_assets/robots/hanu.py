@@ -177,7 +177,7 @@ HANU_A1_CFG = ArticulationCfg(
         ),
     ),
     init_state=ArticulationCfg.InitialStateCfg(
-        pos=(0.0, 0.0, 1.66),  # (x, y, z)
+        pos=(0.0, 0.0, 0.9),  # (x, y, z)
         # rot=(1.0, 1.0, 0.0, 0.0),  # (w, x, y, z)
         joint_pos={".*": 0.0},
         joint_vel={".*": 0.0},
@@ -237,7 +237,7 @@ HANU_A1_CFG = ArticulationCfg(
             ],
             effort_limit=400,
             velocity_limit=100.0,
-            stiffness=500.0,
+            stiffness=1000.0,
             damping=0.005,
             # armature=0.01,
         ),

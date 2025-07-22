@@ -64,7 +64,7 @@ class HanuA1RewardsCfg(RewardsCfg):
         weight=0.9,
         params={
             "asset_cfg": SceneEntityCfg("robot", body_names=["base_link"]),
-            "target_height": 1.66,
+            "target_height": 0.9, # robot height: 1.66m (1.66/2 + fall height) 
         },  # "target": 0.35         target not a param of base_pos_z
     )
 
@@ -79,7 +79,7 @@ class HanuA1TerminationsCfg(TerminationsCfg):
         func=mdp.bad_orientation,
         params={
             "asset_cfg": SceneEntityCfg("robot", body_names=["base_link"]),
-            "threshold": math.radians(60.0),  # 60 degrees
+            "limit_angle": math.radians(60.0),  # 60 degrees
         },
     )
 
