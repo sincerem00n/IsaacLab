@@ -21,11 +21,12 @@ from isaaclab_assets.robots.hanu import HANU_A1_CFG
 
 from isaaclab.assets import Articulation
 from isaaclab.managers import RewardTermCfg as RewTerm
+from isaaclab.managers import TerminationTermCfg as DoneTerm
 from isaaclab.managers import SceneEntityCfg
 from isaaclab.utils import configclass
 
 import isaaclab_tasks.manager_based.locomotion.velocity.mdp as mdp
-from isaaclab_tasks.manager_based.locomotion.velocity.velocity_env_cfg import LocomotionVelocityRoughEnvCfg, RewardsCfg
+from isaaclab_tasks.manager_based.locomotion.velocity.velocity_env_cfg import LocomotionVelocityRoughEnvCfg, RewardsCfg, TerminationsCfg
 
 
 @configclass
@@ -63,9 +64,25 @@ class HanuA1RewardsCfg(RewardsCfg):
         weight=0.9,
         params={
             "asset_cfg": SceneEntityCfg("robot", body_names=["base_link"]),
-            "target_height": 2.0,
+            "target_height": 1.66,
         },  # "target": 0.35         target not a param of base_pos_z
     )
+
+@configclass
+class HanuA1TerminationsCfg(TerminationsCfg):
+    time_out = DoneTerm(func=mdp.time_out, time_out=True)
+    base_contact = DoneTerm(
+        func=mdp.illegal_contact,
+        params={"sensor_cfg": SceneEntityCfg("contact_forces", body_names="base"), "threshold": 1.0},
+    )
+    robot_fallen = DoneTerm(
+        func=mdp.bad_orientation,
+        params={
+            "asset_cfg": SceneEntityCfg("robot", body_names=["base_link"]),
+            "threshold": math.radians(60.0),  # 60 degrees
+        },
+    )
+
 
 
 @configclass
@@ -73,6 +90,7 @@ class HanuA1RoughEnvCfg(LocomotionVelocityRoughEnvCfg):
     """Environment configuration for Hanumanoid A1 in rough terrain."""
 
     rewards: HanuA1RewardsCfg = HanuA1RewardsCfg()
+    terminations: HanuA1TerminationsCfg = HanuA1TerminationsCfg()
 
     def __post_init__(self):
         super().__post_init__()
@@ -135,12 +153,13 @@ class HanuA1RoughEnvCfg(LocomotionVelocityRoughEnvCfg):
         self.rewards.base_height_l2.weight = 3.0
         self.rewards.action_rate_l2.weight = -0.005
         # self.rewards.dof_acc_l2.weight = -1.25e-7
+        self.rewards.termination_penalty.weight = -2.0
 
         # ------ Commands configuration --------
         self.commands.base_velocity.ranges.lin_vel_x = (0.0, 1.0)
         self.commands.base_velocity.ranges.lin_vel_y = (-0.0, 0.0)
         self.commands.base_velocity.ranges.ang_vel_z = (-1.0, 1.0)
-        self.commands.base_velocity.rel_standing_envs = 0.5
+        # self.commands.base_velocity.rel_standing_envs = 0.5
 
         # ------ Obsesrvations configuration --------
         self.observations.policy.enable_corruption = False
