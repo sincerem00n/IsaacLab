@@ -159,22 +159,25 @@ HANU_A1_CFG = ArticulationCfg(
         usd_path=r"C:\Users\jingj\IsaacLab\source\isaaclab_assets\data\Hanu\full_body_description\urdf\full_body\full_body_v2.usd",  # TODO: set path for usd
         activate_contact_sensors=True,
         rigid_props=sim_util.RigidBodyPropertiesCfg(
-            disable_gravity=False,
-            retain_accelerations=False,
+            # disable_gravity=False,
+            # retain_accelerations=False,
+            rigid_body_enabled=True,
             linear_damping=0.0,
             angular_damping=0.0,
             max_linear_velocity=1000.0,
             max_angular_velocity=1000.0,
-            max_depenetration_velocity=1.0,
+            max_depenetration_velocity=100.0,
         ),
         articulation_props=sim_util.ArticulationRootPropertiesCfg(
             enabled_self_collisions=False,
             solver_position_iteration_count=8,
             solver_velocity_iteration_count=4,
+            sleep_threshold=0.005,
+            stabilization_threshold=0.001,
         ),
     ),
     init_state=ArticulationCfg.InitialStateCfg(
-        pos=(0.0, 0.0, 1.0),  # (x, y, z)
+        pos=(0.0, 0.0, 1.66),  # (x, y, z)
         # rot=(1.0, 1.0, 0.0, 0.0),  # (w, x, y, z)
         joint_pos={".*": 0.0},
         joint_vel={".*": 0.0},
@@ -196,11 +199,11 @@ HANU_A1_CFG = ArticulationCfg(
                 "RA5_Wrist_to_RA6_Wrist_Pitch",
                 "RA6_Wrist_to_RA7_Hand_Roll",
             ],
-            effort_limit=100,
-            velocity_limit=50.0,
-            stiffness=30.0,
-            damping=None,
-            armature=0.01,
+            effort_limit=400,
+            velocity_limit=100.0,
+            stiffness=1000.0,
+            damping=0.005,
+            # armature=0.01,
         ),
         "legs": ImplicitActuatorCfg(
             joint_names_expr=[
@@ -217,11 +220,11 @@ HANU_A1_CFG = ArticulationCfg(
                 "hip_to_LL1_Groin_Yaw",
                 "hip_to_RL1_Groin_Yaw",
             ],
-            effort_limit=300,
+            effort_limit=400,
             velocity_limit=100.0,
-            stiffness=100.0,
+            stiffness=0.0,
             damping=10.0,
-            armature=0.01,
+            # armature=0.01,
         ),
         "torso": ImplicitActuatorCfg(
             joint_names_expr=[
@@ -232,11 +235,11 @@ HANU_A1_CFG = ArticulationCfg(
                 "torso_to_RA1_Shoulder_Pitch",
                 "torso_to_abdomen_Yaw",
             ],
-            effort_limit=100,
-            velocity_limit=50.0,
-            stiffness=50.0,
-            damping=5.0,
-            armature=0.01,
+            effort_limit=400,
+            velocity_limit=100.0,
+            stiffness=500.0,
+            damping=0.005,
+            # armature=0.01,
         ),
     },
 )
