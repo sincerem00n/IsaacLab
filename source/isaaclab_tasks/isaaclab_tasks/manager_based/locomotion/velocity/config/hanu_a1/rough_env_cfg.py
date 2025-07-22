@@ -133,6 +133,8 @@ class HanuA1RoughEnvCfg(LocomotionVelocityRoughEnvCfg):
         self.rewards.undesired_contacts.weight = -0.2
         self.rewards.feet_air_time.weight = 0.25
         self.rewards.base_height_l2.weight = 3.0
+        self.rewards.action_rate_l2.weight = -0.005
+        # self.rewards.dof_acc_l2.weight = -1.25e-7
 
         # ------ Commands configuration --------
         self.commands.base_velocity.ranges.lin_vel_x = (0.0, 1.0)
