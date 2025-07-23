@@ -22,11 +22,12 @@ from isaaclab_assets.robots.hanu import HANU_A1_CFG
 from isaaclab.assets import Articulation
 from isaaclab.managers import RewardTermCfg as RewTerm
 from isaaclab.managers import TerminationTermCfg as DoneTerm
+from isaaclab.managers import EventTermCfg as EventTerm
 from isaaclab.managers import SceneEntityCfg
 from isaaclab.utils import configclass
 
 import isaaclab_tasks.manager_based.locomotion.velocity.mdp as mdp
-from isaaclab_tasks.manager_based.locomotion.velocity.velocity_env_cfg import LocomotionVelocityRoughEnvCfg, RewardsCfg, TerminationsCfg, CommandsCfg
+from isaaclab_tasks.manager_based.locomotion.velocity.velocity_env_cfg import LocomotionVelocityRoughEnvCfg, RewardsCfg, TerminationsCfg, CommandsCfg, EventCfg
 
 
 @configclass
@@ -63,8 +64,8 @@ class HanuA1RewardsCfg(RewardsCfg):
         func=mdp.base_height_l2,
         weight=0.9,
         params={
-            "asset_cfg": SceneEntityCfg("robot", body_names=["base_link"]),
-            "target_height": 0.9, # robot height: 1.66m (1.66/2 + fall height) 
+            "asset_cfg": SceneEntityCfg("robot"),
+            "target_height": 0.83, # robot height: 1.66m (1.66/2 + fall height) 
         },  # "target": 0.35         target not a param of base_pos_z
     )
 
@@ -88,6 +89,53 @@ class HanuA1IdleCommandsCfg(CommandsCfg):
     """Idle commands configuration for Hanumanoid A1."""
     null = mdp.NullCommandCfg()
 
+@configclass
+class HanuA1EventsCfg(EventCfg):
+    """Events configuration for Hanumanoid A1."""
+    base_external_force_torque = EventTerm(
+        func=mdp.apply_external_force_torque,
+        mode="reset",
+        params={
+            "asset_cfg": SceneEntityCfg("robot", body_names="base"),
+            "force_range": (0.0, 0.0),
+            "torque_range": (-0.0, 0.0),
+        },
+    )
+
+    reset_base = EventTerm(
+        func=mdp.reset_root_state_uniform,
+        mode="reset",
+        params={
+            "pose_range": {"x": (-0.5, 0.5), "y": (-0.5, 0.5), "yaw": (-3.14, 3.14)},
+            "velocity_range": {
+                "x": (-0.5, 0.5),
+                "y": (-0.5, 0.5),
+                "z": (-0.5, 0.5),
+                "roll": (-0.5, 0.5),
+                "pitch": (-0.5, 0.5),
+                "yaw": (-0.5, 0.5),
+            },
+        },
+    )
+
+    reset_robot_joints = EventTerm(
+        func=mdp.reset_joints_by_scale,
+        mode="reset",
+        params={
+            "position_range": (0.5, 1.5),
+            "velocity_range": (0.0, 0.0),
+        },
+    )
+
+@configclass
+class HanuA1IdleEventsCfg(EventCfg):
+    """Idle events configuration for Hanumanoid A1."""
+    # ------- Reset events --------
+    reset_scene = EventTerm(
+        func=mdp.reset_scene_to_default,
+        mode="reset",
+    )
+
 
 @configclass
 class HanuA1RoughEnvCfg(LocomotionVelocityRoughEnvCfg):
@@ -96,6 +144,7 @@ class HanuA1RoughEnvCfg(LocomotionVelocityRoughEnvCfg):
     rewards: HanuA1RewardsCfg = HanuA1RewardsCfg()
     terminations: HanuA1TerminationsCfg = HanuA1TerminationsCfg()
     commands: HanuA1IdleCommandsCfg = HanuA1IdleCommandsCfg()
+    events: HanuA1IdleEventsCfg = HanuA1IdleEventsCfg()
 
     def __post_init__(self):
         super().__post_init__()
@@ -130,19 +179,8 @@ class HanuA1RoughEnvCfg(LocomotionVelocityRoughEnvCfg):
         # self.events.base_external_force_torque.params["asset_cfg"].body_names = "Hip_1"
         # self.events.base_external_force_torque.params["force_range"] = (-1.0, 1.0)
         
-        
-        self.events.reset_robot_joints.params["position_range"] = (1.0, 1.0)
-        self.events.reset_base.params = {
-            "pose_range": {"x": (-0.5, 0.5), "y": (-0.5, 0.5), "yaw": (-3.14, 3.14)},
-            "velocity_range": {
-                "x": (0.0, 0.0),
-                "y": (0.0, 0.0),
-                "z": (0.0, 0.0),
-                "roll": (0.0, 0.0),
-                "pitch": (0.0, 0.0),
-                "yaw": (0.0, 0.0),
-            },
-        }
+        self.events.reset_robot_joints = None
+        self.events.reset_base = None
         self.events.base_com = None
 
         # ------ Rewards configuration --------
@@ -163,7 +201,8 @@ class HanuA1RoughEnvCfg(LocomotionVelocityRoughEnvCfg):
         self.rewards.termination_penalty.weight = -2.0
 
         # ------ Commands configuration --------
-        
+        self.commands.base_velocity.ranges.lin_vel_x = (0.0, 0.02)
+        self.commands.base_velocity.ranges.lin_vel_y = (-0.0, 0.0)
         # *Remove HanuA1IdleCommandsCfg and use LocomotionVelocityRoughEnvCfg directly
         # self.commands.base_velocity.ranges.lin_vel_x = (0.0, 1.0)
         # self.commands.base_velocity.ranges.lin_vel_y = (-0.0, 0.0)
