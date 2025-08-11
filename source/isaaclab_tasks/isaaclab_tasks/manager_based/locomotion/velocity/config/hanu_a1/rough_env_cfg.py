@@ -17,9 +17,9 @@ from pxr import UsdPhysics
 ###########################
 # Pre-defined configs
 ###########################
-from isaaclab_assets.robots.hanu import HANU_A1_CFG
+from isaaclab_assets import HANU_A1_CFG
 
-# from isaaclab.assets import Articulation
+
 from isaaclab.managers import RewardTermCfg as RewTerm
 from isaaclab.managers import TerminationTermCfg as DoneTerm
 from isaaclab.managers import EventTermCfg as EventTerm
