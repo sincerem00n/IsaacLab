@@ -190,9 +190,9 @@ HANU_A1_CFG = ArticulationCfg(
             "torso_to_LA1_Shoulder_Pitch": -0.37,
             "torso_to_RA1_Shoulder_Pitch": -0.37,
             "LA1_Shoulder_to_LA2_Shoulder_Roll": 0.16,
-            "RA1_Shoulder_to_RA2_Shoulder_Roll": 0.16,
+            "RA1_Shoulder_to_RA2_Shoulder_Roll_": 0.16,
             "LA3_Upper_Arm_to_LA4_Lower_Arm_Pitch": -0.8,
-            "RA3_Upper_Arm_to_RA4_Lower_Arm_Pitch": -0.8,
+            "RA3_Upper_Arm_to_RA4_Lower_Arm_Pitch_": -0.8,
         },
         joint_vel={".*": 0.0},
     ),
@@ -242,11 +242,11 @@ HANU_A1_CFG = ArticulationCfg(
             joint_names_expr=[
                 "LL5_ankle_to_LL6_Foot_Roll",
                 "RL5_ankle_to_RL6_Foot_Roll",
-            ]
+            ],
             effort_limit=20,
             stiffness=20.0,
             damping=5.0,
-        )
+        ),
         "torso": ImplicitActuatorCfg(
             joint_names_expr=[
                 "abdomen_to_hip_Pitch",
