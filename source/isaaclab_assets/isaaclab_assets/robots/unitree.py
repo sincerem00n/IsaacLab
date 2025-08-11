@@ -303,6 +303,7 @@ G1_CFG = ArticulationCfg(
             "left_two_joint": 0.52,
             "right_two_joint": -0.52,
         },
+        # joint_pos={".*": 0.0},
         joint_vel={".*": 0.0},
     ),
     soft_joint_pos_limit_factor=0.9,

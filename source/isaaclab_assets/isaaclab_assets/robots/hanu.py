@@ -177,9 +177,23 @@ HANU_A1_CFG = ArticulationCfg(
         ),
     ),
     init_state=ArticulationCfg.InitialStateCfg(
-        pos=(0.0, 0.0, 0.9),  # (x, y, z)
-        # rot=(1.0, 1.0, 0.0, 0.0),  # (w, x, y, z)
-        joint_pos={".*": 0.0},
+        pos=(0.0, 0.0, 0.95),  # (x, y, z)
+        rot=(0.707, 0.0, 0.0, 0.707),  # (w, x, y, z)
+        # joint_pos={".*": 0.0},
+        joint_pos={
+            "LL1_Groin_to_LL2_Buttock_Pitch": -0.17,
+            "RL1_Groin_to_RL2_Buttock_Pitch": -0.17,
+            "LL3_Thigh_to_LL4_Calf_Pitch": 0.23,
+            "RL3_Thigh_to_RL4_Calf_Pitch": 0.23,
+            "LL4_Calf_to_LL5_ankle_Pitch": -0.15,
+            "RL4_Calf_to_RL5_ankle_Pitch": -0.15,
+            "torso_to_LA1_Shoulder_Pitch": -0.37,
+            "torso_to_RA1_Shoulder_Pitch": -0.37,
+            "LA1_Shoulder_to_LA2_Shoulder_Roll": 0.16,
+            "RA1_Shoulder_to_RA2_Shoulder_Roll": 0.16,
+            "LA3_Upper_Arm_to_LA4_Lower_Arm_Pitch": -0.8,
+            "RA3_Upper_Arm_to_RA4_Lower_Arm_Pitch": -0.8,
+        },
         joint_vel={".*": 0.0},
     ),
     soft_joint_pos_limit_factor=0.9,
@@ -211,12 +225,10 @@ HANU_A1_CFG = ArticulationCfg(
                 "LL2_Buttock_to_LL3_Thigh_Roll",
                 "LL3_Thigh_to_LL4_Calf_Pitch",
                 "LL4_Calf_to_LL5_ankle_Pitch",
-                "LL5_ankle_to_LL6_Foot_Roll",
                 "RL1_Groin_to_RL2_Buttock_Pitch",
                 "RL2_Buttock_to_RL3_Thigh_Roll",
                 "RL3_Thigh_to_RL4_Calf_Pitch",
                 "RL4_Calf_to_RL5_ankle_Pitch",
-                "RL5_ankle_to_RL6_Foot_Roll",
                 "hip_to_LL1_Groin_Yaw",
                 "hip_to_RL1_Groin_Yaw",
             ],
@@ -226,6 +238,15 @@ HANU_A1_CFG = ArticulationCfg(
             damping=10.0,
             # armature=0.01,
         ),
+        "feet": ImplicitActuatorCfg(
+            joint_names_expr=[
+                "LL5_ankle_to_LL6_Foot_Roll",
+                "RL5_ankle_to_RL6_Foot_Roll",
+            ]
+            effort_limit=20,
+            stiffness=20.0,
+            damping=5.0,
+        )
         "torso": ImplicitActuatorCfg(
             joint_names_expr=[
                 "abdomen_to_hip_Pitch",
