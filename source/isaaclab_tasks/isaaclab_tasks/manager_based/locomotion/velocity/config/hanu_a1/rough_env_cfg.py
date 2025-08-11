@@ -19,7 +19,7 @@ from pxr import UsdPhysics
 ###########################
 from isaaclab_assets.robots.hanu import HANU_A1_CFG
 
-from isaaclab.assets import Articulation
+# from isaaclab.assets import Articulation
 from isaaclab.managers import RewardTermCfg as RewTerm
 from isaaclab.managers import TerminationTermCfg as DoneTerm
 from isaaclab.managers import EventTermCfg as EventTerm
@@ -42,31 +42,40 @@ class HanuA1RewardsCfg(RewardsCfg):
             "threshold": 0.4,
         },
     )
-    track_ang_vel_z_exp = RewTerm(
-        func=mdp.track_ang_vel_z_world_exp, 
-        weight=0.5,
-        params={
-            "command_name": "base_velocity",
-            "std": 0.5,
-            "asset_cfg": SceneEntityCfg("robot", body_names=["Hip_1"]),
-        }
-    )
     track_lin_vel_xy_exp = RewTerm(
         func=mdp.track_lin_vel_xy_yaw_frame_exp,
         weight=1.0,
         params={
             "command_name": "base_velocity",
             "std": 0.5,
-            "asset_cfg": SceneEntityCfg("robot", body_names=["Hip_1"]),
+            # "asset_cfg": SceneEntityCfg("robot", body_names=["Hip_1"]),
         },
+    )
+    track_ang_vel_z_exp = RewTerm(
+        func=mdp.track_ang_vel_z_world_exp, 
+        weight=0.5,
+        params={
+            "command_name": "base_velocity",
+            "std": 0.5,
+            # "asset_cfg": SceneEntityCfg("robot", body_names=["Hip_1"]),
+        }
     )
     base_height_l2 = RewTerm(
         func=mdp.base_height_l2,
         weight=0.9,
         params={
             "asset_cfg": SceneEntityCfg("robot"),
-            "target_height": 0.83, # robot height: 1.66m (1.66/2 + fall height) 
+            "target_height": 1.7, # robot height: 1.66m (1.66/2 + fall height) 
         },  # "target": 0.35         target not a param of base_pos_z
+    )
+
+    # ----- joint deviation penalty
+    joint_deviation_neck = RewTerm(
+        func=mdp.joint_deviation_l1,
+        weight=-0.2,
+        params={
+            "asset_cfg": SceneEntityCfg("robot", joint_names=["neck_to_torso_Pitch"])
+        },
     )
 
 @configclass
@@ -143,7 +152,7 @@ class HanuA1RoughEnvCfg(LocomotionVelocityRoughEnvCfg):
 
     rewards: HanuA1RewardsCfg = HanuA1RewardsCfg()
     terminations: HanuA1TerminationsCfg = HanuA1TerminationsCfg()
-    commands: HanuA1IdleCommandsCfg = HanuA1IdleCommandsCfg()
+    # commands: HanuA1IdleCommandsCfg = HanuA1IdleCommandsCfg()
     events: HanuA1IdleEventsCfg = HanuA1IdleEventsCfg()
 
     def __post_init__(self):
@@ -201,12 +210,12 @@ class HanuA1RoughEnvCfg(LocomotionVelocityRoughEnvCfg):
         self.rewards.termination_penalty.weight = -2.0
 
         # ------ Commands configuration --------
-        self.commands.base_velocity.ranges.lin_vel_x = (0.0, 0.02)
-        self.commands.base_velocity.ranges.lin_vel_y = (-0.0, 0.0)
-        # *Remove HanuA1IdleCommandsCfg and use LocomotionVelocityRoughEnvCfg directly
-        # self.commands.base_velocity.ranges.lin_vel_x = (0.0, 1.0)
+        # self.commands.base_velocity.ranges.lin_vel_x = (0.0, 0.02)
         # self.commands.base_velocity.ranges.lin_vel_y = (-0.0, 0.0)
-        # self.commands.base_velocity.ranges.ang_vel_z = (-1.0, 1.0)
+        # *Remove HanuA1IdleCommandsCfg and use LocomotionVelocityRoughEnvCfg directly
+        self.commands.base_velocity.ranges.lin_vel_x = (-0.0, 0.0)
+        self.commands.base_velocity.ranges.lin_vel_y = (-1.0, 0.0)
+        self.commands.base_velocity.ranges.ang_vel_z = (-1.0, 1.0)
         
         # self.commands.base_velocity.rel_standing_envs = 0.5
 
