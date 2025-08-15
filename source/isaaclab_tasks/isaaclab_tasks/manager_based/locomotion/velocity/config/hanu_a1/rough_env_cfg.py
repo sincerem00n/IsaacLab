@@ -10,7 +10,7 @@
 
 import math
 
-import isaacsim.asset.importer.urdf
+# import isaacsim.asset.importer.urdf
 import omni.usd
 from pxr import UsdPhysics
 
@@ -68,6 +68,10 @@ class HanuA1RewardsCfg(RewardsCfg):
             "target_height": 1.7, # robot height: 1.66m (1.66/2 + fall height) 
         },  # "target": 0.35         target not a param of base_pos_z
     )
+    alive_bonus = RewTerm(
+        func=mdp.is_alive,
+        weight=1.0,
+    )
 
     # ----- joint deviation penalty
     joint_deviation_neck = RewTerm(
@@ -85,13 +89,13 @@ class HanuA1TerminationsCfg(TerminationsCfg):
         func=mdp.illegal_contact,
         params={"sensor_cfg": SceneEntityCfg("contact_forces", body_names="base"), "threshold": 1.0},
     )
-    robot_fallen = DoneTerm(
-        func=mdp.bad_orientation,
-        params={
-            "asset_cfg": SceneEntityCfg("robot"),
-            "limit_angle": math.pi/3,  # 60 degrees
-        },
-    )
+    # robot_fallen = DoneTerm(
+    #     func=mdp.bad_orientation,
+    #     params={
+    #         "asset_cfg": SceneEntityCfg("robot"),
+    #         "limit_angle": math.pi/3,  # 60 degrees
+    #     },
+    # )
 
 @configclass
 class HanuA1IdleCommandsCfg(CommandsCfg):
@@ -188,8 +192,8 @@ class HanuA1RoughEnvCfg(LocomotionVelocityRoughEnvCfg):
         # self.events.base_external_force_torque.params["asset_cfg"].body_names = "Hip_1"
         # self.events.base_external_force_torque.params["force_range"] = (-1.0, 1.0)
         
-        self.events.reset_robot_joints = None
-        self.events.reset_base = None
+        # self.events.reset_robot_joints = None
+        # self.events.reset_base = None
         self.events.base_com = None
 
         # ------ Rewards configuration --------
@@ -204,18 +208,18 @@ class HanuA1RoughEnvCfg(LocomotionVelocityRoughEnvCfg):
         ]
         self.rewards.undesired_contacts.weight = -0.2
         self.rewards.feet_air_time.weight = 0.25
-        self.rewards.base_height_l2.weight = 1.0
+        self.rewards.base_height_l2.weight = 2.0
         self.rewards.action_rate_l2.weight = -0.005
         # self.rewards.dof_acc_l2.weight = -1.25e-7
-        self.rewards.termination_penalty.weight = -2.0
+        # self.rewards.termination_penalty.weight = -2.0
 
         # ------ Commands configuration --------
         # self.commands.base_velocity.ranges.lin_vel_x = (0.0, 0.02)
         # self.commands.base_velocity.ranges.lin_vel_y = (-0.0, 0.0)
         # *Remove HanuA1IdleCommandsCfg and use LocomotionVelocityRoughEnvCfg directly
         self.commands.base_velocity.ranges.lin_vel_x = (-0.0, 0.0)
-        self.commands.base_velocity.ranges.lin_vel_y = (-1.0, 0.0)
-        self.commands.base_velocity.ranges.ang_vel_z = (-1.0, 1.0)
+        self.commands.base_velocity.ranges.lin_vel_y = (-0.0, 0.0) # (-1.0, 0.0)
+        self.commands.base_velocity.ranges.ang_vel_z = (-0.0, 0.0)
         
         # self.commands.base_velocity.rel_standing_envs = 0.5
 
@@ -223,33 +227,34 @@ class HanuA1RoughEnvCfg(LocomotionVelocityRoughEnvCfg):
         self.observations.policy.enable_corruption = False
 
         # ------ Terminations configuration --------
-        self.terminations.base_contact.params["sensor_cfg"].body_names = [
-            "base_link",
-            "Neck_1",
-            "LA1_Shoulder_Pitch_1",
-            "RA1_Shoulder_Pitch_1",
-            "LA2_Shoulder_Roll_1",
-            "RA2_Shoulder_Roll_1",
-            "LA3_Upper_Arm_Yaw_1",
-            "RA3_Upper_Arm_Yaw_1",
-            "LA4_Lower_Arm_Pitch_1",
-            "RA4_Lower_Arm_Pitch_1",
-            "LA5_Wrist_Yaw_1",
-            "RA5_Wrist_Yaw_1",
-            "LA6_Wrist_Pitch_1",
-            "RA6_Wrist_Pitch_1",
-            "LA7_Hand_Roll_1",
-            "RA7_Hand_Roll_1",
-            "Torso_1",
-            "abdomen_1",
-            "Hip_1",
-            "LL1_Groin_Yaw_1",
-            "RL1_Groin_Yaw_1",
-            "LL2_Buttock_Pitch_1",
-            "RL2_Buttock_Pitch_1",
-            "LL3_Thigh_Roll_1",
-            "RL3_Thigh_Roll_1",
-            "LL4_Calf_Pitch_1",
-            "RL4_Calf_Pitch_1",
-        ]
+        self.terminations.base_contact.params["sensor_cfg"].body_names = "Torso_1"
+        # self.terminations.base_contact.params["sensor_cfg"].body_names = [
+        #     "base_link",
+        #     "Neck_1",
+        #     "LA1_Shoulder_Pitch_1",
+        #     "RA1_Shoulder_Pitch_1",
+        #     "LA2_Shoulder_Roll_1",
+        #     "RA2_Shoulder_Roll_1",
+        #     "LA3_Upper_Arm_Yaw_1",
+        #     "RA3_Upper_Arm_Yaw_1",
+        #     "LA4_Lower_Arm_Pitch_1",
+        #     "RA4_Lower_Arm_Pitch_1",
+        #     "LA5_Wrist_Yaw_1",
+        #     "RA5_Wrist_Yaw_1",
+        #     "LA6_Wrist_Pitch_1",
+        #     "RA6_Wrist_Pitch_1",
+        #     "LA7_Hand_Roll_1",
+        #     "RA7_Hand_Roll_1",
+        #     "Torso_1",
+        #     "abdomen_1",
+        #     "Hip_1",
+        #     "LL1_Groin_Yaw_1",
+        #     "RL1_Groin_Yaw_1",
+        #     "LL2_Buttock_Pitch_1",
+        #     "RL2_Buttock_Pitch_1",
+        #     "LL3_Thigh_Roll_1",
+        #     "RL3_Thigh_Roll_1",
+        #     "LL4_Calf_Pitch_1",
+        #     "RL4_Calf_Pitch_1",
+        # ]
         
