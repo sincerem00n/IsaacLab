@@ -200,15 +200,15 @@ class HanuA1RoughEnvCfg(LocomotionVelocityRoughEnvCfg):
         # panalties
         self.rewards.lin_vel_z_l2.weight = 0.0
         self.rewards.undesired_contacts.params["sensor_cfg"].body_names = [
-            "LL3_Thigh_Roll_1",
-            "RL3_Thigh_Roll_1",
-            "LL4_Calf_Pitch_1",
-            "RL4_Calf_Pitch_1",
-
+            "Hip_1",
+            "LL1_Groin_Yaw_1",
+            "LL2_Buttock_Pitch_1",
+            "RL1_Groin_Yaw_1",
+            "RL2_Buttock_Pitch_1"
         ]
         self.rewards.undesired_contacts.weight = -0.2
-        self.rewards.feet_air_time.weight = 0.25
-        self.rewards.base_height_l2.weight = 2.0
+        self.rewards.feet_air_time.weight = 0.0 # 0.25
+        self.rewards.base_height_l2.weight = 3.0
         self.rewards.action_rate_l2.weight = -0.005
         # self.rewards.dof_acc_l2.weight = -1.25e-7
         # self.rewards.termination_penalty.weight = -2.0
@@ -227,7 +227,7 @@ class HanuA1RoughEnvCfg(LocomotionVelocityRoughEnvCfg):
         self.observations.policy.enable_corruption = False
 
         # ------ Terminations configuration --------
-        self.terminations.base_contact.params["sensor_cfg"].body_names = "Torso_1"
+        self.terminations.base_contact.params["sensor_cfg"].body_names = "Hip_1"
         # self.terminations.base_contact.params["sensor_cfg"].body_names = [
         #     "base_link",
         #     "Neck_1",
