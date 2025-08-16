@@ -53,26 +53,50 @@ class HanuA1RewardsCfg(RewardsCfg):
     )
     track_ang_vel_z_exp = RewTerm(
         func=mdp.track_ang_vel_z_world_exp, 
-        weight=0.5,
+        weight=2.0,
         params={
             "command_name": "base_velocity",
             "std": 0.5,
             # "asset_cfg": SceneEntityCfg("robot", body_names=["Hip_1"]),
         }
     )
-    base_height_l2 = RewTerm(
-        func=mdp.base_height_l2,
-        weight=0.9,
+    feet_slide = RewTerm(
+        func=mdp.feet_slide,
+        weight=-0.1,
         params={
-            "asset_cfg": SceneEntityCfg("robot"),
-            "target_height": 1.7, # robot height: 1.66m (1.66/2 + fall height) 
-        },  # "target": 0.35         target not a param of base_pos_z
+            "sensor_cfg": SceneEntityCfg("contact_forces", body_names=["RL6_Foot_Roll_1", "LL6_Foot_Roll_1"]),
+            "asset_cfg": SceneEntityCfg("robot", body_names=["RL6_Foot_Roll_1", "LL6_Foot_Roll_1"]),
+        },
     )
-    alive_bonus = RewTerm(
-        func=mdp.is_alive,
-        weight=1.0,
-    )
+    #* cancel base_height out according to g1 reward cfg
+    # base_height_l2 = RewTerm(
+    #     func=mdp.base_height_l2,
+    #     weight=0.9,
+    #     params={
+    #         "asset_cfg": SceneEntityCfg("robot"),
+    #         "target_height": 1.7, # robot height: 1.66m (1.66/2 + fall height) 
+    #     },  # "target": 0.35         target not a param of base_pos_z
+    # )
+    # alive_bonus = RewTerm(
+    #     func=mdp.is_alive,
+    #     weight=1.0,
+    # )
 
+    # ----- ankle joint limits penalty
+    ankle_dof_pos_limits = RewTerm(
+        func=mdp.joint_pos_limits,
+        weight=-1.0,
+        params={
+            "asset_cfg": SceneEntityCfg(
+                "robot", 
+                joint_names=["LL4_Calf_to_LL5_ankle_Pitch",
+                             "RL4_Calf_to_RL5_ankle_Pitch",
+                             "LL5_ankle_to_LL6_Foot_Roll",
+                             "RL5_ankle_to_RL6_Foot_Roll",
+                ]
+            ),
+        },
+    )
     # ----- joint deviation penalty
     joint_deviation_neck = RewTerm(
         func=mdp.joint_deviation_l1,
@@ -81,6 +105,47 @@ class HanuA1RewardsCfg(RewardsCfg):
             "asset_cfg": SceneEntityCfg("robot", joint_names=["neck_to_torso_Pitch"])
         },
     )
+    joint_deviation_arms = RewTerm(
+        func=mdp.joint_deviation_l1,
+        weight=-0.1,
+        params={
+            "asset_cfg": SceneEntityCfg(
+                "robot",
+                joint_names=[
+                    "LA1_Shoulder_to_LA2_Shoulder_Roll",
+                    "LA2_Shoulder_to_LA3_Upper_Arm_Yaw",
+                    "LA3_Upper_Arm_to_LA4_Lower_Arm_Pitch",
+                    "LA4_Lower_Arm_to_LA5_Wrist_Yaw",
+                    "LA5_Wrist_to_LA6_Wrist_Pitch",
+                    "LA6_Wrist_to_LA7_Hand_Roll",
+                    "RA1_Shoulder_to_RA2_Shoulder_Roll_",
+                    "RA2_Shoulder_to_RA3_Upper_Arm_Yaw",
+                    "RA3_Upper_Arm_to_RA4_Lower_Arm_Pitch_",
+                    "RA4_Lower_Arm_to_RA5_Wrist_Yaw",
+                    "RA5_Wrist_to_RA6_Wrist_Pitch",
+                    "RA6_Wrist_to_RA7_Hand_Roll",
+                ],
+            )
+        },
+    )
+    joint_deviation_torso = RewTerm(
+        func=mdp.joint_deviation_l1,
+        weight=-0.1,
+        params={
+            "asset_cfg": SceneEntityCfg(
+                "robot", 
+                joint_names=[
+                    "abdomen_to_hip_Pitch",
+                    "base_to_neck_yaw",
+                    "neck_to_torso_Pitch",
+                    "torso_to_LA1_Shoulder_Pitch",
+                    "torso_to_RA1_Shoulder_Pitch",
+                    "torso_to_abdomen_Yaw",
+                ]
+            )
+        },
+    )
+    
 
 @configclass
 class HanuA1TerminationsCfg(TerminationsCfg):
@@ -193,24 +258,59 @@ class HanuA1RoughEnvCfg(LocomotionVelocityRoughEnvCfg):
         # self.events.base_external_force_torque.params["force_range"] = (-1.0, 1.0)
         
         # self.events.reset_robot_joints = None
-        # self.events.reset_base = None
+        self.events.reset_robot_joints.params["position_range"] = (1.0, 1.0)
+        self.events.reset_base.params = {
+            "pose_range": {"x": (-0.5, 0.5), "y": (-0.5, 0.5), "yaw": (-3.14, 3.14)},
+            "velocity_range": {
+                "x": (0.0, 0.0),
+                "y": (0.0, 0.0),
+                "z": (0.0, 0.0),
+                "roll": (0.0, 0.0),
+                "pitch": (0.0, 0.0),
+                "yaw": (0.0, 0.0),
+            },
+        }
         self.events.base_com = None
 
         # ------ Rewards configuration --------
-        # panalties
-        self.rewards.lin_vel_z_l2.weight = 0.0
+        # penalties
+        self.rewards.track_ang_vel_z_exp.weight = 1.0
+        self.rewards.lin_vel_z_l2.weight = -0.2
         self.rewards.undesired_contacts.params["sensor_cfg"].body_names = [
-            "Hip_1",
             "LL1_Groin_Yaw_1",
             "LL2_Buttock_Pitch_1",
             "RL1_Groin_Yaw_1",
             "RL2_Buttock_Pitch_1"
         ]
         self.rewards.undesired_contacts.weight = -0.2
-        self.rewards.feet_air_time.weight = 0.0 # 0.25
-        self.rewards.base_height_l2.weight = 3.0
+        self.rewards.feet_air_time.weight = 0.75 # g1_flat
+        self.rewards.feet_air_time.params["threshold"] = 0.4 # g1 flat
+        # self.rewards.base_height_l2.weight = 3.0
         self.rewards.action_rate_l2.weight = -0.005
-        # self.rewards.dof_acc_l2.weight = -1.25e-7
+        self.rewards.dof_acc_l2.weight = -1.0e-7 # g1_flat
+        self.rewards.dof_acc_l2.params["asset_cfg"] = SceneEntityCfg(
+            "robot", 
+            joint_names=[
+                "torso_to_abdomen_Yaw",
+                "LL1_Groin_to_LL2_Buttock_Pitch",
+                "RL1_Groin_to_RL2_Buttock_Pitch",
+                "LL3_Thigh_to_LL4_Calf_Pitch",
+                "RL3_Thigh_to_RL4_Calf_Pitch",
+            ]
+        )
+        self.rewards.dof_torques_l2.weight = -2.0e-6 # g1_flat
+        self.rewards.dof_torques_l2.params["asset_cfg"] = SceneEntityCfg(
+            "robot", 
+            joint_names=[
+                "torso_to_abdomen_Yaw",
+                "LL1_Groin_to_LL2_Buttock_Pitch",
+                "RL1_Groin_to_RL2_Buttock_Pitch",
+                "LL3_Thigh_to_LL4_Calf_Pitch",
+                "RL3_Thigh_to_RL4_Calf_Pitch",
+                # "LL4_Calf_to_LL5_ankle_Pitch",
+                # "RL4_Calf_to_RL5_ankle_Pitch",
+            ]
+        )
         # self.rewards.termination_penalty.weight = -2.0
 
         # ------ Commands configuration --------
@@ -218,16 +318,16 @@ class HanuA1RoughEnvCfg(LocomotionVelocityRoughEnvCfg):
         # self.commands.base_velocity.ranges.lin_vel_y = (-0.0, 0.0)
         # *Remove HanuA1IdleCommandsCfg and use LocomotionVelocityRoughEnvCfg directly
         self.commands.base_velocity.ranges.lin_vel_x = (-0.0, 0.0)
-        self.commands.base_velocity.ranges.lin_vel_y = (-0.0, 0.0) # (-1.0, 0.0)
+        self.commands.base_velocity.ranges.lin_vel_y = (-1.0, 0.0) # (-1.0, 0.0)
         self.commands.base_velocity.ranges.ang_vel_z = (-0.0, 0.0)
         
         # self.commands.base_velocity.rel_standing_envs = 0.5
 
-        # ------ Obsesrvations configuration --------
+        # ------ Observations configuration --------
         self.observations.policy.enable_corruption = False
 
         # ------ Terminations configuration --------
-        self.terminations.base_contact.params["sensor_cfg"].body_names = "Hip_1"
+        self.terminations.base_contact.params["sensor_cfg"].body_names = ["Hip_1","Torso_1"]
         # self.terminations.base_contact.params["sensor_cfg"].body_names = [
         #     "base_link",
         #     "Neck_1",

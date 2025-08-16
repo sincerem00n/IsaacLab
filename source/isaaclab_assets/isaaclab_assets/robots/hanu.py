@@ -177,28 +177,31 @@ HANU_A1_CFG = ArticulationCfg(
         ),
     ),
     init_state=ArticulationCfg.InitialStateCfg(
-        pos=(0.0, 0.0, 0.95),  # (x, y, z)
+        pos=(0.0, 0.0, 0.93),  # (x, y, z)
         rot=(0.707, 0.0, 0.0, 0.707),  # (w, x, y, z)
         # joint_pos={".*": 0.0},
         joint_pos={
-            "LL1_Groin_to_LL2_Buttock_Pitch": -0.20,
-            "RL1_Groin_to_RL2_Buttock_Pitch": -0.20,
-            "LL3_Thigh_to_LL4_Calf_Pitch": 0.35,
-            "RL3_Thigh_to_RL4_Calf_Pitch": 0.35,
-            "LL4_Calf_to_LL5_ankle_Pitch": -0.19,
-            "RL4_Calf_to_RL5_ankle_Pitch": -0.19, 
-            "torso_to_LA1_Shoulder_Pitch": -0.35,
-            "torso_to_RA1_Shoulder_Pitch": 0.35, #! **
-            "LA3_Upper_Arm_to_LA4_Lower_Arm_Pitch": -0.8,
-            "RA3_Upper_Arm_to_RA4_Lower_Arm_Pitch_": 0.8, #! **
-            "hip_to_LL1_Groin_Yaw": 0.02,
-            "hip_to_RL1_Groin_Yaw": -0.02,
+            # bend legs
+            "LL1_Groin_to_LL2_Buttock_Pitch": -0.32,
+            "RL1_Groin_to_RL2_Buttock_Pitch": -0.32,
+            "LL3_Thigh_to_LL4_Calf_Pitch": 0.42,
+            "RL3_Thigh_to_RL4_Calf_Pitch": 0.42,
+            "LL4_Calf_to_LL5_ankle_Pitch": -0.30,
+            "RL4_Calf_to_RL5_ankle_Pitch": -0.30,
+            # bend arms 
+            "torso_to_LA1_Shoulder_Pitch": -0.40,
+            "torso_to_RA1_Shoulder_Pitch": 0.40, #! **
+            "LA3_Upper_Arm_to_LA4_Lower_Arm_Pitch": -0.9,
+            "RA3_Upper_Arm_to_RA4_Lower_Arm_Pitch_": 0.9, #! **
+            # wider legs
+            "LL2_Buttock_to_LL3_Thigh_Roll": 0.02, # hip roll
+            "LL2_Buttock_to_LL3_Thigh_Roll": -0.02,
             "LL5_ankle_to_LL6_Foot_Roll": -0.02,
             "RL5_ankle_to_RL6_Foot_Roll": 0.02,
             "hip_to_LL1_Groin_Yaw": 0.08,
             "hip_to_RL1_Groin_Yaw": -0.08,
-            "abdomen_to_hip_Pitch": -0.08, #! ****
-
+            # lean forward
+            "abdomen_to_hip_Pitch": -0.15, #! ****
 
         },
         joint_vel={".*": 0.0},
