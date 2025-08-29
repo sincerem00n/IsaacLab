@@ -166,7 +166,7 @@ HANU_A1_CFG = ArticulationCfg(
             angular_damping=0.0,
             max_linear_velocity=1000.0,
             max_angular_velocity=1000.0,
-            max_depenetration_velocity=100.0,
+            max_depenetration_velocity=1.0,
         ),
         articulation_props=sim_util.ArticulationRootPropertiesCfg(
             enabled_self_collisions=False,
@@ -208,6 +208,44 @@ HANU_A1_CFG = ArticulationCfg(
     ),
     soft_joint_pos_limit_factor=0.9,
     actuators={
+        "legs": ImplicitActuatorCfg(
+            joint_names_expr=[
+                "hip_to_LL1_Groin_Yaw",
+                "hip_to_RL1_Groin_Yaw",
+                "LL1_Groin_to_LL2_Buttock_Pitch",
+                "LL2_Buttock_to_LL3_Thigh_Roll",
+                "LL3_Thigh_to_LL4_Calf_Pitch",
+                "RL1_Groin_to_RL2_Buttock_Pitch",
+                "RL2_Buttock_to_RL3_Thigh_Roll",
+                "RL3_Thigh_to_RL4_Calf_Pitch",
+            ],
+            effort_limit=300.0, #!follow g1
+            # velocity_limit=100.0,
+            # stiffness=200.0,
+            stiffness={
+                "hip_to_LL1_Groin_Yaw": 150.0, # hip yaw
+                "hip_to_RL1_Groin_Yaw": 150.0,
+                "LL1_Groin_to_LL2_Buttock_Pitch": 200.0, # hip pitch
+                "RL1_Groin_to_RL2_Buttock_Pitch": 200.0,
+                "LL2_Buttock_to_LL3_Thigh_Roll": 150.0, # hip roll
+                "RL2_Buttock_to_RL3_Thigh_Roll": 150.0,
+                "LL3_Thigh_to_LL4_Calf_Pitch": 200.0, # knee pitch
+                "RL3_Thigh_to_RL4_Calf_Pitch": 200.0,
+            },
+            damping=5.0,
+            # armature=0.01,
+        ),
+        "feet": ImplicitActuatorCfg(
+            joint_names_expr=[
+                "LL4_Calf_to_LL5_ankle_Pitch",
+                "RL4_Calf_to_RL5_ankle_Pitch",
+                "LL5_ankle_to_LL6_Foot_Roll",
+                "RL5_ankle_to_RL6_Foot_Roll",
+            ],
+            effort_limit=20.0, #! follow g1
+            stiffness=20.0,
+            damping=2.0,
+        ),
         "arms": ImplicitActuatorCfg(
             joint_names_expr=[
                 "LA1_Shoulder_to_LA2_Shoulder_Roll",
@@ -223,39 +261,11 @@ HANU_A1_CFG = ArticulationCfg(
                 "RA5_Wrist_to_RA6_Wrist_Pitch",
                 "RA6_Wrist_to_RA7_Hand_Roll",
             ],
-            effort_limit=None,
-            velocity_limit=None,
-            stiffness=None,
-            damping=None,
+            effort_limit=300.0, #! follow g1
+            # velocity_limit=100.0,
+            stiffness=40.0,
+            damping=10.0,
             # armature=0.01,
-        ),
-        "legs": ImplicitActuatorCfg(
-            joint_names_expr=[
-                "hip_to_LL1_Groin_Yaw",
-                "hip_to_RL1_Groin_Yaw",
-                "LL1_Groin_to_LL2_Buttock_Pitch",
-                "LL2_Buttock_to_LL3_Thigh_Roll",
-                "LL3_Thigh_to_LL4_Calf_Pitch",
-                "RL1_Groin_to_RL2_Buttock_Pitch",
-                "RL2_Buttock_to_RL3_Thigh_Roll",
-                "RL3_Thigh_to_RL4_Calf_Pitch",
-            ],
-            effort_limit=None,
-            velocity_limit=None,
-            stiffness=None,
-            damping=None,
-            # armature=0.01,
-        ),
-        "feet": ImplicitActuatorCfg(
-            joint_names_expr=[
-                "LL4_Calf_to_LL5_ankle_Pitch",
-                "RL4_Calf_to_RL5_ankle_Pitch",
-                "LL5_ankle_to_LL6_Foot_Roll",
-                "RL5_ankle_to_RL6_Foot_Roll",
-            ],
-            effort_limit=None,
-            stiffness=None,
-            damping=None,
         ),
         "torso": ImplicitActuatorCfg(
             joint_names_expr=[
@@ -266,10 +276,24 @@ HANU_A1_CFG = ArticulationCfg(
                 "torso_to_RA1_Shoulder_Pitch",
                 "torso_to_abdomen_Yaw",
             ],
-            effort_limit=None,
-            velocity_limit=None,
-            stiffness=None,
-            damping=None,
+            effort_limit=300.0, #! follow arm
+            velocity_limit=100.0,
+            stiffness={
+                "abdomen_to_hip_Pitch": 200.0,
+                "base_to_neck_yaw": 40.0,
+                "neck_to_torso_Pitch": 40.0,
+                "torso_to_LA1_Shoulder_Pitch": 40.0,
+                "torso_to_RA1_Shoulder_Pitch": 40.0,
+                "torso_to_abdomen_Yaw": 40.0,
+            },            
+            damping={
+                "abdomen_to_hip_Pitch": 5.0,
+                "base_to_neck_yaw": 10.0,
+                "neck_to_torso_Pitch": 10.0,
+                "torso_to_LA1_Shoulder_Pitch": 10.0,
+                "torso_to_RA1_Shoulder_Pitch": 10.0,
+                "torso_to_abdomen_Yaw": 10.0,
+            }
             # armature=0.01,
         ),
     },
