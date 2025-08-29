@@ -150,7 +150,7 @@ class HanuA1RewardsCfg(RewardsCfg):
 @configclass
 class HanuA1TerminationsCfg(TerminationsCfg):
     time_out = DoneTerm(func=mdp.time_out, time_out=True)
-    base_contact = DoneTerm(
+    link_contact = DoneTerm(
         func=mdp.illegal_contact,
         params={"sensor_cfg": SceneEntityCfg("contact_forces", body_names="base"), "threshold": 1.0},
     )
@@ -231,6 +231,8 @@ class HanuA1RoughEnvCfg(LocomotionVelocityRoughEnvCfg):
     terminations: HanuA1TerminationsCfg = HanuA1TerminationsCfg()
     # commands: HanuA1IdleCommandsCfg = HanuA1IdleCommandsCfg()
     # events: HanuA1IdleEventsCfg = HanuA1IdleEventsCfg()
+
+    foot_link_name = ".*_Foot_.*"
 
     def __post_init__(self):
         super().__post_init__()
@@ -335,7 +337,10 @@ class HanuA1RoughEnvCfg(LocomotionVelocityRoughEnvCfg):
         self.observations.policy.enable_corruption = False
 
         # ------ Terminations configuration --------
-        self.terminations.base_contact.params["sensor_cfg"].body_names = ["Hip_1","Torso_1"]
+        # self.terminations.link_contact.params["sensor_cfg"].body_names = ["Hip_1","Torso_1"]
+
+        self.terminations.link_contact.params["sensor_cfg"].body_names = [f"^(?!.*{self.foot_link_name}).*"]
+
         # self.terminations.base_contact.params["sensor_cfg"].body_names = [
         #     "base_link",
         #     "Neck_1",
