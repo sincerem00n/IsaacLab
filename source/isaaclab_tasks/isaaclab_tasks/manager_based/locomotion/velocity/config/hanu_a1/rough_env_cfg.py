@@ -161,6 +161,14 @@ class HanuA1TerminationsCfg(TerminationsCfg):
     #         "limit_angle": math.pi/3,  # 60 degrees
     #     },
     # )
+    # minimum_height = DoneTerm(
+    #     func=mdp.root_height_below_minimum,
+    #     params={
+    #         "asset_cfg": SceneEntityCfg("robot"),
+    #         "minimum_height": 0.45
+    #     }
+    # )
+
 
 @configclass
 class HanuA1IdleCommandsCfg(CommandsCfg):
@@ -222,7 +230,7 @@ class HanuA1RoughEnvCfg(LocomotionVelocityRoughEnvCfg):
     rewards: HanuA1RewardsCfg = HanuA1RewardsCfg()
     terminations: HanuA1TerminationsCfg = HanuA1TerminationsCfg()
     # commands: HanuA1IdleCommandsCfg = HanuA1IdleCommandsCfg()
-    events: HanuA1IdleEventsCfg = HanuA1IdleEventsCfg()
+    # events: HanuA1IdleEventsCfg = HanuA1IdleEventsCfg()
 
     def __post_init__(self):
         super().__post_init__()
