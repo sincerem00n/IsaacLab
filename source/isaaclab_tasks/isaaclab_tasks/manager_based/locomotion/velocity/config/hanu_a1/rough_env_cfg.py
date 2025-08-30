@@ -1,8 +1,3 @@
-# Copyright (c) 2022-2025, The Isaac Lab Project Developers.
-# All rights reserved.
-#
-# SPDX-License-Identifier: BSD-3-Clause
-
 # Copyright (c) 2025, RAI Hanumanoid Project Developers.
 # All rights reserved.
 
@@ -29,6 +24,7 @@ from isaaclab.utils import configclass
 import isaaclab_tasks.manager_based.locomotion.velocity.mdp as mdp
 from isaaclab_tasks.manager_based.locomotion.velocity.velocity_env_cfg import LocomotionVelocityRoughEnvCfg, RewardsCfg, TerminationsCfg, CommandsCfg, EventCfg
 
+from .env import rewards
 
 @configclass
 class HanuA1RewardsCfg(RewardsCfg):
@@ -77,10 +73,14 @@ class HanuA1RewardsCfg(RewardsCfg):
     #         "target_height": 1.7, # robot height: 1.66m (1.66/2 + fall height) 
     #     },  # "target": 0.35         target not a param of base_pos_z
     # )
-    # alive_bonus = RewTerm(
-    #     func=mdp.is_alive,
-    #     weight=1.0,
-    # )
+
+    upright_orientation = RewTerm(
+        func=rewards.upright_orientation_l2,
+        weight=1.0,
+        params={
+            "asset_cfg": SceneEntityCfg("robot"), 
+        }
+    )
 
     # ----- ankle joint limits penalty
     ankle_dof_pos_limits = RewTerm(
@@ -295,7 +295,7 @@ class HanuA1RoughEnvCfg(LocomotionVelocityRoughEnvCfg):
         self.rewards.undesired_contacts.weight = -0.2
         self.rewards.feet_air_time.weight = 0.75 # g1_flat
         self.rewards.feet_air_time.params["threshold"] = 0.4 # g1 flat
-        # self.rewards.base_height_l2.weight = 3.0
+        # self.rewards.base_height_l2.weight = 1.5
         self.rewards.action_rate_l2.weight = -0.005
         self.rewards.dof_acc_l2.weight = -1.0e-7 # g1_flat
         self.rewards.dof_acc_l2.params["asset_cfg"] = SceneEntityCfg(
@@ -322,15 +322,12 @@ class HanuA1RoughEnvCfg(LocomotionVelocityRoughEnvCfg):
             ]
         )
         # self.rewards.termination_penalty.weight = -2.0
+        
 
         # ------ Commands configuration --------
-        # self.commands.base_velocity.ranges.lin_vel_x = (0.0, 0.02)
-        # self.commands.base_velocity.ranges.lin_vel_y = (-0.0, 0.0)
-        # *Remove HanuA1IdleCommandsCfg and use LocomotionVelocityRoughEnvCfg directly
         self.commands.base_velocity.ranges.lin_vel_x = (-0.0, 0.0)
         self.commands.base_velocity.ranges.lin_vel_y = (-1.0, 0.0) # (-1.0, 0.0)
         self.commands.base_velocity.ranges.ang_vel_z = (-0.0, 0.0)
-        
         # self.commands.base_velocity.rel_standing_envs = 0.5
 
         # ------ Observations configuration --------
