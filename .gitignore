@@ -57,6 +57,11 @@ _build
 **/runs/*
 **/logs/*
 **/recordings/*
+# But keep params and exported
+!**/logs/**/params/
+!**/logs/**/params/**
+!**/logs/**/exported/
+!**/logs/**/exported/**
 
 # Pre-Trained Checkpoints
 /.pretrained_checkpoints/
