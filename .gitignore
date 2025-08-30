@@ -55,12 +55,16 @@ _build
 
 # RL-Games
 **/runs/*
-**/logs/*
 **/recordings/*
-# But keep params and exported
-!**/logs/**/params/
+# Ignore everything in any logs dir
+**/logs/**
+
+# Allow traversal into any logs dir
+!**/logs/
+!**/logs/**/
+
+# Only keep params and exported (and their contents)
 !**/logs/**/params/**
-!**/logs/**/exported/
 !**/logs/**/exported/**
 
 # Pre-Trained Checkpoints
