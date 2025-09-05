@@ -284,6 +284,7 @@ class HanuA1RoughEnvCfg(LocomotionVelocityRoughEnvCfg):
 
         # ------ Rewards configuration --------
         # penalties
+        self.rewards.track_lin_vel_xy_exp.weight = 1.5
         self.rewards.track_ang_vel_z_exp.weight = 1.0
         self.rewards.lin_vel_z_l2.weight = -0.2
         self.rewards.undesired_contacts.params["sensor_cfg"].body_names = [
@@ -293,7 +294,7 @@ class HanuA1RoughEnvCfg(LocomotionVelocityRoughEnvCfg):
             "RL2_Buttock_Pitch_1"
         ]
         self.rewards.undesired_contacts.weight = -0.2
-        self.rewards.feet_air_time.weight = 0.75 # g1_flat
+        self.rewards.feet_air_time.weight = 0.1 # g1_flat: 0.75
         self.rewards.feet_air_time.params["threshold"] = 0.4 # g1 flat
         # self.rewards.base_height_l2.weight = 1.5
         self.rewards.action_rate_l2.weight = -0.005
@@ -326,7 +327,7 @@ class HanuA1RoughEnvCfg(LocomotionVelocityRoughEnvCfg):
 
         # ------ Commands configuration --------
         self.commands.base_velocity.ranges.lin_vel_x = (-0.0, 0.0)
-        self.commands.base_velocity.ranges.lin_vel_y = (-1.0, 0.0) # (-1.0, 0.0)
+        self.commands.base_velocity.ranges.lin_vel_y = (-1.5, 0.0) # (-1.0, 0.0)
         self.commands.base_velocity.ranges.ang_vel_z = (-0.0, 0.0)
         # self.commands.base_velocity.rel_standing_envs = 0.5
 

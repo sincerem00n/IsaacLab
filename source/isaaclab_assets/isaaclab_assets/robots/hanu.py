@@ -21,6 +21,7 @@ import isaaclab.sim as sim_util
 from isaaclab.actuators import ActuatorNetMLPCfg, DCMotorCfg, ImplicitActuatorCfg
 from isaaclab.assets.articulation import ArticulationCfg
 from isaaclab.utils.assets import ISAACLAB_NUCLEUS_DIR
+from isaaclab_assets import ISAACLAB_ASSETS_DATA_DIR
 
 HANU_A0_CFG = ArticulationCfg(
     prim_path="{ENV_REGEX_NS}/LegV5_URDF_Export",
@@ -155,8 +156,13 @@ HANU_A0_CFG = ArticulationCfg(
 
 HANU_A1_CFG = ArticulationCfg(
     prim_path="{ENV_REGEX_NS}/full_body",  # TODO: check prim_path
-    spawn=sim_util.UsdFileCfg(
-        usd_path=r"C:\Users\jingj\IsaacLab\source\isaaclab_assets\data\Hanu\full_body_description\urdf\full_body\full_body_v2.usd",  # TODO: set path for usd
+    spawn=sim_util.UrdfFileCfg(
+        fix_base=False,
+        merge_fixed_joints=True,
+        replace_cylinders_with_capsules=False,
+        asset_path=f"{ISAACLAB_ASSETS_DATA_DIR}/Robots/hanu/full_body_description/urdf/full_body.urdf",
+        # asset_path=r"C:\Users\jingj\IsaacLab\source\isaaclab_assets\data\Hanu\full_body_description\urdf\full_body.urdf",
+        # usd_path=r"C:\Users\jingj\IsaacLab\source\isaaclab_assets\data\Hanu\full_body_description\urdf\full_body\full_body_v2.usd",  # TODO: set path for usd
         activate_contact_sensors=True,
         rigid_props=sim_util.RigidBodyPropertiesCfg(
             # disable_gravity=False,
