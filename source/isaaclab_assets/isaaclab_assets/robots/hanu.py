@@ -1,12 +1,6 @@
-# Copyright (c) 2022-2025, The Isaac Lab Project Developers.
-# All rights reserved.
-#
-# SPDX-License-Identifier: BSD-3-Clause
-
 # Copyright (c) 2025, RAI Hanumanoid Project Developers.
 # All right reserved.
 
-# SPDX-License-Identifier: BSD-3-Clause
 
 """Configuration for the Hanumanoid robot.
 
@@ -20,8 +14,11 @@ Reference: https://github.com/whaly-w/Hanumanoid
 import isaaclab.sim as sim_util
 from isaaclab.actuators import ActuatorNetMLPCfg, DCMotorCfg, ImplicitActuatorCfg
 from isaaclab.assets.articulation import ArticulationCfg
+
 from isaaclab.utils.assets import ISAACLAB_NUCLEUS_DIR
 from isaaclab_assets import ISAACLAB_ASSETS_DATA_DIR
+
+
 
 HANU_A0_CFG = ArticulationCfg(
     prim_path="{ENV_REGEX_NS}/LegV5_URDF_Export",
@@ -156,13 +153,13 @@ HANU_A0_CFG = ArticulationCfg(
 
 HANU_A1_CFG = ArticulationCfg(
     prim_path="{ENV_REGEX_NS}/full_body",  # TODO: check prim_path
-    spawn=sim_util.UrdfFileCfg(
-        fix_base=False,
-        merge_fixed_joints=True,
-        replace_cylinders_with_capsules=False,
-        asset_path=f"{ISAACLAB_ASSETS_DATA_DIR}/Robots/hanu/full_body_description/urdf/full_body.urdf",
+    spawn=sim_util.UsdFileCfg(
+        # fix_base=False,
+        # merge_fixed_joints=True,
+        # replace_cylinders_with_capsules=False,
+        # asset_path=f"{ISAACLAB_ASSETS_DATA_DIR}\\Robots\\hanu\\full_body_description\\urdf\\full_body.urdf",
         # asset_path=r"C:\Users\jingj\IsaacLab\source\isaaclab_assets\data\Hanu\full_body_description\urdf\full_body.urdf",
-        # usd_path=r"C:\Users\jingj\IsaacLab\source\isaaclab_assets\data\Hanu\full_body_description\urdf\full_body\full_body_v2.usd",  # TODO: set path for usd
+        usd_path=f"{ISAACLAB_ASSETS_DATA_DIR}\\Robots\\Hanu\\full_body_description\\urdf\\full_body\\full_body_v2.usd",  # TODO: set path for usd
         activate_contact_sensors=True,
         rigid_props=sim_util.RigidBodyPropertiesCfg(
             # disable_gravity=False,
@@ -181,6 +178,12 @@ HANU_A1_CFG = ArticulationCfg(
             sleep_threshold=0.005,
             stabilization_threshold=0.001,
         ),
+        # joint_drive=sim_util.UrdfConverterCfg.JointDriveCfg(
+        #     gains=sim_util.UrdfConverterCfg.JointDriveCfg.PDGainsCfg(
+        #         stiffness=0.0,
+        #         damping=0.0,
+        #     )
+        # )
     ),
     init_state=ArticulationCfg.InitialStateCfg(
         pos=(0.0, 0.0, 0.93),  # (x, y, z)
