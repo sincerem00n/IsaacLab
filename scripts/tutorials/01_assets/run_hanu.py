@@ -66,7 +66,20 @@ def design_scene() -> tuple[dict, list[list[float]]]:
 
     # Articulation
     hanu_cfg = HANU_A1_CFG.copy()
-    hanu_cfg.prim_path = "/World/Origin.*/full_body"
+    hanu_cfg.prim_path = "/World/Origin.*/Robot"
+    
+    """
+    'Robot' can be changed to other articulation names (the robot will be spawned within that name)
+    examples:
+    World
+    |---- Origin1
+    |   |---- Robot
+    |       |---- full_body -> this is the articulation root
+    |           |---- arm_left_1
+    |---- Origin2
+        |---- Robot
+        
+    """
     hanu = Articulation(cfg=hanu_cfg)
 
     # return the scene information
