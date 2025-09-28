@@ -48,3 +48,13 @@ class HanuA1FlatPPORunnerCfg(HanuA1RoughPPORunnerCfg):
         self.experiment_name = "hanu_a1_flat"
         self.policy.actor_hidden_dims = [128, 128, 128]
         self.policy.critic_hidden_dims = [128, 128, 128]
+
+
+class HanuA1QuadRoughPPORunnerCfg(HanuA1RoughPPORunnerCfg):
+    def __post_init__(self):
+        super().__post_init__()
+
+        self.max_iterations = 3000
+        self.experiment_name = "hanu_a1_quad_rough"
+        self.policy.actor_hidden_dims = [512, 256, 128]
+        self.policy.critic_hidden_dims = [512, 256, 128]

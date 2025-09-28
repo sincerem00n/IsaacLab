@@ -37,3 +37,14 @@ gym.register(
         "skrl_cfg_entry_point": f"{agents.__name__}:skrl_flat_ppo_cfg.yaml",
     },
 )
+
+gym.register(
+    id="Isaac-Velocity-Rough-Quad-Hanu-A1-v0",
+    entry_point="isaaclab.envs:ManagerBasedRLEnv",
+    disable_env_checker=True,
+    kwargs={
+        "env_cfg_entry_point": f"{__name__}.rough_quad_env_cfg:HanuA1QuadRoughEnvCfg",
+        "rsl_rl_cfg_entry_point": f"{agents.__name__}.rsl_rl_ppo_cfg:HanuA1QuadRoughPPORunnerCfg",
+        "skrl_cfg_entry_point": f"{agents.__name__}:skrl_quad_rough_ppo_cfg.yaml",
+    },
+)
