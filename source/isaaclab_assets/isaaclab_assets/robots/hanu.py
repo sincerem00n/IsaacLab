@@ -308,3 +308,150 @@ HANU_A1_CFG = ArticulationCfg(
     },
 )
 """Configuration for the Hanumanoid A1 robot."""
+
+HANU_A1_QUAD_CFG = ArticulationCfg(
+    prim_path="{ENV_REGEX_NS}/full_body",
+    spawn=sim_util.UsdFileCfg(
+        usd_path=f"{ISAACLAB_ASSETS_DATA_DIR}\\Robots\\Hanu\\full_body_description\\urdf\\full_body\\full_body_v2.usd",  # TODO: set path for usd
+        activate_contact_sensors=True,
+        rigid_props=sim_util.RigidBodyPropertiesCfg(
+            disable_gravity=False,
+            retain_accelerations=False,
+            linear_damping=0.0,
+            angular_damping=0.0,
+            max_linear_velocity=1000.0,
+            max_angular_velocity=1000.0,
+            max_depenetration_velocity=1.0,
+        ),
+        articulation_props=sim_util.ArticulationRootPropertiesCfg(
+            enabled_self_collisions=False,
+            solver_position_iteration_count=8,
+            solver_velocity_iteration_count=4,
+        ),
+    ),
+    init_state=ArticulationCfg.InitialStateCfg(
+        pos=(0.0, 0.0, 0.65),  # (x, y, z)
+        rot=(0.707, 0.0, 0.0, 0.707),  # (w, x, y, z)
+        joint_pos={
+            # arms
+            "torso_to_LA1_Shoulder_Pitch": 0.92,
+            "torso_to_RA1_Shoulder_Pitch": -0.92, #! **
+            "LA3_Upper_Arm_to_LA4_Lower_Arm_Pitch": -0.21,
+            "RA3_Upper_Arm_to_RA4_Lower_Arm_Pitch_": 0.21, #! **
+            "LA5_Wrist_to_LA6_Wrist_Pitch": 1.5,
+            "RA5_Wrist_to_RA6_Wrist_Pitch": 1.5,
+            # legs
+            "LL1_Groin_to_LL2_Buttock_Pitch": -2.4,
+            "RL1_Groin_to_RL2_Buttock_Pitch": -2.4,
+            "LL3_Thigh_to_LL4_Calf_Pitch": 2.0,
+            "RL3_Thigh_to_RL4_Calf_Pitch": 2.0,
+            "LL4_Calf_to_LL5_ankle_Pitch": -0.87,
+            "RL4_Calf_to_RL5_ankle_Pitch": -0.87,
+            # torso
+            "neck_to_torso_Pitch": -1.0,
+            "abdomen_to_hip_Pitch": -0.63, #! ****
+        },
+        joint_vel={".*": 0.0},
+    )
+    soft_joint_pos_limit_factor=0.9,
+    actuators={
+        "legs": ImplicitActuatorCfg(
+            joint_names_expr=[
+                "hip_to_LL1_Groin_Yaw",
+                "hip_to_RL1_Groin_Yaw",
+                "LL1_Groin_to_LL2_Buttock_Pitch",
+                "LL2_Buttock_to_LL3_Thigh_Roll",
+                "LL3_Thigh_to_LL4_Calf_Pitch",
+                "RL1_Groin_to_RL2_Buttock_Pitch",
+                "RL2_Buttock_to_RL3_Thigh_Roll",
+                "RL3_Thigh_to_RL4_Calf_Pitch",
+            ],
+            effort_limit=300.0,
+            # velocity_limit=100.0,
+            # stiffness=200.0,
+            stiffness={
+                "hip_to_LL1_Groin_Yaw": 150.0, # hip yaw
+                "hip_to_RL1_Groin_Yaw": 150.0,
+                "LL1_Groin_to_LL2_Buttock_Pitch": 200.0, # hip pitch
+                "RL1_Groin_to_RL2_Buttock_Pitch": 200.0,
+                "LL2_Buttock_to_LL3_Thigh_Roll": 150.0, # hip roll
+                "RL2_Buttock_to_RL3_Thigh_Roll": 150.0,
+                "LL3_Thigh_to_LL4_Calf_Pitch": 200.0, # knee pitch
+                "RL3_Thigh_to_RL4_Calf_Pitch": 200.0,
+            },
+            damping=5.0,
+            # armature=0.01,
+        ),
+        "feet": ImplicitActuatorCfg(
+            joint_names_expr=[
+                # rear
+                "LL4_Calf_to_LL5_ankle_Pitch",
+                "RL4_Calf_to_RL5_ankle_Pitch",
+                "LL5_ankle_to_LL6_Foot_Roll",
+                "RL5_ankle_to_RL6_Foot_Roll",
+                # front
+                "LA5_Wrist_to_LA6_Wrist_Pitch",
+                "RA5_Wrist_to_RA6_Wrist_Pitch",
+                "LA6_Wrist_to_LA7_Hand_Roll",
+                "RA6_Wrist_to_RA7_Hand_Roll",
+            ],
+            effort_limit=20.0,
+            stiffness=20.0,
+            damping=2.0,
+        ),
+        "arms": ImplicitActuatorCfg(
+            joint_names_expr=[
+                "torso_to_LA1_Shoulder_Pitch",
+                "LA1_Shoulder_to_LA2_Shoulder_Roll",
+                "LA2_Shoulder_to_LA3_Upper_Arm_Yaw",
+                "LA3_Upper_Arm_to_LA4_Lower_Arm_Pitch",
+                "LA4_Lower_Arm_to_LA5_Wrist_Yaw",
+                "torso_to_RA1_Shoulder_Pitch",
+                "RA1_Shoulder_to_RA2_Shoulder_Roll_",
+                "RA2_Shoulder_to_RA3_Upper_Arm_Yaw",
+                "RA3_Upper_Arm_to_RA4_Lower_Arm_Pitch_",
+                "RA4_Lower_Arm_to_RA5_Wrist_Yaw",
+            ],
+            effort_limit=300.0,
+            # velocity_limit=100.0,
+            stiffness={
+                "torso_to_LA1_Shoulder_Pitch": 200.0,
+                "torso_to_RA1_Shoulder_Pitch": 200.0,
+                "LA1_Shoulder_to_LA2_Shoulder_Roll": 150.0,
+                "RA1_Shoulder_to_RA2_Shoulder_Roll_": 150.0,
+                "LA2_Shoulder_to_LA3_Upper_Arm_Yaw": 40.0,
+                "RA2_Shoulder_to_RA3_Upper_Arm_Yaw": 40.0,
+                "LA3_Upper_Arm_to_LA4_Lower_Arm_Pitch": 200.0,
+                "RA3_Upper_Arm_to_RA4_Lower_Arm_Pitch_": 200.0,
+                "LA4_Lower_Arm_to_LA5_Wrist_Yaw": 40.0,
+                "RA4_Lower_Arm_to_RA5_Wrist_Yaw": 40.0,
+            },
+            damping=5.0,
+            # armature=0.01,
+        ),
+        "torso": ImplicitActuatorCfg(
+            joint_names_expr=[
+                "abdomen_to_hip_Pitch",
+                "base_to_neck_yaw",
+                "neck_to_torso_Pitch",
+                "torso_to_abdomen_Yaw",
+            ],
+            effort_limit=300.0,
+            velocity_limit=100.0,
+            stiffness={
+                "abdomen_to_hip_Pitch": 200.0,
+                "base_to_neck_yaw": 40.0,
+                "neck_to_torso_Pitch": 100.0,
+                "torso_to_abdomen_Yaw": 40.0,
+            },            
+            damping={
+                "abdomen_to_hip_Pitch": 5.0,
+                "base_to_neck_yaw": 10.0,
+                "neck_to_torso_Pitch": 5.0,
+                "torso_to_abdomen_Yaw": 10.0,
+            }
+            # armature=0.01,
+        ),
+    }, 
+)
+"""Configuration for the Hanumanoid A1 robot in quadruped mode."""
