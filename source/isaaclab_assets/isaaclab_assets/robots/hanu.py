@@ -341,18 +341,18 @@ HANU_A1_QUAD_CFG = ArticulationCfg(
             "LA5_Wrist_to_LA6_Wrist_Pitch": 1.5,
             "RA5_Wrist_to_RA6_Wrist_Pitch": 1.5,
             # legs
-            "LL1_Groin_to_LL2_Buttock_Pitch": -2.4,
-            "RL1_Groin_to_RL2_Buttock_Pitch": -2.4,
+            "LL1_Groin_to_LL2_Buttock_Pitch": -2.356,
+            "RL1_Groin_to_RL2_Buttock_Pitch": -2.356,
             "LL3_Thigh_to_LL4_Calf_Pitch": 2.0,
             "RL3_Thigh_to_RL4_Calf_Pitch": 2.0,
             "LL4_Calf_to_LL5_ankle_Pitch": -0.87,
             "RL4_Calf_to_RL5_ankle_Pitch": -0.87,
             # torso
             "neck_to_torso_Pitch": -1.0,
-            "abdomen_to_hip_Pitch": -0.63, #! ****
+            "abdomen_to_hip_Pitch": 0.63, #! ****
         },
         joint_vel={".*": 0.0},
-    )
+    ),
     soft_joint_pos_limit_factor=0.9,
     actuators={
         "legs": ImplicitActuatorCfg(
