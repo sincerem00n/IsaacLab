@@ -46,5 +46,5 @@ class HanuA2FlatPPORunnerCfg(HanuA2RoughPPORunnerCfg):
 
         self.max_iterations = 500
         self.experiment_name = "hanu_a2_flat"
-        self.policy.actor_hidden_dims = [128, 128, 128]
-        self.policy.critic_hidden_dims = [128, 128, 128]
+        self.policy.actor_hidden_dims = [256, 128, 128]
+        self.policy.critic_hidden_dims = [256, 128, 128]
