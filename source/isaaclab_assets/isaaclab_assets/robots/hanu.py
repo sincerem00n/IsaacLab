@@ -473,6 +473,8 @@ HANU_A2_CFG = ArticulationCfg(
             enabled_self_collisions=False,
             solver_position_iteration_count=8,
             solver_velocity_iteration_count=4,
+            sleep_threshold=0.005,
+            stabilization_threshold=0.001,
         ),
     ),
     init_state=ArticulationCfg.InitialStateCfg(
@@ -506,10 +508,10 @@ HANU_A2_CFG = ArticulationCfg(
             ],
             effort_limit=300.0,
             stiffness={
-                ".*_hip_yaw": 150.0,
-                ".*_hip_roll": 150.0,
-                ".*_hip_pitch": 200.0,
-                ".*_knee_pitch": 200.0,
+                ".*_hip_yaw": 200.0,
+                ".*_hip_roll": 200.0,
+                ".*_hip_pitch": 250.0,
+                ".*_knee_pitch": 250.0,
             },
             damping=5.0,
         ),
