@@ -476,8 +476,8 @@ HANU_A2_CFG = ArticulationCfg(
         ),
     ),
     init_state=ArticulationCfg.InitialStateCfg(
-        pos=(0.0, 0.0, 0.95),  # (x, y, z)
-        rot=(0.707, 0.0, 0.0, 0.707),  # (w, x, y, z)
+        pos=(0.0, 0.0, 1.0),  # (x, y, z)
+        rot=(1.0, 0.0, 0.0, 0.0),  # (w, x, y, z)
         joint_pos={
             # bend legs
             ".*_hip_pitch": -0.32,
@@ -494,7 +494,8 @@ HANU_A2_CFG = ArticulationCfg(
             ".*_shoulder_pitch": 0.40,
             ".*_elbow_pitch": -0.9,
             ".*_shoulder_roll": 0.02,
-        }
+        },
+        joint_vel={".*": 0.0},
     ),
     soft_joint_pos_limit_factor=0.9,
     actuators={
