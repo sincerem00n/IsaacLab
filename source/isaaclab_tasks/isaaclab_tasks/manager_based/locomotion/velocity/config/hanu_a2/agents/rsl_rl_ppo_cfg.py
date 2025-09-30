@@ -14,7 +14,7 @@ from isaaclab_rl.rsl_rl import RslRlOnPolicyRunnerCfg, RslRlPpoActorCriticCfg, R
 @configclass
 class HanuA2RoughPPORunnerCfg(RslRlOnPolicyRunnerCfg):
     num_steps_per_env = 24
-    max_iterations = 1500
+    max_iterations = 3000
     save_interval = 50
     experiment_name = "hanu_a2_rough"
     empirical_normalization = False
@@ -44,7 +44,7 @@ class HanuA2FlatPPORunnerCfg(HanuA2RoughPPORunnerCfg):
     def __post_init__(self):
         super().__post_init__()
 
-        self.max_iterations = 500
+        self.max_iterations = 1500
         self.experiment_name = "hanu_a2_flat"
         self.policy.actor_hidden_dims = [256, 128, 128]
         self.policy.critic_hidden_dims = [256, 128, 128]
