@@ -59,13 +59,13 @@ _build
 # Ignore everything in any logs dir
 **/logs/**
 
-# Allow traversal into any logs dir
-!**/logs/
-!**/logs/**/
+# # Allow traversal into any logs dir
+# !**/logs/
+# !**/logs/**/
 
-# Only keep params and exported (and their contents)
-!**/logs/**/params/**
-!**/logs/**/exported/**
+# # Only keep params and exported (and their contents)
+# !**/logs/**/params/**
+# !**/logs/**/exported/**
 
 # Pre-Trained Checkpoints
 /.pretrained_checkpoints/
