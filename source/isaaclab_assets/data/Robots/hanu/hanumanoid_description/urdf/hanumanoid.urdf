@@ -542,14 +542,14 @@
     <visual>
       <origin rpy="0 0 0" xyz="0 0 0"/>
       <geometry>
-        <mesh filename="C:\Users\jingj\IsaacLab\source\isaaclab_assets\data\Robots\hanu\hanumanoid_description\meshes\base_link.stl" scale="0.001 0.001 0.001"/>
+        <mesh filename="/home/ubuntu/IsaacLab/source/isaaclab_assets/data/Robots/hanu/hanumanoid_description/meshes/base_link.stl" scale="0.001 0.001 0.001"/>
       </geometry>
       <material name="silver"/>
     </visual>
     <collision>
       <origin rpy="0 0 0" xyz="0 0 0"/>
       <geometry>
-        <mesh filename="C:\Users\jingj\IsaacLab\source\isaaclab_assets\data\Robots\hanu\hanumanoid_description\meshes\base_link.stl" scale="0.001 0.001 0.001"/>
+        <mesh filename="/home/ubuntu/IsaacLab/source/isaaclab_assets/data/Robots/hanu/hanumanoid_description/meshes/base_link.stl" scale="0.001 0.001 0.001"/>
       </geometry>
     </collision>
   </link>
@@ -562,14 +562,14 @@
     <visual>
       <origin rpy="0 0 0" xyz="-0.0 -0.0 -0.460397"/>
       <geometry>
-        <mesh filename="C:\Users\jingj\IsaacLab\source\isaaclab_assets\data\Robots\hanu\hanumanoid_description\meshes\neck_1.stl" scale="0.001 0.001 0.001"/>
+        <mesh filename="/home/ubuntu/IsaacLab/source/isaaclab_assets/data/Robots/hanu/hanumanoid_description/meshes/neck_1.stl" scale="0.001 0.001 0.001"/>
       </geometry>
       <material name="silver"/>
     </visual>
     <collision>
       <origin rpy="0 0 0" xyz="-0.0 -0.0 -0.460397"/>
       <geometry>
-        <mesh filename="C:\Users\jingj\IsaacLab\source\isaaclab_assets\data\Robots\hanu\hanumanoid_description\meshes\neck_1.stl" scale="0.001 0.001 0.001"/>
+        <mesh filename="/home/ubuntu/IsaacLab/source/isaaclab_assets/data/Robots/hanu/hanumanoid_description/meshes/neck_1.stl" scale="0.001 0.001 0.001"/>
       </geometry>
     </collision>
   </link>
@@ -582,14 +582,14 @@
     <visual>
       <origin rpy="0 0 0" xyz="0.02375 0.0 -0.385"/>
       <geometry>
-        <mesh filename="C:\Users\jingj\IsaacLab\source\isaaclab_assets\data\Robots\hanu\hanumanoid_description\meshes\torso_1.stl" scale="0.001 0.001 0.001"/>
+        <mesh filename="/home/ubuntu/IsaacLab/source/isaaclab_assets/data/Robots/hanu/hanumanoid_description/meshes/torso_1.stl" scale="0.001 0.001 0.001"/>
       </geometry>
       <material name="silver"/>
     </visual>
     <collision>
       <origin rpy="0 0 0" xyz="0.02375 0.0 -0.385"/>
       <geometry>
-        <mesh filename="C:\Users\jingj\IsaacLab\source\isaaclab_assets\data\Robots\hanu\hanumanoid_description\meshes\torso_1.stl" scale="0.001 0.001 0.001"/>
+        <mesh filename="/home/ubuntu/IsaacLab/source/isaaclab_assets/data/Robots/hanu/hanumanoid_description/meshes/torso_1.stl" scale="0.001 0.001 0.001"/>
       </geometry>
     </collision>
   </link>
@@ -602,14 +602,14 @@
     <visual>
       <origin rpy="0 0 0" xyz="0.0 -0.0 0.0336"/>
       <geometry>
-        <mesh filename="C:\Users\jingj\IsaacLab\source\isaaclab_assets\data\Robots\hanu\hanumanoid_description\meshes\abdomen_1.stl" scale="0.001 0.001 0.001"/>
+        <mesh filename="/home/ubuntu/IsaacLab/source/isaaclab_assets/data/Robots/hanu/hanumanoid_description/meshes/abdomen_1.stl" scale="0.001 0.001 0.001"/>
       </geometry>
       <material name="silver"/>
     </visual>
     <collision>
       <origin rpy="0 0 0" xyz="0.0 -0.0 0.0336"/>
       <geometry>
-        <mesh filename="C:\Users\jingj\IsaacLab\source\isaaclab_assets\data\Robots\hanu\hanumanoid_description\meshes\abdomen_1.stl" scale="0.001 0.001 0.001"/>
+        <mesh filename="/home/ubuntu/IsaacLab/source/isaaclab_assets/data/Robots/hanu/hanumanoid_description/meshes/abdomen_1.stl" scale="0.001 0.001 0.001"/>
       </geometry>
     </collision>
   </link>
@@ -622,14 +622,14 @@
     <visual>
       <origin rpy="0 0 0" xyz="0.05225 -0.079619 -0.31375"/>
       <geometry>
-        <mesh filename="C:\Users\jingj\IsaacLab\source\isaaclab_assets\data\Robots\hanu\hanumanoid_description\meshes\E1R_1.stl" scale="0.001 0.001 0.001"/>
+        <mesh filename="/home/ubuntu/IsaacLab/source/isaaclab_assets/data/Robots/hanu/hanumanoid_description/meshes/E1R_1.stl" scale="0.001 0.001 0.001"/>
       </geometry>
       <material name="silver"/>
     </visual>
     <collision>
       <origin rpy="0 0 0" xyz="0.05225 -0.079619 -0.31375"/>
       <geometry>
-        <mesh filename="C:\Users\jingj\IsaacLab\source\isaaclab_assets\data\Robots\hanu\hanumanoid_description\meshes\E1R_1.stl" scale="0.001 0.001 0.001"/>
+        <mesh filename="/home/ubuntu/IsaacLab/source/isaaclab_assets/data/Robots/hanu/hanumanoid_description/meshes/E1R_1.stl" scale="0.001 0.001 0.001"/>
       </geometry>
     </collision>
   </link>
@@ -642,14 +642,14 @@
     <visual>
       <origin rpy="0 0 0" xyz="0.0 -0.108 -0.237849"/>
       <geometry>
-        <mesh filename="C:\Users\jingj\IsaacLab\source\isaaclab_assets\data\Robots\hanu\hanumanoid_description\meshes\fixed_imu_1.stl" scale="0.001 0.001 0.001"/>
+        <mesh filename="/home/ubuntu/IsaacLab/source/isaaclab_assets/data/Robots/hanu/hanumanoid_description/meshes/fixed_imu_1.stl" scale="0.001 0.001 0.001"/>
       </geometry>
       <material name="silver"/>
     </visual>
     <collision>
       <origin rpy="0 0 0" xyz="0.0 -0.108 -0.237849"/>
       <geometry>
-        <mesh filename="C:\Users\jingj\IsaacLab\source\isaaclab_assets\data\Robots\hanu\hanumanoid_description\meshes\fixed_imu_1.stl" scale="0.001 0.001 0.001"/>
+        <mesh filename="/home/ubuntu/IsaacLab/source/isaaclab_assets/data/Robots/hanu/hanumanoid_description/meshes/fixed_imu_1.stl" scale="0.001 0.001 0.001"/>
       </geometry>
     </collision>
   </link>
@@ -662,14 +662,14 @@
     <visual>
       <origin rpy="0 0 0" xyz="0.0 0.185058 -0.340927"/>
       <geometry>
-        <mesh filename="C:\Users\jingj\IsaacLab\source\isaaclab_assets\data\Robots\hanu\hanumanoid_description\meshes\fixed_mid_360_1.stl" scale="0.001 0.001 0.001"/>
+        <mesh filename="/home/ubuntu/IsaacLab/source/isaaclab_assets/data/Robots/hanu/hanumanoid_description/meshes/fixed_mid_360_1.stl" scale="0.001 0.001 0.001"/>
       </geometry>
       <material name="silver"/>
     </visual>
     <collision>
       <origin rpy="0 0 0" xyz="0.0 0.185058 -0.340927"/>
       <geometry>
-        <mesh filename="C:\Users\jingj\IsaacLab\source\isaaclab_assets\data\Robots\hanu\hanumanoid_description\meshes\fixed_mid_360_1.stl" scale="0.001 0.001 0.001"/>
+        <mesh filename="/home/ubuntu/IsaacLab/source/isaaclab_assets/data/Robots/hanu/hanumanoid_description/meshes/fixed_mid_360_1.stl" scale="0.001 0.001 0.001"/>
       </geometry>
     </collision>
   </link>
@@ -682,14 +682,14 @@
     <visual>
       <origin rpy="0 0 0" xyz="-0.1845 0.0 -0.3345"/>
       <geometry>
-        <mesh filename="C:\Users\jingj\IsaacLab\source\isaaclab_assets\data\Robots\hanu\hanumanoid_description\meshes\r_shoulder_pitch_1.stl" scale="0.001 0.001 0.001"/>
+        <mesh filename="/home/ubuntu/IsaacLab/source/isaaclab_assets/data/Robots/hanu/hanumanoid_description/meshes/r_shoulder_pitch_1.stl" scale="0.001 0.001 0.001"/>
       </geometry>
       <material name="silver"/>
     </visual>
     <collision>
       <origin rpy="0 0 0" xyz="-0.1845 0.0 -0.3345"/>
       <geometry>
-        <mesh filename="C:\Users\jingj\IsaacLab\source\isaaclab_assets\data\Robots\hanu\hanumanoid_description\meshes\r_shoulder_pitch_1.stl" scale="0.001 0.001 0.001"/>
+        <mesh filename="/home/ubuntu/IsaacLab/source/isaaclab_assets/data/Robots/hanu/hanumanoid_description/meshes/r_shoulder_pitch_1.stl" scale="0.001 0.001 0.001"/>
       </geometry>
     </collision>
   </link>
@@ -702,14 +702,14 @@
     <visual>
       <origin rpy="0 0 0" xyz="-0.276239 0.0 -0.0046"/>
       <geometry>
-        <mesh filename="C:\Users\jingj\IsaacLab\source\isaaclab_assets\data\Robots\hanu\hanumanoid_description\meshes\r_lowerarm_pitch_1.stl" scale="0.001 0.001 0.001"/>
+        <mesh filename="/home/ubuntu/IsaacLab/source/isaaclab_assets/data/Robots/hanu/hanumanoid_description/meshes/r_lowerarm_pitch_1.stl" scale="0.001 0.001 0.001"/>
       </geometry>
       <material name="silver"/>
     </visual>
     <collision>
       <origin rpy="0 0 0" xyz="-0.276239 0.0 -0.0046"/>
       <geometry>
-        <mesh filename="C:\Users\jingj\IsaacLab\source\isaaclab_assets\data\Robots\hanu\hanumanoid_description\meshes\r_lowerarm_pitch_1.stl" scale="0.001 0.001 0.001"/>
+        <mesh filename="/home/ubuntu/IsaacLab/source/isaaclab_assets/data/Robots/hanu/hanumanoid_description/meshes/r_lowerarm_pitch_1.stl" scale="0.001 0.001 0.001"/>
       </geometry>
     </collision>
   </link>
@@ -722,14 +722,14 @@
     <visual>
       <origin rpy="0 0 0" xyz="-0.260739 -0.0 0.107263"/>
       <geometry>
-        <mesh filename="C:\Users\jingj\IsaacLab\source\isaaclab_assets\data\Robots\hanu\hanumanoid_description\meshes\r_wrist_yaw_1.stl" scale="0.001 0.001 0.001"/>
+        <mesh filename="/home/ubuntu/IsaacLab/source/isaaclab_assets/data/Robots/hanu/hanumanoid_description/meshes/r_wrist_yaw_1.stl" scale="0.001 0.001 0.001"/>
       </geometry>
       <material name="silver"/>
     </visual>
     <collision>
       <origin rpy="0 0 0" xyz="-0.260739 -0.0 0.107263"/>
       <geometry>
-        <mesh filename="C:\Users\jingj\IsaacLab\source\isaaclab_assets\data\Robots\hanu\hanumanoid_description\meshes\r_wrist_yaw_1.stl" scale="0.001 0.001 0.001"/>
+        <mesh filename="/home/ubuntu/IsaacLab/source/isaaclab_assets/data/Robots/hanu/hanumanoid_description/meshes/r_wrist_yaw_1.stl" scale="0.001 0.001 0.001"/>
       </geometry>
     </collision>
   </link>
@@ -742,14 +742,14 @@
     <visual>
       <origin rpy="0 0 0" xyz="-0.261 -0.018 -0.334581"/>
       <geometry>
-        <mesh filename="C:\Users\jingj\IsaacLab\source\isaaclab_assets\data\Robots\hanu\hanumanoid_description\meshes\r_shoulder_roll_1.stl" scale="0.001 0.001 0.001"/>
+        <mesh filename="/home/ubuntu/IsaacLab/source/isaaclab_assets/data/Robots/hanu/hanumanoid_description/meshes/r_shoulder_roll_1.stl" scale="0.001 0.001 0.001"/>
       </geometry>
       <material name="silver"/>
     </visual>
     <collision>
       <origin rpy="0 0 0" xyz="-0.261 -0.018 -0.334581"/>
       <geometry>
-        <mesh filename="C:\Users\jingj\IsaacLab\source\isaaclab_assets\data\Robots\hanu\hanumanoid_description\meshes\r_shoulder_roll_1.stl" scale="0.001 0.001 0.001"/>
+        <mesh filename="/home/ubuntu/IsaacLab/source/isaaclab_assets/data/Robots/hanu/hanumanoid_description/meshes/r_shoulder_roll_1.stl" scale="0.001 0.001 0.001"/>
       </geometry>
     </collision>
   </link>
@@ -762,14 +762,14 @@
     <visual>
       <origin rpy="0 0 0" xyz="-0.260739 -0.0 -0.2387"/>
       <geometry>
-        <mesh filename="C:\Users\jingj\IsaacLab\source\isaaclab_assets\data\Robots\hanu\hanumanoid_description\meshes\r_upperarm_yaw_1.stl" scale="0.001 0.001 0.001"/>
+        <mesh filename="/home/ubuntu/IsaacLab/source/isaaclab_assets/data/Robots/hanu/hanumanoid_description/meshes/r_upperarm_yaw_1.stl" scale="0.001 0.001 0.001"/>
       </geometry>
       <material name="silver"/>
     </visual>
     <collision>
       <origin rpy="0 0 0" xyz="-0.260739 -0.0 -0.2387"/>
       <geometry>
-        <mesh filename="C:\Users\jingj\IsaacLab\source\isaaclab_assets\data\Robots\hanu\hanumanoid_description\meshes\r_upperarm_yaw_1.stl" scale="0.001 0.001 0.001"/>
+        <mesh filename="/home/ubuntu/IsaacLab/source/isaaclab_assets/data/Robots/hanu/hanumanoid_description/meshes/r_upperarm_yaw_1.stl" scale="0.001 0.001 0.001"/>
       </geometry>
     </collision>
   </link>
@@ -782,14 +782,14 @@
     <visual>
       <origin rpy="0 0 0" xyz="-0.215239 -0.001723 0.2594"/>
       <geometry>
-        <mesh filename="C:\Users\jingj\IsaacLab\source\isaaclab_assets\data\Robots\hanu\hanumanoid_description\meshes\r_contact_sensor_1.stl" scale="0.001 0.001 0.001"/>
+        <mesh filename="/home/ubuntu/IsaacLab/source/isaaclab_assets/data/Robots/hanu/hanumanoid_description/meshes/r_contact_sensor_1.stl" scale="0.001 0.001 0.001"/>
       </geometry>
       <material name="silver"/>
     </visual>
     <collision>
       <origin rpy="0 0 0" xyz="-0.215239 -0.001723 0.2594"/>
       <geometry>
-        <mesh filename="C:\Users\jingj\IsaacLab\source\isaaclab_assets\data\Robots\hanu\hanumanoid_description\meshes\r_contact_sensor_1.stl" scale="0.001 0.001 0.001"/>
+        <mesh filename="/home/ubuntu/IsaacLab/source/isaaclab_assets/data/Robots/hanu/hanumanoid_description/meshes/r_contact_sensor_1.stl" scale="0.001 0.001 0.001"/>
       </geometry>
     </collision>
   </link>
@@ -802,14 +802,14 @@
     <visual>
       <origin rpy="0 0 0" xyz="-0.237239 -1.1e-05 0.159172"/>
       <geometry>
-        <mesh filename="C:\Users\jingj\IsaacLab\source\isaaclab_assets\data\Robots\hanu\hanumanoid_description\meshes\r_wrist_pitch_1.stl" scale="0.001 0.001 0.001"/>
+        <mesh filename="/home/ubuntu/IsaacLab/source/isaaclab_assets/data/Robots/hanu/hanumanoid_description/meshes/r_wrist_pitch_1.stl" scale="0.001 0.001 0.001"/>
       </geometry>
       <material name="silver"/>
     </visual>
     <collision>
       <origin rpy="0 0 0" xyz="-0.237239 -1.1e-05 0.159172"/>
       <geometry>
-        <mesh filename="C:\Users\jingj\IsaacLab\source\isaaclab_assets\data\Robots\hanu\hanumanoid_description\meshes\r_wrist_pitch_1.stl" scale="0.001 0.001 0.001"/>
+        <mesh filename="/home/ubuntu/IsaacLab/source/isaaclab_assets/data/Robots/hanu/hanumanoid_description/meshes/r_wrist_pitch_1.stl" scale="0.001 0.001 0.001"/>
       </geometry>
     </collision>
   </link>
@@ -822,14 +822,14 @@
     <visual>
       <origin rpy="0 0 0" xyz="-0.260739 0.022807 0.2294"/>
       <geometry>
-        <mesh filename="C:\Users\jingj\IsaacLab\source\isaaclab_assets\data\Robots\hanu\hanumanoid_description\meshes\r_hand_roll_1.stl" scale="0.001 0.001 0.001"/>
+        <mesh filename="/home/ubuntu/IsaacLab/source/isaaclab_assets/data/Robots/hanu/hanumanoid_description/meshes/r_hand_roll_1.stl" scale="0.001 0.001 0.001"/>
       </geometry>
       <material name="silver"/>
     </visual>
     <collision>
       <origin rpy="0 0 0" xyz="-0.260739 0.022807 0.2294"/>
       <geometry>
-        <mesh filename="C:\Users\jingj\IsaacLab\source\isaaclab_assets\data\Robots\hanu\hanumanoid_description\meshes\r_hand_roll_1.stl" scale="0.001 0.001 0.001"/>
+        <mesh filename="/home/ubuntu/IsaacLab/source/isaaclab_assets/data/Robots/hanu/hanumanoid_description/meshes/r_hand_roll_1.stl" scale="0.001 0.001 0.001"/>
       </geometry>
     </collision>
   </link>
@@ -842,14 +842,14 @@
     <visual>
       <origin rpy="0 0 0" xyz="0.261 -0.018 -0.334581"/>
       <geometry>
-        <mesh filename="C:\Users\jingj\IsaacLab\source\isaaclab_assets\data\Robots\hanu\hanumanoid_description\meshes\l_shoulder_roll_1.stl" scale="0.001 0.001 0.001"/>
+        <mesh filename="/home/ubuntu/IsaacLab/source/isaaclab_assets/data/Robots/hanu/hanumanoid_description/meshes/l_shoulder_roll_1.stl" scale="0.001 0.001 0.001"/>
       </geometry>
       <material name="silver"/>
     </visual>
     <collision>
       <origin rpy="0 0 0" xyz="0.261 -0.018 -0.334581"/>
       <geometry>
-        <mesh filename="C:\Users\jingj\IsaacLab\source\isaaclab_assets\data\Robots\hanu\hanumanoid_description\meshes\l_shoulder_roll_1.stl" scale="0.001 0.001 0.001"/>
+        <mesh filename="/home/ubuntu/IsaacLab/source/isaaclab_assets/data/Robots/hanu/hanumanoid_description/meshes/l_shoulder_roll_1.stl" scale="0.001 0.001 0.001"/>
       </geometry>
     </collision>
   </link>
@@ -862,14 +862,14 @@
     <visual>
       <origin rpy="0 0 0" xyz="0.260739 -0.0 -0.2387"/>
       <geometry>
-        <mesh filename="C:\Users\jingj\IsaacLab\source\isaaclab_assets\data\Robots\hanu\hanumanoid_description\meshes\l_upperarm_yaw_1.stl" scale="0.001 0.001 0.001"/>
+        <mesh filename="/home/ubuntu/IsaacLab/source/isaaclab_assets/data/Robots/hanu/hanumanoid_description/meshes/l_upperarm_yaw_1.stl" scale="0.001 0.001 0.001"/>
       </geometry>
       <material name="silver"/>
     </visual>
     <collision>
       <origin rpy="0 0 0" xyz="0.260739 -0.0 -0.2387"/>
       <geometry>
-        <mesh filename="C:\Users\jingj\IsaacLab\source\isaaclab_assets\data\Robots\hanu\hanumanoid_description\meshes\l_upperarm_yaw_1.stl" scale="0.001 0.001 0.001"/>
+        <mesh filename="/home/ubuntu/IsaacLab/source/isaaclab_assets/data/Robots/hanu/hanumanoid_description/meshes/l_upperarm_yaw_1.stl" scale="0.001 0.001 0.001"/>
       </geometry>
     </collision>
   </link>
@@ -882,14 +882,14 @@
     <visual>
       <origin rpy="0 0 0" xyz="0.260739 0.022807 0.2294"/>
       <geometry>
-        <mesh filename="C:\Users\jingj\IsaacLab\source\isaaclab_assets\data\Robots\hanu\hanumanoid_description\meshes\l_hand_roll_1.stl" scale="0.001 0.001 0.001"/>
+        <mesh filename="/home/ubuntu/IsaacLab/source/isaaclab_assets/data/Robots/hanu/hanumanoid_description/meshes/l_hand_roll_1.stl" scale="0.001 0.001 0.001"/>
       </geometry>
       <material name="silver"/>
     </visual>
     <collision>
       <origin rpy="0 0 0" xyz="0.260739 0.022807 0.2294"/>
       <geometry>
-        <mesh filename="C:\Users\jingj\IsaacLab\source\isaaclab_assets\data\Robots\hanu\hanumanoid_description\meshes\l_hand_roll_1.stl" scale="0.001 0.001 0.001"/>
+        <mesh filename="/home/ubuntu/IsaacLab/source/isaaclab_assets/data/Robots/hanu/hanumanoid_description/meshes/l_hand_roll_1.stl" scale="0.001 0.001 0.001"/>
       </geometry>
     </collision>
   </link>
@@ -902,14 +902,14 @@
     <visual>
       <origin rpy="0 0 0" xyz="0.215239 -0.001723 0.2594"/>
       <geometry>
-        <mesh filename="C:\Users\jingj\IsaacLab\source\isaaclab_assets\data\Robots\hanu\hanumanoid_description\meshes\l_contact_sensor_1.stl" scale="0.001 0.001 0.001"/>
+        <mesh filename="/home/ubuntu/IsaacLab/source/isaaclab_assets/data/Robots/hanu/hanumanoid_description/meshes/l_contact_sensor_1.stl" scale="0.001 0.001 0.001"/>
       </geometry>
       <material name="silver"/>
     </visual>
     <collision>
       <origin rpy="0 0 0" xyz="0.215239 -0.001723 0.2594"/>
       <geometry>
-        <mesh filename="C:\Users\jingj\IsaacLab\source\isaaclab_assets\data\Robots\hanu\hanumanoid_description\meshes\l_contact_sensor_1.stl" scale="0.001 0.001 0.001"/>
+        <mesh filename="/home/ubuntu/IsaacLab/source/isaaclab_assets/data/Robots/hanu/hanumanoid_description/meshes/l_contact_sensor_1.stl" scale="0.001 0.001 0.001"/>
       </geometry>
     </collision>
   </link>
@@ -922,14 +922,14 @@
     <visual>
       <origin rpy="0 0 0" xyz="0.276239 0.0 -0.0046"/>
       <geometry>
-        <mesh filename="C:\Users\jingj\IsaacLab\source\isaaclab_assets\data\Robots\hanu\hanumanoid_description\meshes\l_lowerarm_pitch_1.stl" scale="0.001 0.001 0.001"/>
+        <mesh filename="/home/ubuntu/IsaacLab/source/isaaclab_assets/data/Robots/hanu/hanumanoid_description/meshes/l_lowerarm_pitch_1.stl" scale="0.001 0.001 0.001"/>
       </geometry>
       <material name="silver"/>
     </visual>
     <collision>
       <origin rpy="0 0 0" xyz="0.276239 0.0 -0.0046"/>
       <geometry>
-        <mesh filename="C:\Users\jingj\IsaacLab\source\isaaclab_assets\data\Robots\hanu\hanumanoid_description\meshes\l_lowerarm_pitch_1.stl" scale="0.001 0.001 0.001"/>
+        <mesh filename="/home/ubuntu/IsaacLab/source/isaaclab_assets/data/Robots/hanu/hanumanoid_description/meshes/l_lowerarm_pitch_1.stl" scale="0.001 0.001 0.001"/>
       </geometry>
     </collision>
   </link>
@@ -942,14 +942,14 @@
     <visual>
       <origin rpy="0 0 0" xyz="0.260739 -0.0 0.107263"/>
       <geometry>
-        <mesh filename="C:\Users\jingj\IsaacLab\source\isaaclab_assets\data\Robots\hanu\hanumanoid_description\meshes\l_wrist_yaw_1.stl" scale="0.001 0.001 0.001"/>
+        <mesh filename="/home/ubuntu/IsaacLab/source/isaaclab_assets/data/Robots/hanu/hanumanoid_description/meshes/l_wrist_yaw_1.stl" scale="0.001 0.001 0.001"/>
       </geometry>
       <material name="silver"/>
     </visual>
     <collision>
       <origin rpy="0 0 0" xyz="0.260739 -0.0 0.107263"/>
       <geometry>
-        <mesh filename="C:\Users\jingj\IsaacLab\source\isaaclab_assets\data\Robots\hanu\hanumanoid_description\meshes\l_wrist_yaw_1.stl" scale="0.001 0.001 0.001"/>
+        <mesh filename="/home/ubuntu/IsaacLab/source/isaaclab_assets/data/Robots/hanu/hanumanoid_description/meshes/l_wrist_yaw_1.stl" scale="0.001 0.001 0.001"/>
       </geometry>
     </collision>
   </link>
@@ -962,14 +962,14 @@
     <visual>
       <origin rpy="0 0 0" xyz="0.237239 -1.1e-05 0.159172"/>
       <geometry>
-        <mesh filename="C:\Users\jingj\IsaacLab\source\isaaclab_assets\data\Robots\hanu\hanumanoid_description\meshes\l_wrist_pitch_1.stl" scale="0.001 0.001 0.001"/>
+        <mesh filename="/home/ubuntu/IsaacLab/source/isaaclab_assets/data/Robots/hanu/hanumanoid_description/meshes/l_wrist_pitch_1.stl" scale="0.001 0.001 0.001"/>
       </geometry>
       <material name="silver"/>
     </visual>
     <collision>
       <origin rpy="0 0 0" xyz="0.237239 -1.1e-05 0.159172"/>
       <geometry>
-        <mesh filename="C:\Users\jingj\IsaacLab\source\isaaclab_assets\data\Robots\hanu\hanumanoid_description\meshes\l_wrist_pitch_1.stl" scale="0.001 0.001 0.001"/>
+        <mesh filename="/home/ubuntu/IsaacLab/source/isaaclab_assets/data/Robots/hanu/hanumanoid_description/meshes/l_wrist_pitch_1.stl" scale="0.001 0.001 0.001"/>
       </geometry>
     </collision>
   </link>
@@ -982,14 +982,14 @@
     <visual>
       <origin rpy="0 0 0" xyz="0.1845 0.0 -0.3345"/>
       <geometry>
-        <mesh filename="C:\Users\jingj\IsaacLab\source\isaaclab_assets\data\Robots\hanu\hanumanoid_description\meshes\l_shoulder_pitch_1.stl" scale="0.001 0.001 0.001"/>
+        <mesh filename="/home/ubuntu/IsaacLab/source/isaaclab_assets/data/Robots/hanu/hanumanoid_description/meshes/l_shoulder_pitch_1.stl" scale="0.001 0.001 0.001"/>
       </geometry>
       <material name="silver"/>
     </visual>
     <collision>
       <origin rpy="0 0 0" xyz="0.1845 0.0 -0.3345"/>
       <geometry>
-        <mesh filename="C:\Users\jingj\IsaacLab\source\isaaclab_assets\data\Robots\hanu\hanumanoid_description\meshes\l_shoulder_pitch_1.stl" scale="0.001 0.001 0.001"/>
+        <mesh filename="/home/ubuntu/IsaacLab/source/isaaclab_assets/data/Robots/hanu/hanumanoid_description/meshes/l_shoulder_pitch_1.stl" scale="0.001 0.001 0.001"/>
       </geometry>
     </collision>
   </link>
@@ -1002,14 +1002,14 @@
     <visual>
       <origin rpy="0 0 0" xyz="-0.064 0.0 0.1056"/>
       <geometry>
-        <mesh filename="C:\Users\jingj\IsaacLab\source\isaaclab_assets\data\Robots\hanu\hanumanoid_description\meshes\r_groin_yaw_1.stl" scale="0.001 0.001 0.001"/>
+        <mesh filename="/home/ubuntu/IsaacLab/source/isaaclab_assets/data/Robots/hanu/hanumanoid_description/meshes/r_groin_yaw_1.stl" scale="0.001 0.001 0.001"/>
       </geometry>
       <material name="silver"/>
     </visual>
     <collision>
       <origin rpy="0 0 0" xyz="-0.064 0.0 0.1056"/>
       <geometry>
-        <mesh filename="C:\Users\jingj\IsaacLab\source\isaaclab_assets\data\Robots\hanu\hanumanoid_description\meshes\r_groin_yaw_1.stl" scale="0.001 0.001 0.001"/>
+        <mesh filename="/home/ubuntu/IsaacLab/source/isaaclab_assets/data/Robots/hanu/hanumanoid_description/meshes/r_groin_yaw_1.stl" scale="0.001 0.001 0.001"/>
       </geometry>
     </collision>
   </link>
@@ -1022,14 +1022,14 @@
     <visual>
       <origin rpy="0 0 0" xyz="-0.17455 0.0 0.4789"/>
       <geometry>
-        <mesh filename="C:\Users\jingj\IsaacLab\source\isaaclab_assets\data\Robots\hanu\hanumanoid_description\meshes\r_calf_pitch_1.stl" scale="0.001 0.001 0.001"/>
+        <mesh filename="/home/ubuntu/IsaacLab/source/isaaclab_assets/data/Robots/hanu/hanumanoid_description/meshes/r_calf_pitch_1.stl" scale="0.001 0.001 0.001"/>
       </geometry>
       <material name="silver"/>
     </visual>
     <collision>
       <origin rpy="0 0 0" xyz="-0.17455 0.0 0.4789"/>
       <geometry>
-        <mesh filename="C:\Users\jingj\IsaacLab\source\isaaclab_assets\data\Robots\hanu\hanumanoid_description\meshes\r_calf_pitch_1.stl" scale="0.001 0.001 0.001"/>
+        <mesh filename="/home/ubuntu/IsaacLab/source/isaaclab_assets/data/Robots/hanu/hanumanoid_description/meshes/r_calf_pitch_1.stl" scale="0.001 0.001 0.001"/>
       </geometry>
     </collision>
   </link>
@@ -1042,14 +1042,14 @@
     <visual>
       <origin rpy="0 0 0" xyz="-0.1973 0.0 0.8089"/>
       <geometry>
-        <mesh filename="C:\Users\jingj\IsaacLab\source\isaaclab_assets\data\Robots\hanu\hanumanoid_description\meshes\r_ankle_pitch_1.stl" scale="0.001 0.001 0.001"/>
+        <mesh filename="/home/ubuntu/IsaacLab/source/isaaclab_assets/data/Robots/hanu/hanumanoid_description/meshes/r_ankle_pitch_1.stl" scale="0.001 0.001 0.001"/>
       </geometry>
       <material name="silver"/>
     </visual>
     <collision>
       <origin rpy="0 0 0" xyz="-0.1973 0.0 0.8089"/>
       <geometry>
-        <mesh filename="C:\Users\jingj\IsaacLab\source\isaaclab_assets\data\Robots\hanu\hanumanoid_description\meshes\r_ankle_pitch_1.stl" scale="0.001 0.001 0.001"/>
+        <mesh filename="/home/ubuntu/IsaacLab/source/isaaclab_assets/data/Robots/hanu/hanumanoid_description/meshes/r_ankle_pitch_1.stl" scale="0.001 0.001 0.001"/>
       </geometry>
     </collision>
   </link>
@@ -1062,14 +1062,14 @@
     <visual>
       <origin rpy="0 0 0" xyz="-0.0665 0.0 0.1989"/>
       <geometry>
-        <mesh filename="C:\Users\jingj\IsaacLab\source\isaaclab_assets\data\Robots\hanu\hanumanoid_description\meshes\r_glute_pitch_1.stl" scale="0.001 0.001 0.001"/>
+        <mesh filename="/home/ubuntu/IsaacLab/source/isaaclab_assets/data/Robots/hanu/hanumanoid_description/meshes/r_glute_pitch_1.stl" scale="0.001 0.001 0.001"/>
       </geometry>
       <material name="silver"/>
     </visual>
     <collision>
       <origin rpy="0 0 0" xyz="-0.0665 0.0 0.1989"/>
       <geometry>
-        <mesh filename="C:\Users\jingj\IsaacLab\source\isaaclab_assets\data\Robots\hanu\hanumanoid_description\meshes\r_glute_pitch_1.stl" scale="0.001 0.001 0.001"/>
+        <mesh filename="/home/ubuntu/IsaacLab/source/isaaclab_assets/data/Robots/hanu/hanumanoid_description/meshes/r_glute_pitch_1.stl" scale="0.001 0.001 0.001"/>
       </geometry>
     </collision>
   </link>
@@ -1082,14 +1082,14 @@
     <visual>
       <origin rpy="0 0 0" xyz="-0.1563 0.00015 0.88375"/>
       <geometry>
-        <mesh filename="C:\Users\jingj\IsaacLab\source\isaaclab_assets\data\Robots\hanu\hanumanoid_description\meshes\r_foot_pressure_sensor_1.stl" scale="0.001 0.001 0.001"/>
+        <mesh filename="/home/ubuntu/IsaacLab/source/isaaclab_assets/data/Robots/hanu/hanumanoid_description/meshes/r_foot_pressure_sensor_1.stl" scale="0.001 0.001 0.001"/>
       </geometry>
       <material name="silver"/>
     </visual>
     <collision>
       <origin rpy="0 0 0" xyz="-0.1563 0.00015 0.88375"/>
       <geometry>
-        <mesh filename="C:\Users\jingj\IsaacLab\source\isaaclab_assets\data\Robots\hanu\hanumanoid_description\meshes\r_foot_pressure_sensor_1.stl" scale="0.001 0.001 0.001"/>
+        <mesh filename="/home/ubuntu/IsaacLab/source/isaaclab_assets/data/Robots/hanu/hanumanoid_description/meshes/r_foot_pressure_sensor_1.stl" scale="0.001 0.001 0.001"/>
       </geometry>
     </collision>
   </link>
@@ -1102,14 +1102,14 @@
     <visual>
       <origin rpy="0 0 0" xyz="-0.1563 0.041 0.8089"/>
       <geometry>
-        <mesh filename="C:\Users\jingj\IsaacLab\source\isaaclab_assets\data\Robots\hanu\hanumanoid_description\meshes\r_foot_roll_1.stl" scale="0.001 0.001 0.001"/>
+        <mesh filename="/home/ubuntu/IsaacLab/source/isaaclab_assets/data/Robots/hanu/hanumanoid_description/meshes/r_foot_roll_1.stl" scale="0.001 0.001 0.001"/>
       </geometry>
       <material name="silver"/>
     </visual>
     <collision>
       <origin rpy="0 0 0" xyz="-0.1563 0.041 0.8089"/>
       <geometry>
-        <mesh filename="C:\Users\jingj\IsaacLab\source\isaaclab_assets\data\Robots\hanu\hanumanoid_description\meshes\r_foot_roll_1.stl" scale="0.001 0.001 0.001"/>
+        <mesh filename="/home/ubuntu/IsaacLab/source/isaaclab_assets/data/Robots/hanu/hanumanoid_description/meshes/r_foot_roll_1.stl" scale="0.001 0.001 0.001"/>
       </geometry>
     </collision>
   </link>
@@ -1122,14 +1122,14 @@
     <visual>
       <origin rpy="0 0 0" xyz="-0.1573 -0.02215 0.1989"/>
       <geometry>
-        <mesh filename="C:\Users\jingj\IsaacLab\source\isaaclab_assets\data\Robots\hanu\hanumanoid_description\meshes\r_thigh_roll_1.stl" scale="0.001 0.001 0.001"/>
+        <mesh filename="/home/ubuntu/IsaacLab/source/isaaclab_assets/data/Robots/hanu/hanumanoid_description/meshes/r_thigh_roll_1.stl" scale="0.001 0.001 0.001"/>
       </geometry>
       <material name="silver"/>
     </visual>
     <collision>
       <origin rpy="0 0 0" xyz="-0.1573 -0.02215 0.1989"/>
       <geometry>
-        <mesh filename="C:\Users\jingj\IsaacLab\source\isaaclab_assets\data\Robots\hanu\hanumanoid_description\meshes\r_thigh_roll_1.stl" scale="0.001 0.001 0.001"/>
+        <mesh filename="/home/ubuntu/IsaacLab/source/isaaclab_assets/data/Robots/hanu/hanumanoid_description/meshes/r_thigh_roll_1.stl" scale="0.001 0.001 0.001"/>
       </geometry>
     </collision>
   </link>
@@ -1142,14 +1142,14 @@
     <visual>
       <origin rpy="0 0 0" xyz="0.064 0.0 0.1056"/>
       <geometry>
-        <mesh filename="C:\Users\jingj\IsaacLab\source\isaaclab_assets\data\Robots\hanu\hanumanoid_description\meshes\l_groin_yaw_1.stl" scale="0.001 0.001 0.001"/>
+        <mesh filename="/home/ubuntu/IsaacLab/source/isaaclab_assets/data/Robots/hanu/hanumanoid_description/meshes/l_groin_yaw_1.stl" scale="0.001 0.001 0.001"/>
       </geometry>
       <material name="silver"/>
     </visual>
     <collision>
       <origin rpy="0 0 0" xyz="0.064 0.0 0.1056"/>
       <geometry>
-        <mesh filename="C:\Users\jingj\IsaacLab\source\isaaclab_assets\data\Robots\hanu\hanumanoid_description\meshes\l_groin_yaw_1.stl" scale="0.001 0.001 0.001"/>
+        <mesh filename="/home/ubuntu/IsaacLab/source/isaaclab_assets/data/Robots/hanu/hanumanoid_description/meshes/l_groin_yaw_1.stl" scale="0.001 0.001 0.001"/>
       </geometry>
     </collision>
   </link>
@@ -1162,14 +1162,14 @@
     <visual>
       <origin rpy="0 0 0" xyz="0.1563 0.041 0.8089"/>
       <geometry>
-        <mesh filename="C:\Users\jingj\IsaacLab\source\isaaclab_assets\data\Robots\hanu\hanumanoid_description\meshes\l_foot_roll_1.stl" scale="0.001 0.001 0.001"/>
+        <mesh filename="/home/ubuntu/IsaacLab/source/isaaclab_assets/data/Robots/hanu/hanumanoid_description/meshes/l_foot_roll_1.stl" scale="0.001 0.001 0.001"/>
       </geometry>
       <material name="silver"/>
     </visual>
     <collision>
       <origin rpy="0 0 0" xyz="0.1563 0.041 0.8089"/>
       <geometry>
-        <mesh filename="C:\Users\jingj\IsaacLab\source\isaaclab_assets\data\Robots\hanu\hanumanoid_description\meshes\l_foot_roll_1.stl" scale="0.001 0.001 0.001"/>
+        <mesh filename="/home/ubuntu/IsaacLab/source/isaaclab_assets/data/Robots/hanu/hanumanoid_description/meshes/l_foot_roll_1.stl" scale="0.001 0.001 0.001"/>
       </geometry>
     </collision>
   </link>
@@ -1182,14 +1182,14 @@
     <visual>
       <origin rpy="0 0 0" xyz="0.1563 0.00015 0.88375"/>
       <geometry>
-        <mesh filename="C:\Users\jingj\IsaacLab\source\isaaclab_assets\data\Robots\hanu\hanumanoid_description\meshes\l_foot_pressure_sensor_1.stl" scale="0.001 0.001 0.001"/>
+        <mesh filename="/home/ubuntu/IsaacLab/source/isaaclab_assets/data/Robots/hanu/hanumanoid_description/meshes/l_foot_pressure_sensor_1.stl" scale="0.001 0.001 0.001"/>
       </geometry>
       <material name="silver"/>
     </visual>
     <collision>
       <origin rpy="0 0 0" xyz="0.1563 0.00015 0.88375"/>
       <geometry>
-        <mesh filename="C:\Users\jingj\IsaacLab\source\isaaclab_assets\data\Robots\hanu\hanumanoid_description\meshes\l_foot_pressure_sensor_1.stl" scale="0.001 0.001 0.001"/>
+        <mesh filename="/home/ubuntu/IsaacLab/source/isaaclab_assets/data/Robots/hanu/hanumanoid_description/meshes/l_foot_pressure_sensor_1.stl" scale="0.001 0.001 0.001"/>
       </geometry>
     </collision>
   </link>
@@ -1202,14 +1202,14 @@
     <visual>
       <origin rpy="0 0 0" xyz="0.0665 0.0 0.1989"/>
       <geometry>
-        <mesh filename="C:\Users\jingj\IsaacLab\source\isaaclab_assets\data\Robots\hanu\hanumanoid_description\meshes\l_glute_pitch_1.stl" scale="0.001 0.001 0.001"/>
+        <mesh filename="/home/ubuntu/IsaacLab/source/isaaclab_assets/data/Robots/hanu/hanumanoid_description/meshes/l_glute_pitch_1.stl" scale="0.001 0.001 0.001"/>
       </geometry>
       <material name="silver"/>
     </visual>
     <collision>
       <origin rpy="0 0 0" xyz="0.0665 0.0 0.1989"/>
       <geometry>
-        <mesh filename="C:\Users\jingj\IsaacLab\source\isaaclab_assets\data\Robots\hanu\hanumanoid_description\meshes\l_glute_pitch_1.stl" scale="0.001 0.001 0.001"/>
+        <mesh filename="/home/ubuntu/IsaacLab/source/isaaclab_assets/data/Robots/hanu/hanumanoid_description/meshes/l_glute_pitch_1.stl" scale="0.001 0.001 0.001"/>
       </geometry>
     </collision>
   </link>
@@ -1222,14 +1222,14 @@
     <visual>
       <origin rpy="0 0 0" xyz="0.1573 -0.02215 0.1989"/>
       <geometry>
-        <mesh filename="C:\Users\jingj\IsaacLab\source\isaaclab_assets\data\Robots\hanu\hanumanoid_description\meshes\l_thigh_roll_1.stl" scale="0.001 0.001 0.001"/>
+        <mesh filename="/home/ubuntu/IsaacLab/source/isaaclab_assets/data/Robots/hanu/hanumanoid_description/meshes/l_thigh_roll_1.stl" scale="0.001 0.001 0.001"/>
       </geometry>
       <material name="silver"/>
     </visual>
     <collision>
       <origin rpy="0 0 0" xyz="0.1573 -0.02215 0.1989"/>
       <geometry>
-        <mesh filename="C:\Users\jingj\IsaacLab\source\isaaclab_assets\data\Robots\hanu\hanumanoid_description\meshes\l_thigh_roll_1.stl" scale="0.001 0.001 0.001"/>
+        <mesh filename="/home/ubuntu/IsaacLab/source/isaaclab_assets/data/Robots/hanu/hanumanoid_description/meshes/l_thigh_roll_1.stl" scale="0.001 0.001 0.001"/>
       </geometry>
     </collision>
   </link>
@@ -1242,14 +1242,14 @@
     <visual>
       <origin rpy="0 0 0" xyz="0.17455 0.0 0.4789"/>
       <geometry>
-        <mesh filename="C:\Users\jingj\IsaacLab\source\isaaclab_assets\data\Robots\hanu\hanumanoid_description\meshes\l_calf_pitch_1.stl" scale="0.001 0.001 0.001"/>
+        <mesh filename="/home/ubuntu/IsaacLab/source/isaaclab_assets/data/Robots/hanu/hanumanoid_description/meshes/l_calf_pitch_1.stl" scale="0.001 0.001 0.001"/>
       </geometry>
       <material name="silver"/>
     </visual>
     <collision>
       <origin rpy="0 0 0" xyz="0.17455 0.0 0.4789"/>
       <geometry>
-        <mesh filename="C:\Users\jingj\IsaacLab\source\isaaclab_assets\data\Robots\hanu\hanumanoid_description\meshes\l_calf_pitch_1.stl" scale="0.001 0.001 0.001"/>
+        <mesh filename="/home/ubuntu/IsaacLab/source/isaaclab_assets/data/Robots/hanu/hanumanoid_description/meshes/l_calf_pitch_1.stl" scale="0.001 0.001 0.001"/>
       </geometry>
     </collision>
   </link>
@@ -1262,14 +1262,14 @@
     <visual>
       <origin rpy="0 0 0" xyz="0.1973 0.0 0.8089"/>
       <geometry>
-        <mesh filename="C:\Users\jingj\IsaacLab\source\isaaclab_assets\data\Robots\hanu\hanumanoid_description\meshes\l_ankle_pitch_1.stl" scale="0.001 0.001 0.001"/>
+        <mesh filename="/home/ubuntu/IsaacLab/source/isaaclab_assets/data/Robots/hanu/hanumanoid_description/meshes/l_ankle_pitch_1.stl" scale="0.001 0.001 0.001"/>
       </geometry>
       <material name="silver"/>
     </visual>
     <collision>
       <origin rpy="0 0 0" xyz="0.1973 0.0 0.8089"/>
       <geometry>
-        <mesh filename="C:\Users\jingj\IsaacLab\source\isaaclab_assets\data\Robots\hanu\hanumanoid_description\meshes\l_ankle_pitch_1.stl" scale="0.001 0.001 0.001"/>
+        <mesh filename="/home/ubuntu/IsaacLab/source/isaaclab_assets/data/Robots/hanu/hanumanoid_description/meshes/l_ankle_pitch_1.stl" scale="0.001 0.001 0.001"/>
       </geometry>
     </collision>
   </link>

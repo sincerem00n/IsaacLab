@@ -458,7 +458,8 @@ HANU_A2_CFG = ArticulationCfg(
     prim_path="{ENV_REGEX_NS}/hanumanoid",
     spawn=sim_util.UsdFileCfg(
         # source\isaaclab_assets\data\Robots\hanu\hanumanoid_description\urdf\hanumanoid\hanumanoid.usd
-        usd_path=f"{ISAACLAB_ASSETS_DATA_DIR}\\Robots\\Hanu\\hanumanoid_description\\urdf\\hanumanoid\\hanumanoid_v2.usd",  # TODO: set path for usd
+        # usd_path=f"{ISAACLAB_ASSETS_DATA_DIR}\\Robots\\hanu\\hanumanoid_description\\urdf\\hanumanoid\\hanumanoid_v2.usd",  # TODO: set path for usd
+        usd_path=f"{ISAACLAB_ASSETS_DATA_DIR}/Robots/hanu/hanumanoid_description/urdf/hanumanoid/hanumanoid_v2.usd", 
         activate_contact_sensors=True,
         rigid_props=sim_util.RigidBodyPropertiesCfg(
             disable_gravity=False,
@@ -527,6 +528,16 @@ HANU_A2_CFG = ArticulationCfg(
             joint_names_expr=[
                 ".*_shoulder_.*",
                 ".*_elbow_.*",
+            ],
+            effort_limit=300.0,
+            stiffness=40.0,
+            damping=10.0,
+        ),
+        "others": ImplicitActuatorCfg(
+            joint_names_expr=[
+                ".*_neck_.*",
+                ".*_abodomen_.*",
+                ".*_E1R"
             ],
             effort_limit=300.0,
             stiffness=40.0,
