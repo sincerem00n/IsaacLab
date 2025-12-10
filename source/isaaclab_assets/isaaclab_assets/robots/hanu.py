@@ -536,7 +536,7 @@ HANU_A2_CFG = ArticulationCfg(
         "others": ImplicitActuatorCfg(
             joint_names_expr=[
                 ".*_neck_.*",
-                ".*_abodomen_.*",
+                ".*_abdomen_.*",
                 ".*_E1R"
             ],
             effort_limit=300.0,
