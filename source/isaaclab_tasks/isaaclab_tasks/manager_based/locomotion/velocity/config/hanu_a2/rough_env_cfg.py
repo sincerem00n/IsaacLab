@@ -208,13 +208,6 @@ class HanuA2RoughEnvCfg(LocomotionVelocityRoughEnvCfg):
         self.scene.terrain.terrain_generator.sub_terrains["random_rough"].noise_step = 0.01
 
         # ------ Events configuration --------
-        self.events.push_robot = None
-        self.events.add_base_mass = None
-        # self.events.add_base_mass.params["mass_distribution_params"] = (-1.0, 3.0)
-        self.events.base_external_force_torque = None
-        # self.events.base_external_force_torque.params["asset_cfg"].body_names = "Hip_1"
-        # self.events.base_external_force_torque.params["force_range"] = (-1.0, 1.0)
-        
         # self.events.reset_robot_joints = None
         self.events.reset_robot_joints.params["position_range"] = (1.0, 1.0)
         self.events.reset_base.params = {
@@ -228,7 +221,6 @@ class HanuA2RoughEnvCfg(LocomotionVelocityRoughEnvCfg):
                 "yaw": (0.0, 0.0),
             },
         }
-        self.events.base_com = None
 
         # ------ Rewards configuration --------
         # penalties
@@ -273,5 +265,66 @@ class HanuA2RoughEnvCfg(LocomotionVelocityRoughEnvCfg):
         self.observations.policy.enable_corruption = False
 
         # ------ Terminations configuration --------
-        # self.terminations.base_contact.params["sensor_cfg"].body_names = ["Hip_1","Torso_1"]
+        self.terminations.base_contact.params["sensor_cfg"].body_names = "torso_.*"
+        # self.terminations.base_contact.params["sensor_cfg"].body_names = [f"^(?!.*{self.foot_link_name}).*"]
+
+@configclass
+class HanuA2RoughEnvCfgV0(HanuA2RoughEnvCfg):
+    """
+    Environment configuration for Hanumanoid A2 in rough terrain - Version 0.
+    Changes made in V0:
+    - No events
+    """
+    def __post_init__(self):
+        super().__post_init__()
+
+        # ------ Events configuration --------
+        self.events.push_robot = None
+        self.events.add_base_mass = None
+        self.events.base_external_force_torque = None
+        self.events.base_com = None
+
+        # ------ Rewards configuration --------
+        self.rewards.action_rate_l2.weight = -0.01
+        # ------ Terminations configuration --------
+        self.terminations.base_contact.params["sensor_cfg"].body_names = [f"^(?!.*{self.foot_link_name}).*"]
+
+
+@configclass
+class HanuA2RoughEnvCfgV1(HanuA2RoughEnvCfg):
+    """
+    Environment configuration for Hanumanoid A2 in rough terrain - Version 1.
+    Changes made in V1:
+    - Add events
+    """
+    def __post_init__(self):
+        super().__post_init__()
+
+        # ------ Events configuration --------
+        self.events.add_base_mass.params["asset_cfg"].body_names = "torso_.*"
+        self.events.add_base_mass.params["mass_distribution_params"] = (-0.5, 1.5)
+        # self.events.base_com.params["asset_cfg"].body_names = "torso_.*"
+        # self.events.base_com.params["com_range"] = {
+        #     "x": (-0.05, 0.05), 
+        #     "y": (-0.05, 0.05), 
+        #     "z": (-0.01, 0.01)
+        # }
+        self.events.base_com = None  # disabling for now
+        self.events.base_external_force_torque.params["asset_cfg"].body_names = "torso_.*"
+        self.events.base_external_force_torque.params["force_range"] = (-0.5, 1.5)
+
+        self.events.reset_robot_joints.params["position_range"] = (0.5, 1.5)
+        self.events.reset_base.params = {
+            "pose_range": {"x": (-0.5, 0.5), "y": (-0.5, 0.5), "yaw": (-3.14, 3.14)},
+            "velocity_range": {
+                "x": (-0.5, 0.5),
+                "y": (-0.5, 0.5),
+                "z": (-0.5, 0.5),
+                "roll": (-0.5, 0.5),
+                "pitch": (-0.5, 0.5),
+                "yaw": (-0.5, 0.5),
+            },
+        }
+
+        # ------ Terminations configuration --------
         self.terminations.base_contact.params["sensor_cfg"].body_names = [f"^(?!.*{self.foot_link_name}).*"]
