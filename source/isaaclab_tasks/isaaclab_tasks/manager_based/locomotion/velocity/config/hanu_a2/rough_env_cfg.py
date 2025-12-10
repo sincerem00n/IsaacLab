@@ -326,5 +326,13 @@ class HanuA2RoughEnvCfgV1(HanuA2RoughEnvCfg):
             },
         }
 
+        # ------- Rewards configuration --------
+        self.rewards.feet_air_time.weight = 0.3
+        self.rewards.feet_air_time.params["threshold"] = 0.2
+
+        # ------ Commands configuration --------
+        self.commands.base_velocity.ranges.lin_vel_y = (-0.0, 1.0) # (-1.0, 0.0)
+        self.commands.base_velocity.ranges.ang_vel_z = (-0.5, 0.5)
+
         # ------ Terminations configuration --------
         self.terminations.base_contact.params["sensor_cfg"].body_names = [f"^(?!.*{self.foot_link_name}).*"]
