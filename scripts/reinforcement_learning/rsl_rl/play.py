@@ -8,6 +8,7 @@
 """Launch Isaac Sim Simulator first."""
 
 import argparse
+import csv
 import sys
 
 from isaaclab.app import AppLauncher
@@ -34,6 +35,7 @@ parser.add_argument(
     help="Use the pre-trained checkpoint from Nucleus.",
 )
 parser.add_argument("--real-time", action="store_true", default=False, help="Run in real-time, if possible.")
+parser.add_argument("--save_csv", action="store_true", default=False, help="Save actions tensor to a CSV file.")
 # append RSL-RL cli arguments
 cli_args.add_rsl_rl_args(parser)
 # append AppLauncher cli args
@@ -170,8 +172,24 @@ def main(env_cfg: ManagerBasedRLEnvCfg | DirectRLEnvCfg | DirectMARLEnvCfg, agen
         with torch.inference_mode():
             # agent stepping
             actions = policy(obs)
+            
+            print(f"Step {timestep}: Actions: {actions}")
+            
+            # save action to csv
+            if args_cli.save_csv:
+                actions_path = os.path.join(log_dir, "actions_log.csv")
+                os.makedirs(os.path.dirname(actions_path), exist_ok=True)
+                with open(actions_path, "a", encoding="utf-8", newline="") as f:
+                    writer = csv.writer(f)
+                    writer.writerow([timestep] + actions.detach().cpu().flatten().tolist())
             # env stepping
-            obs, _, _, _ = env.step(actions)
+            obs, rew, done, info = env.step(actions)
+
+            # print info
+            print(f"Step {timestep}: Obs: {obs}, \nReward: {rew}, \nDone: {done}, \nInfo: {info}")
+            
+
+
         if args_cli.video:
             timestep += 1
             # Exit the play loop after recording one video
