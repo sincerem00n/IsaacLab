@@ -311,7 +311,7 @@ class HanuA2RoughEnvCfgV1(HanuA2RoughEnvCfg):
         # }
         self.events.base_com = None  # disabling for now
         self.events.base_external_force_torque.params["asset_cfg"].body_names = "torso_.*"
-        self.events.base_external_force_torque.params["force_range"] = (-0.5, 1.5)
+        self.events.base_external_force_torque.params["force_range"] = (-0.75, 1.25)
 
         self.events.reset_robot_joints.params["position_range"] = (0.5, 1.5)
         self.events.reset_base.params = {
@@ -329,10 +329,11 @@ class HanuA2RoughEnvCfgV1(HanuA2RoughEnvCfg):
         # ------- Rewards configuration --------
         self.rewards.feet_air_time.weight = 0.3
         self.rewards.feet_air_time.params["threshold"] = 0.2
+        self.rewards.feet_slide.weight = -0.2
 
         # ------ Commands configuration --------
-        self.commands.base_velocity.ranges.lin_vel_y = (-0.0, 1.0) # (-1.0, 0.0)
-        self.commands.base_velocity.ranges.ang_vel_z = (-0.5, 0.5)
+        self.commands.base_velocity.ranges.lin_vel_y = (-0.0, 1.5) # (-1.0, 0.0)
+        self.commands.base_velocity.ranges.ang_vel_z = (-0.0, 0.0)
 
         # ------ Terminations configuration --------
         self.terminations.base_contact.params["sensor_cfg"].body_names = [f"^(?!.*{self.foot_link_name}).*"]

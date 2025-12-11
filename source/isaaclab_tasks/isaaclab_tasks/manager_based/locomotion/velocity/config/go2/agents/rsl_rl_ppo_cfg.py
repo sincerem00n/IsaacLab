@@ -43,6 +43,7 @@ class UnitreeGo2FlatPPORunnerCfg(UnitreeGo2RoughPPORunnerCfg):
         super().__post_init__()
 
         self.max_iterations = 300
+        self.save_interval = 1000
         self.experiment_name = "unitree_go2_flat"
         self.policy.actor_hidden_dims = [128, 128, 128]
         self.policy.critic_hidden_dims = [128, 128, 128]
