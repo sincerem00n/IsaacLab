@@ -40,8 +40,9 @@ import random
 import torch
 import tqdm
 
+import isaacsim.core.utils.prims as prim_utils
+
 import isaaclab.sim as sim_utils
-import isaaclab.sim.utils.prims as prim_utils
 
 
 def define_origins(num_origins: int, spacing: float) -> list[list[float]]:

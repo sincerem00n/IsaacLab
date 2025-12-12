@@ -59,12 +59,11 @@ def main():
 
     update_task_param(args.cfg_path, args.assembly_id, args.train, args.log_eval)
 
-    # avoid the warning of low GPU occupancy for SoftDTWCUDA function
-    bash_command = "NUMBA_CUDA_LOW_OCCUPANCY_WARNINGS=0"
+    bash_command = None
     if sys.platform.startswith("win"):
-        bash_command += " isaaclab.bat -p"
+        bash_command = "isaaclab.bat -p"
     elif sys.platform.startswith("linux"):
-        bash_command += " ./isaaclab.sh -p"
+        bash_command = "./isaaclab.sh -p"
     if args.train:
         bash_command += " scripts/reinforcement_learning/rl_games/train.py --task=Isaac-AutoMate-Assembly-Direct-v0"
         bash_command += f" --seed={str(args.seed)} --max_iterations={str(args.max_iterations)}"

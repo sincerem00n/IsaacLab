@@ -5,10 +5,11 @@
 
 from __future__ import annotations
 
-import logging
 import torch
 from collections.abc import Sequence
 from typing import TYPE_CHECKING
+
+import omni.log
 
 import isaaclab.utils.string as string_utils
 from isaaclab.assets.articulation import Articulation
@@ -20,9 +21,6 @@ if TYPE_CHECKING:
     from isaaclab.envs.utils.io_descriptors import GenericActionIODescriptor
 
     from . import actions_cfg
-
-# import logger
-logger = logging.getLogger(__name__)
 
 
 class NonHolonomicAction(ActionTerm):
@@ -94,11 +92,11 @@ class NonHolonomicAction(ActionTerm):
         self._joint_ids = [x_joint_id[0], y_joint_id[0], yaw_joint_id[0]]
         self._joint_names = [x_joint_name[0], y_joint_name[0], yaw_joint_name[0]]
         # log info for debugging
-        logger.info(
+        omni.log.info(
             f"Resolved joint names for the action term {self.__class__.__name__}:"
             f" {self._joint_names} [{self._joint_ids}]"
         )
-        logger.info(
+        omni.log.info(
             f"Resolved body name for the action term {self.__class__.__name__}: {self._body_name} [{self._body_idx}]"
         )
 

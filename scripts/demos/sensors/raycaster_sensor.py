@@ -4,6 +4,7 @@
 # SPDX-License-Identifier: BSD-3-Clause
 
 import argparse
+import numpy as np
 
 from isaaclab.app import AppLauncher
 
@@ -21,7 +22,6 @@ simulation_app = app_launcher.app
 
 """Rest everything follows."""
 
-import numpy as np
 import torch
 
 import isaaclab.sim as sim_utils

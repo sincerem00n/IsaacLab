@@ -3,13 +3,14 @@
 #
 # SPDX-License-Identifier: BSD-3-Clause
 
-import logging
 import numpy as np
 from contextlib import suppress
 from matplotlib import cm
 from typing import TYPE_CHECKING, Optional
 
+import carb
 import omni
+import omni.log
 
 with suppress(ImportError):
     # isaacsim.gui is not available when running in headless mode.
@@ -20,9 +21,6 @@ from .ui_widget_wrapper import UIWidgetWrapper
 if TYPE_CHECKING:
     import isaacsim.gui.components
     import omni.ui
-
-# import logger
-logger = logging.getLogger(__name__)
 
 
 class ImagePlot(UIWidgetWrapper):
@@ -81,7 +79,7 @@ class ImagePlot(UIWidgetWrapper):
 
         self._byte_provider = omni.ui.ByteImageProvider()
         if image is None:
-            logger.warning("image is NONE")
+            carb.log_warn("image is NONE")
             image = np.ones((480, 640, 3), dtype=np.uint8) * 255
             image[:, :, 0] = 0
             image[:, :240, 1] = 0
@@ -117,7 +115,7 @@ class ImagePlot(UIWidgetWrapper):
             image = (image * 255).astype(np.uint8)
         elif self._curr_mode == "Colorization":
             if image.ndim == 3 and image.shape[2] == 3:
-                logger.warning("Colorization mode is only available for single channel images")
+                omni.log.warn("Colorization mode is only available for single channel images")
             else:
                 image = (image - image.min()) / (image.max() - image.min())
                 colormap = cm.get_cmap("jet")

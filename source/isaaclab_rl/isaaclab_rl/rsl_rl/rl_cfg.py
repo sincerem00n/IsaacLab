@@ -10,6 +10,7 @@ from typing import Literal
 
 from isaaclab.utils import configclass
 
+from .distillation_cfg import RslRlDistillationAlgorithmCfg, RslRlDistillationStudentTeacherCfg
 from .rnd_cfg import RslRlRndCfg
 from .symmetry_cfg import RslRlSymmetryCfg
 
@@ -30,15 +31,6 @@ class RslRlPpoActorCriticCfg:
 
     noise_std_type: Literal["scalar", "log"] = "scalar"
     """The type of noise standard deviation for the policy. Default is scalar."""
-
-    state_dependent_std: bool = False
-    """Whether to use state-dependent standard deviation for the policy. Default is False."""
-
-    actor_obs_normalization: bool = MISSING
-    """Whether to normalize the observation for the actor network."""
-
-    critic_obs_normalization: bool = MISSING
-    """Whether to normalize the observation for the critic network."""
 
     actor_hidden_dims: list[int] = MISSING
     """The hidden dimensions of the actor network."""
@@ -122,11 +114,13 @@ class RslRlPpoAlgorithmCfg:
     Otherwise, the advantage is normalized over the entire collected trajectories.
     """
 
-    rnd_cfg: RslRlRndCfg | None = None
-    """The RND configuration. Default is None, in which case RND is not used."""
-
     symmetry_cfg: RslRlSymmetryCfg | None = None
     """The symmetry configuration. Default is None, in which case symmetry is not used."""
+
+    rnd_cfg: RslRlRndCfg | None = None
+    """The configuration for the Random Network Distillation (RND) module. Default is None,
+    in which case RND is not used.
+    """
 
 
 #########################
@@ -135,8 +129,8 @@ class RslRlPpoAlgorithmCfg:
 
 
 @configclass
-class RslRlBaseRunnerCfg:
-    """Base configuration of the runner."""
+class RslRlOnPolicyRunnerCfg:
+    """Configuration of the runner for on-policy algorithms."""
 
     seed: int = 42
     """The seed for the experiment. Default is 42."""
@@ -150,36 +144,17 @@ class RslRlBaseRunnerCfg:
     max_iterations: int = MISSING
     """The maximum number of iterations."""
 
-    empirical_normalization: bool | None = None
-    """This parameter is deprecated and will be removed in the future.
+    empirical_normalization: bool = MISSING
+    """Whether to use empirical normalization."""
 
-    Use `actor_obs_normalization` and `critic_obs_normalization` instead.
-    """
+    policy: RslRlPpoActorCriticCfg | RslRlDistillationStudentTeacherCfg = MISSING
+    """The policy configuration."""
 
-    obs_groups: dict[str, list[str]] = MISSING
-    """A mapping from observation groups to observation sets.
-
-    The keys of the dictionary are predefined observation sets used by the underlying algorithm
-    and values are lists of observation groups provided by the environment.
-
-    For instance, if the environment provides a dictionary of observations with groups "policy", "images",
-    and "privileged", these can be mapped to algorithmic observation sets as follows:
-
-    .. code-block:: python
-
-        obs_groups = {
-            "policy": ["policy", "images"],
-            "critic": ["policy", "privileged"],
-        }
-
-    This way, the policy will receive the "policy" and "images" observations, and the critic will
-    receive the "policy" and "privileged" observations.
-
-    For more details, please check ``vec_env.py`` in the rsl_rl library.
-    """
+    algorithm: RslRlPpoAlgorithmCfg | RslRlDistillationAlgorithmCfg = MISSING
+    """The algorithm configuration."""
 
     clip_actions: float | None = None
-    """The clipping value for actions. If None, then no clipping is done. Defaults to None.
+    """The clipping value for actions. If ``None``, then no clipping is done.
 
     .. note::
         This clipping is performed inside the :class:`RslRlVecEnvWrapper` wrapper.
@@ -209,10 +184,7 @@ class RslRlBaseRunnerCfg:
     """The wandb project name. Default is "isaaclab"."""
 
     resume: bool = False
-    """Whether to resume a previous training. Default is False.
-
-    This flag will be ignored for distillation.
-    """
+    """Whether to resume. Default is False."""
 
     load_run: str = ".*"
     """The run directory to load. Default is ".*" (all).
@@ -225,17 +197,3 @@ class RslRlBaseRunnerCfg:
 
     If regex expression, the latest (alphabetical order) matching file will be loaded.
     """
-
-
-@configclass
-class RslRlOnPolicyRunnerCfg(RslRlBaseRunnerCfg):
-    """Configuration of the runner for on-policy algorithms."""
-
-    class_name: str = "OnPolicyRunner"
-    """The runner class name. Default is OnPolicyRunner."""
-
-    policy: RslRlPpoActorCriticCfg = MISSING
-    """The policy configuration."""
-
-    algorithm: RslRlPpoAlgorithmCfg = MISSING
-    """The algorithm configuration."""

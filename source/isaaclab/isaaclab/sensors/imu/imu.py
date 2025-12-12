@@ -9,13 +9,13 @@ import torch
 from collections.abc import Sequence
 from typing import TYPE_CHECKING
 
+import isaacsim.core.utils.stage as stage_utils
 from isaacsim.core.simulation_manager import SimulationManager
+from pxr import UsdPhysics
 
 import isaaclab.sim as sim_utils
-import isaaclab.sim.utils.stage as stage_utils
 import isaaclab.utils.math as math_utils
 from isaaclab.markers import VisualizationMarkers
-from isaaclab.sim.utils import resolve_pose_relative_to_physx_parent
 
 from ..sensor_base import SensorBase
 from .imu_data import ImuData
@@ -27,12 +27,10 @@ if TYPE_CHECKING:
 class Imu(SensorBase):
     """The Inertia Measurement Unit (IMU) sensor.
 
-    The sensor can be attached to any prim path with a rigid ancestor in its tree and produces body-frame linear acceleration and angular velocity,
-    along with world-frame pose and body-frame linear and angular accelerations/velocities.
-
-    If the provided path is not a rigid body, the closest rigid-body ancestor is used for simulation queries.
-    The fixed transform from that ancestor to the target prim is computed once during initialization and
-    composed with the configured sensor offset.
+    The sensor can be attached to any :class:`RigidObject` or :class:`Articulation` in the scene. The sensor provides complete state information.
+    The sensor is primarily used to provide the linear acceleration and angular velocity of the object in the body frame. The sensor also provides
+    the position and orientation of the object in the world frame and the angular acceleration and linear velocity in the body frame. The extra
+    data outputs are useful for simulating with or comparing against "perfect" state estimation.
 
     .. note::
 
@@ -42,13 +40,10 @@ class Imu(SensorBase):
 
     .. note::
 
-        The user can configure the sensor offset in the configuration file. The offset is applied relative to the rigid source prim.
-        If the target prim is not a rigid body, the offset is composed with the fixed transform
-        from the rigid ancestor to the target prim. The offset is applied in the body frame of the rigid source prim.
-        The offset is defined as a position vector and a quaternion rotation, which
-        are applied in the order: position, then rotation. The position is applied as a translation
-        in the body frame of the rigid source prim, and the rotation is applied as a rotation
-        in the body frame of the rigid source prim.
+        It is suggested to use the OffsetCfg to define an IMU frame relative to a rigid body prim defined at the root of
+        a :class:`RigidObject` or  a prim that is defined by a non-fixed joint in an :class:`Articulation` (except for the
+        root of a fixed based articulation). The use frames with fixed joints and small mass/inertia to emulate a transform
+        relative to a body frame can result in lower performance and accuracy.
 
     """
 
@@ -65,9 +60,6 @@ class Imu(SensorBase):
         super().__init__(cfg)
         # Create empty variables for storing output data
         self._data = ImuData()
-
-        # Internal: expression used to build the rigid body view (may be different from cfg.prim_path)
-        self._rigid_parent_expr: str | None = None
 
     def __str__(self) -> str:
         """Returns: A string containing information about the instance."""
@@ -127,9 +119,11 @@ class Imu(SensorBase):
     def _initialize_impl(self):
         """Initializes the sensor handles and internal buffers.
 
-        - If the target prim path is a rigid body, build the view directly on it.
-        - Otherwise find the closest rigid-body ancestor, cache the fixed transform from that ancestor
-          to the target prim, and build the view on the ancestor expression.
+        This function creates handles and registers the provided data types with the replicator registry to
+        be able to access the data from the sensor. It also initializes the internal buffers to store the data.
+
+        Raises:
+            RuntimeError: If the imu prim is not a RigidBodyPrim
         """
         # Initialize parent class
         super()._initialize_impl()
@@ -139,12 +133,11 @@ class Imu(SensorBase):
         prim = sim_utils.find_first_matching_prim(self.cfg.prim_path)
         if prim is None:
             raise RuntimeError(f"Failed to find a prim at path expression: {self.cfg.prim_path}")
-
-        # Determine rigid source prim and (if needed) the fixed transform from that rigid prim to target prim
-        self._rigid_parent_expr, fixed_pos_b, fixed_quat_b = resolve_pose_relative_to_physx_parent(self.cfg.prim_path)
-
-        # Create the rigid body view on the ancestor
-        self._view = self._physics_sim_view.create_rigid_body_view(self._rigid_parent_expr)
+        # check if it is a RigidBody Prim
+        if prim.HasAPI(UsdPhysics.RigidBodyAPI):
+            self._view = self._physics_sim_view.create_rigid_body_view(self.cfg.prim_path.replace(".*", "*"))
+        else:
+            raise RuntimeError(f"Failed to find a RigidBodyAPI for the prim paths: {self.cfg.prim_path}")
 
         # Get world gravity
         gravity = self._physics_sim_view.get_gravity()
@@ -155,53 +148,35 @@ class Imu(SensorBase):
         # Create internal buffers
         self._initialize_buffers_impl()
 
-        # Compose the configured offset with the fixed ancestor->target transform (done once)
-        # new_offset = fixed * cfg.offset
-        # where composition is: p = p_fixed + R_fixed * p_cfg, q = q_fixed * q_cfg
-        if fixed_pos_b is not None and fixed_quat_b is not None:
-            # Broadcast fixed transform across instances
-            fixed_p = torch.tensor(fixed_pos_b, device=self._device).repeat(self._view.count, 1)
-            fixed_q = torch.tensor(fixed_quat_b, device=self._device).repeat(self._view.count, 1)
-
-            cfg_p = self._offset_pos_b.clone()
-            cfg_q = self._offset_quat_b.clone()
-
-            composed_p = fixed_p + math_utils.quat_apply(fixed_q, cfg_p)
-            composed_q = math_utils.quat_mul(fixed_q, cfg_q)
-
-            self._offset_pos_b = composed_p
-            self._offset_quat_b = composed_q
-
     def _update_buffers_impl(self, env_ids: Sequence[int]):
         """Fills the buffers of the sensor data."""
 
         # default to all sensors
         if len(env_ids) == self._num_envs:
             env_ids = slice(None)
-        # world pose of the rigid source (ancestor) from the PhysX view
+        # obtain the poses of the sensors
         pos_w, quat_w = self._view.get_transforms()[env_ids].split([3, 4], dim=-1)
         quat_w = quat_w.roll(1, dims=-1)
 
-        # sensor pose in world: apply composed offset
+        # store the poses
         self._data.pos_w[env_ids] = pos_w + math_utils.quat_apply(quat_w, self._offset_pos_b[env_ids])
         self._data.quat_w[env_ids] = math_utils.quat_mul(quat_w, self._offset_quat_b[env_ids])
 
-        # COM of rigid source (body frame)
+        # get the offset from COM to link origin
         com_pos_b = self._view.get_coms().to(self.device).split([3, 4], dim=-1)[0]
 
-        # Velocities at rigid source COM
+        # obtain the velocities of the link COM
         lin_vel_w, ang_vel_w = self._view.get_velocities()[env_ids].split([3, 3], dim=-1)
-
-        # If sensor offset or COM != link origin, account for angular velocity contribution
+        # if an offset is present or the COM does not agree with the link origin, the linear velocity has to be
+        # transformed taking the angular velocity into account
         lin_vel_w += torch.linalg.cross(
             ang_vel_w, math_utils.quat_apply(quat_w, self._offset_pos_b[env_ids] - com_pos_b[env_ids]), dim=-1
         )
 
-        # numerical derivative (world frame)
+        # numerical derivative
         lin_acc_w = (lin_vel_w - self._prev_lin_vel_w[env_ids]) / self._dt + self._gravity_bias_w[env_ids]
         ang_acc_w = (ang_vel_w - self._prev_ang_vel_w[env_ids]) / self._dt
-
-        # batch rotate world->body using current sensor orientation
+        # stack data in world frame and batch rotate
         dynamics_data = torch.stack((lin_vel_w, ang_vel_w, lin_acc_w, ang_acc_w, self.GRAVITY_VEC_W[env_ids]), dim=0)
         dynamics_data_rot = math_utils.quat_apply_inverse(self._data.quat_w[env_ids].repeat(5, 1), dynamics_data).chunk(
             5, dim=0
@@ -232,7 +207,7 @@ class Imu(SensorBase):
         self._prev_lin_vel_w = torch.zeros_like(self._data.pos_w)
         self._prev_ang_vel_w = torch.zeros_like(self._data.pos_w)
 
-        # store sensor offset (applied relative to rigid source). This may be composed later with a fixed ancestor->target transform.
+        # store sensor offset transformation
         self._offset_pos_b = torch.tensor(list(self.cfg.offset.pos), device=self._device).repeat(self._view.count, 1)
         self._offset_quat_b = torch.tensor(list(self.cfg.offset.rot), device=self._device).repeat(self._view.count, 1)
         # set gravity bias

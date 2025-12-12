@@ -136,27 +136,18 @@ class HDF5DatasetFileHandler(DatasetFileHandlerBase):
 
         return episode
 
-    def write_episode(self, episode: EpisodeData, demo_id: int | None = None):
+    def write_episode(self, episode: EpisodeData):
         """Add an episode to the dataset.
 
         Args:
             episode: The episode data to add.
-            demo_id: Custom index for the episode. If None, uses default index.
         """
         self._raise_if_not_initialized()
         if episode.is_empty():
             return
 
-        # Use custom demo id if provided, otherwise use default naming
-        if demo_id is not None:
-            episode_group_name = f"demo_{demo_id}"
-        else:
-            episode_group_name = f"demo_{self._demo_count}"
-
-        # create episode group with the specified name
-        if episode_group_name in self._hdf5_data_group:
-            raise ValueError(f"Episode group '{episode_group_name}' already exists in the dataset")
-        h5_episode_group = self._hdf5_data_group.create_group(episode_group_name)
+        # create episode group based on demo count
+        h5_episode_group = self._hdf5_data_group.create_group(f"demo_{self._demo_count}")
 
         # store number of steps taken
         if "actions" in episode.data:
@@ -185,10 +176,8 @@ class HDF5DatasetFileHandler(DatasetFileHandlerBase):
         # increment total step counts
         self._hdf5_data_group.attrs["total"] += h5_episode_group.attrs["num_samples"]
 
-        # Only increment demo count if using default indexing
-        if demo_id is None:
-            # increment total demo counts
-            self._demo_count += 1
+        # increment total demo counts
+        self._demo_count += 1
 
     def flush(self):
         """Flush the episode data to disk."""

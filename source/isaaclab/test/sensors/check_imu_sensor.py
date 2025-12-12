@@ -12,7 +12,6 @@ from __future__ import annotations
 """Launch Isaac Sim Simulator first."""
 
 import argparse
-import logging
 
 from isaacsim import SimulationApp
 
@@ -54,9 +53,6 @@ from isaaclab.terrains.config.rough import ROUGH_TERRAINS_CFG
 from isaaclab.terrains.terrain_importer import TerrainImporter
 from isaaclab.utils.assets import ISAAC_NUCLEUS_DIR
 from isaaclab.utils.timer import Timer
-
-# import logger
-logger = logging.getLogger(__name__)
 
 
 def design_scene(sim: SimulationContext, num_envs: int = 2048) -> RigidObject:
@@ -192,8 +188,8 @@ if __name__ == "__main__":
         # Run the main function
         main()
     except Exception as err:
-        logger.error(err)
-        logger.error(traceback.format_exc())
+        carb.log_error(err)
+        carb.log_error(traceback.format_exc())
         raise
     finally:
         # close sim app

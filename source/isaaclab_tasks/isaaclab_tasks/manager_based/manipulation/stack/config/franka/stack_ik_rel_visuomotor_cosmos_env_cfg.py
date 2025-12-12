@@ -105,8 +105,11 @@ class FrankaCubeStackVisuomotorCosmosEnvCfg(stack_ik_rel_visuomotor_env_cfg.Fran
         # post init of parent
         super().__post_init__()
 
-        # set domeLight.upperLowerStrategy to 4 to remove rendering noise
-        self.sim.render.dome_light_upper_lower_strategy = 4
+        import carb
+        from isaacsim.core.utils.carb import set_carb_setting
+
+        carb_setting = carb.settings.get_settings()
+        set_carb_setting(carb_setting, "/rtx/domeLight/upperLowerStrategy", 4)
 
         SEMANTIC_MAPPING = {
             "class:cube_1": (120, 230, 255, 255),
@@ -153,8 +156,8 @@ class FrankaCubeStackVisuomotorCosmosEnvCfg(stack_ik_rel_visuomotor_env_cfg.Fran
         )
 
         # Set settings for camera rendering
-        self.num_rerenders_on_reset = 1
-        self.sim.render.antialiasing_mode = "OFF"
+        self.rerender_on_reset = True
+        self.sim.render.antialiasing_mode = "OFF"  # disable dlss
 
         # List of image observations in policy observations
         self.image_obs_list = ["table_cam", "wrist_cam"]

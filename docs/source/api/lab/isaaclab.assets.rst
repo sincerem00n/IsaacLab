@@ -32,7 +32,7 @@ Asset Base
 
 .. autoclass:: AssetBaseCfg
     :members:
-    :exclude-members: __init__, class_type, InitialStateCfg
+    :exclude-members: __init__, class_type
 
 Rigid Object
 ------------

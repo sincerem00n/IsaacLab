@@ -9,7 +9,6 @@
 from __future__ import annotations
 
 import torch
-from tensordict import TensorDict
 from typing import TYPE_CHECKING
 
 if TYPE_CHECKING:
@@ -22,8 +21,9 @@ __all__ = ["compute_symmetric_states"]
 @torch.no_grad()
 def compute_symmetric_states(
     env: ManagerBasedRLEnv,
-    obs: TensorDict | None = None,
+    obs: torch.Tensor | None = None,
     actions: torch.Tensor | None = None,
+    obs_type: str = "policy",
 ):
     """Augments the given observations and actions by applying symmetry transformations.
 
@@ -34,8 +34,9 @@ def compute_symmetric_states(
 
     Args:
         env: The environment instance.
-        obs: The original observation tensor dictionary. Defaults to None.
+        obs: The original observation tensor. Defaults to None.
         actions: The original actions tensor. Defaults to None.
+        obs_type: The type of observation to augment. Defaults to "policy".
 
     Returns:
         Augmented observations and actions tensors, or None if the respective input was None.
@@ -43,39 +44,33 @@ def compute_symmetric_states(
 
     # observations
     if obs is not None:
-        batch_size = obs.batch_size[0]
+        num_envs = obs.shape[0]
         # since we have 4 different symmetries, we need to augment the batch size by 4
-        obs_aug = obs.repeat(4)
-
-        # policy observation group
+        obs_aug = torch.zeros(num_envs * 4, obs.shape[1], device=obs.device)
         # -- original
-        obs_aug["policy"][:batch_size] = obs["policy"][:]
+        obs_aug[:num_envs] = obs[:]
         # -- left-right
-        obs_aug["policy"][batch_size : 2 * batch_size] = _transform_policy_obs_left_right(env.unwrapped, obs["policy"])
+        obs_aug[num_envs : 2 * num_envs] = _transform_obs_left_right(env.unwrapped, obs, obs_type)
         # -- front-back
-        obs_aug["policy"][2 * batch_size : 3 * batch_size] = _transform_policy_obs_front_back(
-            env.unwrapped, obs["policy"]
-        )
+        obs_aug[2 * num_envs : 3 * num_envs] = _transform_obs_front_back(env.unwrapped, obs, obs_type)
         # -- diagonal
-        obs_aug["policy"][3 * batch_size :] = _transform_policy_obs_front_back(
-            env.unwrapped, obs_aug["policy"][batch_size : 2 * batch_size]
-        )
+        obs_aug[3 * num_envs :] = _transform_obs_front_back(env.unwrapped, obs_aug[num_envs : 2 * num_envs])
     else:
         obs_aug = None
 
     # actions
     if actions is not None:
-        batch_size = actions.shape[0]
+        num_envs = actions.shape[0]
         # since we have 4 different symmetries, we need to augment the batch size by 4
-        actions_aug = torch.zeros(batch_size * 4, actions.shape[1], device=actions.device)
+        actions_aug = torch.zeros(num_envs * 4, actions.shape[1], device=actions.device)
         # -- original
-        actions_aug[:batch_size] = actions[:]
+        actions_aug[:num_envs] = actions[:]
         # -- left-right
-        actions_aug[batch_size : 2 * batch_size] = _transform_actions_left_right(actions)
+        actions_aug[num_envs : 2 * num_envs] = _transform_actions_left_right(actions)
         # -- front-back
-        actions_aug[2 * batch_size : 3 * batch_size] = _transform_actions_front_back(actions)
+        actions_aug[2 * num_envs : 3 * num_envs] = _transform_actions_front_back(actions)
         # -- diagonal
-        actions_aug[3 * batch_size :] = _transform_actions_front_back(actions_aug[batch_size : 2 * batch_size])
+        actions_aug[3 * num_envs :] = _transform_actions_front_back(actions_aug[num_envs : 2 * num_envs])
     else:
         actions_aug = None
 
@@ -87,7 +82,7 @@ Symmetry functions for observations.
 """
 
 
-def _transform_policy_obs_left_right(env: ManagerBasedRLEnv, obs: torch.Tensor) -> torch.Tensor:
+def _transform_obs_left_right(env: ManagerBasedRLEnv, obs: torch.Tensor, obs_type: str = "policy") -> torch.Tensor:
     """Apply a left-right symmetry transformation to the observation tensor.
 
     This function modifies the given observation tensor by applying transformations
@@ -100,6 +95,7 @@ def _transform_policy_obs_left_right(env: ManagerBasedRLEnv, obs: torch.Tensor) 
     Args:
         env: The environment instance from which the observation is obtained.
         obs: The observation tensor to be transformed.
+        obs_type: The type of observation to augment. Defaults to "policy".
 
     Returns:
         The transformed observation tensor with left-right symmetry applied.
@@ -122,14 +118,21 @@ def _transform_policy_obs_left_right(env: ManagerBasedRLEnv, obs: torch.Tensor) 
     # last actions
     obs[:, 36:48] = _switch_anymal_joints_left_right(obs[:, 36:48])
 
+    # height-scan
+    if obs_type == "critic":
+        # handle asymmetric actor-critic formulation
+        group_name = "critic" if "critic" in env.observation_manager.active_terms else "policy"
+    else:
+        group_name = "policy"
+
     # note: this is hard-coded for grid-pattern of ordering "xy" and size (1.6, 1.0)
-    if "height_scan" in env.observation_manager.active_terms["policy"]:
+    if "height_scan" in env.observation_manager.active_terms[group_name]:
         obs[:, 48:235] = obs[:, 48:235].view(-1, 11, 17).flip(dims=[1]).view(-1, 11 * 17)
 
     return obs
 
 
-def _transform_policy_obs_front_back(env: ManagerBasedRLEnv, obs: torch.Tensor) -> torch.Tensor:
+def _transform_obs_front_back(env: ManagerBasedRLEnv, obs: torch.Tensor, obs_type: str = "policy") -> torch.Tensor:
     """Applies a front-back symmetry transformation to the observation tensor.
 
     This function modifies the given observation tensor by applying transformations
@@ -141,6 +144,7 @@ def _transform_policy_obs_front_back(env: ManagerBasedRLEnv, obs: torch.Tensor) 
     Args:
         env: The environment instance from which the observation is obtained.
         obs: The observation tensor to be transformed.
+        obs_type: The type of observation to augment. Defaults to "policy".
 
     Returns:
         The transformed observation tensor with front-back symmetry applied.
@@ -163,8 +167,15 @@ def _transform_policy_obs_front_back(env: ManagerBasedRLEnv, obs: torch.Tensor) 
     # last actions
     obs[:, 36:48] = _switch_anymal_joints_front_back(obs[:, 36:48])
 
+    # height-scan
+    if obs_type == "critic":
+        # handle asymmetric actor-critic formulation
+        group_name = "critic" if "critic" in env.observation_manager.active_terms else "policy"
+    else:
+        group_name = "policy"
+
     # note: this is hard-coded for grid-pattern of ordering "xy" and size (1.6, 1.0)
-    if "height_scan" in env.observation_manager.active_terms["policy"]:
+    if "height_scan" in env.observation_manager.active_terms[group_name]:
         obs[:, 48:235] = obs[:, 48:235].view(-1, 11, 17).flip(dims=[2]).view(-1, 11 * 17)
 
     return obs

@@ -30,23 +30,19 @@ simulation_app = SimulationApp({"headless": args_cli.headless})
 
 """Rest everything follows."""
 
-import logging
 import torch
 
+import isaacsim.core.utils.nucleus as nucleus_utils
+import isaacsim.core.utils.prims as prim_utils
+import isaacsim.core.utils.stage as stage_utils
 import omni.kit.commands
+import omni.log
 import omni.physx
 from isaacsim.core.api.world import World
 from isaacsim.core.prims import Articulation
+from isaacsim.core.utils.carb import set_carb_setting
 from isaacsim.core.utils.viewports import set_camera_view
 from pxr import PhysxSchema, UsdPhysics
-
-import isaaclab.sim.utils.nucleus as nucleus_utils
-import isaaclab.sim.utils.prims as prim_utils
-import isaaclab.sim.utils.stage as stage_utils
-
-# import logger
-logger = logging.getLogger(__name__)
-
 
 # check nucleus connection
 if nucleus_utils.get_assets_root_path() is None:
@@ -54,7 +50,7 @@ if nucleus_utils.get_assets_root_path() is None:
         "Unable to perform Nucleus login on Omniverse. Assets root path is not set.\n"
         "\tPlease check: https://docs.omniverse.nvidia.com/app_isaacsim/app_isaacsim/overview.html#omniverse-nucleus"
     )
-    logger.error(msg)
+    omni.log.error(msg)
     raise RuntimeError(msg)
 
 
@@ -79,7 +75,7 @@ def main():
 
     # Enable hydra scene-graph instancing
     # this is needed to visualize the scene when flatcache is enabled
-    world._settings.set_bool("/persistent/omnihydra/useSceneGraphInstancing", True)
+    set_carb_setting(world._settings, "/persistent/omnihydra/useSceneGraphInstancing", True)
 
     # Spawn things into stage
     # Ground-plane

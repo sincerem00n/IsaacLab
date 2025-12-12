@@ -61,7 +61,7 @@ USD Camera
     :members:
     :inherited-members:
     :show-inheritance:
-    :exclude-members: __init__, class_type, OffsetCfg
+    :exclude-members: __init__, class_type
 
 Tile-Rendered USD Camera
 ------------------------

@@ -35,8 +35,9 @@ simulation_app = app_launcher.app
 
 import torch
 
+import isaacsim.core.utils.prims as prim_utils
+
 import isaaclab.sim as sim_utils
-import isaaclab.sim.utils.prims as prim_utils
 import isaaclab.utils.math as math_utils
 from isaaclab.assets import RigidObject, RigidObjectCfg
 from isaaclab.sim import SimulationContext

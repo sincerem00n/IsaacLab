@@ -19,7 +19,6 @@ simulation_app = app_launcher.app
 
 import importlib
 import numpy as np
-import torch
 
 import carb
 import omni.usd
@@ -28,28 +27,9 @@ from isaacsim.core.prims import XFormPrim
 
 from isaaclab.devices import OpenXRDevice, OpenXRDeviceCfg
 from isaaclab.devices.openxr import XrCfg
-from isaaclab.devices.retargeter_base import RetargeterBase, RetargeterCfg
 from isaaclab.envs import ManagerBasedEnv, ManagerBasedEnvCfg
 from isaaclab.scene import InteractiveSceneCfg
 from isaaclab.utils import configclass
-
-
-class NoOpRetargeter(RetargeterBase):
-    """A no-op retargeter that requests hand and head tracking but returns empty tensor."""
-
-    def __init__(self, cfg: RetargeterCfg):
-        super().__init__(cfg)
-
-    def get_requirements(self) -> list[RetargeterBase.Requirement]:
-        """Request hand and head tracking to trigger data collection."""
-        return [
-            RetargeterBase.Requirement.HAND_TRACKING,
-            RetargeterBase.Requirement.HEAD_TRACKING,
-        ]
-
-    def retarget(self, data):
-        """Return empty tensor."""
-        return torch.tensor([], device=self._sim_device)
 
 
 @configclass
@@ -179,7 +159,7 @@ def test_xr_anchor(empty_env, mock_xrcore):
     device = OpenXRDevice(OpenXRDeviceCfg(xr_cfg=env_cfg.xr))
 
     # Check that the xr anchor prim is created with the correct pose
-    xr_anchor_prim = XFormPrim("/World/XRAnchor")
+    xr_anchor_prim = XFormPrim("/XRAnchor")
     assert xr_anchor_prim.is_valid()
 
     position, orientation = xr_anchor_prim.get_world_poses()
@@ -188,7 +168,7 @@ def test_xr_anchor(empty_env, mock_xrcore):
 
     # Check that xr anchor mode and custom anchor are set correctly
     assert carb.settings.get_settings().get("/persistent/xr/profile/ar/anchorMode") == "custom anchor"
-    assert carb.settings.get_settings().get("/xrstage/profile/ar/customAnchor") == "/World/XRAnchor"
+    assert carb.settings.get_settings().get("/xrstage/profile/ar/customAnchor") == "/XRAnchor"
 
     device.reset()
 
@@ -201,7 +181,7 @@ def test_xr_anchor_default(empty_env, mock_xrcore):
     device = OpenXRDevice(OpenXRDeviceCfg())
 
     # Check that the xr anchor prim is created with the correct default pose
-    xr_anchor_prim = XFormPrim("/World/XRAnchor")
+    xr_anchor_prim = XFormPrim("/XRAnchor")
     assert xr_anchor_prim.is_valid()
 
     position, orientation = xr_anchor_prim.get_world_poses()
@@ -210,7 +190,7 @@ def test_xr_anchor_default(empty_env, mock_xrcore):
 
     # Check that xr anchor mode and custom anchor are set correctly
     assert carb.settings.get_settings().get("/persistent/xr/profile/ar/anchorMode") == "custom anchor"
-    assert carb.settings.get_settings().get("/xrstage/profile/ar/customAnchor") == "/World/XRAnchor"
+    assert carb.settings.get_settings().get("/xrstage/profile/ar/customAnchor") == "/XRAnchor"
 
     device.reset()
 
@@ -224,7 +204,7 @@ def test_xr_anchor_multiple_devices(empty_env, mock_xrcore):
     device_2 = OpenXRDevice(OpenXRDeviceCfg())
 
     # Check that the xr anchor prim is created with the correct default pose
-    xr_anchor_prim = XFormPrim("/World/XRAnchor")
+    xr_anchor_prim = XFormPrim("/XRAnchor")
     assert xr_anchor_prim.is_valid()
 
     position, orientation = xr_anchor_prim.get_world_poses()
@@ -233,7 +213,7 @@ def test_xr_anchor_multiple_devices(empty_env, mock_xrcore):
 
     # Check that xr anchor mode and custom anchor are set correctly
     assert carb.settings.get_settings().get("/persistent/xr/profile/ar/anchorMode") == "custom anchor"
-    assert carb.settings.get_settings().get("/xrstage/profile/ar/customAnchor") == "/World/XRAnchor"
+    assert carb.settings.get_settings().get("/xrstage/profile/ar/customAnchor") == "/XRAnchor"
 
     device_1.reset()
     device_2.reset()
@@ -243,22 +223,19 @@ def test_xr_anchor_multiple_devices(empty_env, mock_xrcore):
 def test_get_raw_data(empty_env, mock_xrcore):
     """Test the _get_raw_data method returns correctly formatted tracking data."""
     env, _ = empty_env
-    # Create a proper config object with default values and a no-op retargeter to trigger data collection
-    retargeter = NoOpRetargeter(RetargeterCfg())
-    device = OpenXRDevice(OpenXRDeviceCfg(), retargeters=[retargeter])
+    # Create a proper config object with default values
+    device = OpenXRDevice(OpenXRDeviceCfg())
 
     # Get raw tracking data
     raw_data = device._get_raw_data()
 
     # Check that the data structure is as expected
-    from isaaclab.devices.device_base import DeviceBase
-
-    assert DeviceBase.TrackingTarget.HAND_LEFT in raw_data
-    assert DeviceBase.TrackingTarget.HAND_RIGHT in raw_data
-    assert DeviceBase.TrackingTarget.HEAD in raw_data
+    assert OpenXRDevice.TrackingTarget.HAND_LEFT in raw_data
+    assert OpenXRDevice.TrackingTarget.HAND_RIGHT in raw_data
+    assert OpenXRDevice.TrackingTarget.HEAD in raw_data
 
     # Check left hand joints
-    left_hand = raw_data[DeviceBase.TrackingTarget.HAND_LEFT]
+    left_hand = raw_data[OpenXRDevice.TrackingTarget.HAND_LEFT]
     assert "palm" in left_hand
     assert "wrist" in left_hand
 
@@ -269,7 +246,7 @@ def test_get_raw_data(empty_env, mock_xrcore):
     np.testing.assert_almost_equal(palm_pose[3:], [0.9, 0.1, 0.2, 0.3])  # Orientation
 
     # Check head pose
-    head_pose = raw_data[DeviceBase.TrackingTarget.HEAD]
+    head_pose = raw_data[OpenXRDevice.TrackingTarget.HEAD]
     assert len(head_pose) == 7
     np.testing.assert_almost_equal(head_pose[:3], [0.1, 0.2, 0.3])  # Position
     np.testing.assert_almost_equal(head_pose[3:], [0.9, 0.1, 0.2, 0.3])  # Orientation

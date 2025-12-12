@@ -195,13 +195,13 @@
   },
   {
     "package": "cmeel-boost",
-    "license": "BSL-1.0",
+    "license": "UNKNOWN",
     "comment": "BSL"
   },
   {
     "package": "cmeel-console-bridge",
-    "license": "Zlib",
-    "comment": "ZLIBL"
+    "license": "UNKNOWN",
+    "comment": "BSD"
   },
   {
     "package": "cmeel-octomap",
@@ -215,7 +215,7 @@
   },
   {
     "package": "cmeel-tinyxml",
-    "license": "Zlib",
+    "license": "UNKNOWN",
     "comment": "ZLIBL"
   },
   {
@@ -225,7 +225,7 @@
   },
   {
     "package": "cmeel-zlib",
-    "license": "Zlib",
+    "license": "UNKNOWN",
     "comment": "ZLIBL"
   },
   {
@@ -293,7 +293,7 @@
   },
   {
     "package": "filelock",
-    "license": "Unlicense",
+    "license": "The Unlicense (Unlicense)",
     "comment": "no condition"
   },
   {
@@ -308,7 +308,7 @@
   },
   {
     "package": "typing_extensions",
-    "license": "Python Software Foundation License",
+    "license": "UNKNOWN",
     "comment": "PSFL / OSRB"
   },
   {
@@ -390,55 +390,5 @@
     "package": "ml_dtypes",
     "license" : "UNKNOWN",
     "comment": "Apache 2.0"
-  },
-  {
-    "package": "zipp",
-    "license" : "UNKNOWN",
-    "comment": "MIT"
-  },
-  {
-    "package": "fsspec",
-    "license" : "UNKNOWN",
-    "comment": "BSD"
-  },
-  {
-    "package": "numpy-quaternion",
-    "license": "UNKNOWN",
-    "comment": "MIT"
-  },
-  {
-    "package": "aiohappyeyeballs",
-    "license": "Other/Proprietary License; Python Software Foundation License",
-    "comment": "PSFL / OSRB"
-  },
-  {
-    "package": "cffi",
-    "license": "UNKNOWN",
-    "comment": "MIT"
-  },
-  {
-    "package": "trio",
-    "license": "UNKNOWN",
-    "comment": "MIT"
-  },
-  {
-    "package": "pipdeptree",
-    "license": "UNKNOWN",
-    "comment": "MIT"
-  },
-  {
-    "package": "msgpack",
-    "license": "UNKNOWN",
-    "comment": "Apache 2.0"
-  },
-  {
-    "package": "onnx-ir",
-    "license": "UNKNOWN",
-    "comment": "Apache 2.0"
-  },
-  {
-    "package": "matplotlib-inline",
-    "license": "UNKNOWN",
-    "comment": "BSD-3"
   }
 ]

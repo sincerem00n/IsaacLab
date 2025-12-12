@@ -10,7 +10,6 @@ on:
     branches:
       - main
       - devel
-      - 'release/**'
   pull_request:
     types: [opened, synchronize, reopened]
 
@@ -28,7 +27,8 @@ jobs:
     - id: trigger-deploy
       env:
         REPO_NAME: ${{ secrets.REPO_NAME }}
-      if: "${{ github.repository == env.REPO_NAME && (github.ref == 'refs/heads/main' || github.ref == 'refs/heads/devel' || startsWith(github.ref, 'refs/heads/release/')) }}"
+        BRANCH_REF: ${{ secrets.BRANCH_REF }}
+      if: "${{ github.repository == env.REPO_NAME && github.ref == env.BRANCH_REF }}"
       run: echo "defined=true" >> "$GITHUB_OUTPUT"
 
   build-docs:

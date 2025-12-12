@@ -5,12 +5,13 @@
 
 from __future__ import annotations
 
-import logging
 import numpy as np
 import os
 import torch
 import trimesh
 from typing import TYPE_CHECKING
+
+import omni.log
 
 from isaaclab.utils.dict import dict_to_md5_hash
 from isaaclab.utils.io import dump_yaml
@@ -23,9 +24,6 @@ from .utils import color_meshes_by_height, find_flat_patches
 if TYPE_CHECKING:
     from .sub_terrain_cfg import FlatPatchSamplingCfg, SubTerrainBaseCfg
     from .terrain_generator_cfg import TerrainGeneratorCfg
-
-# import logger
-logger = logging.getLogger(__name__)
 
 
 class TerrainGenerator:
@@ -128,7 +126,7 @@ class TerrainGenerator:
 
         # throw a warning if the cache is enabled but the seed is not set
         if self.cfg.use_cache and self.cfg.seed is None:
-            logger.warning(
+            omni.log.warn(
                 "Cache is enabled but the seed is not set. The terrain generation will not be reproducible."
                 " Please set the seed in the terrain generator configuration to make the generation reproducible."
             )
@@ -304,7 +302,7 @@ class TerrainGenerator:
         """
         # sample flat patches if specified
         if sub_terrain_cfg.flat_patch_sampling is not None:
-            logger.info(f"Sampling flat patches for sub-terrain at (row, col):  ({row}, {col})")
+            omni.log.info(f"Sampling flat patches for sub-terrain at (row, col):  ({row}, {col})")
             # convert the mesh to warp mesh
             wp_mesh = convert_to_warp_mesh(mesh.vertices, mesh.faces, device=self.device)
             # sample flat patches based on each patch configuration for that sub-terrain
